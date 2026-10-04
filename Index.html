@@ -286,6 +286,74 @@ textarea[readonly]{background:var(--paper-deep);}
 .slabel{letter-spacing:.06em;}
 .gc-soon{transition:transform .2s;}
 .gc-soon:hover{transform:rotate(0deg) translateY(-2px);}
+/* ================= REDESIGN: sticker-book ================= */
+:root{--stk:3px solid var(--ink);--off:4px 4px 0 var(--ink);--radius:16px;}
+body{font-size:16px;}
+#app{max-width:520px;}
+.card,.deskcard{border:var(--stk);border-radius:var(--radius);box-shadow:var(--off);background:var(--card);}
+.deskcard{padding:18px;}
+.btn{border:var(--stk)!important;border-radius:14px;font-weight:900;letter-spacing:.01em;padding:13px 18px;box-shadow:0 5px 0 var(--ink);transition:transform .07s,box-shadow .07s;}
+.btn:active:not(:disabled){transform:translateY(4px) scale(1)!important;box-shadow:0 1px 0 var(--ink);filter:none;}
+.btn-ink{background:var(--ink);color:var(--paper);box-shadow:0 5px 0 var(--hl-dark);}
+.btn-ink:active:not(:disabled){box-shadow:0 1px 0 var(--hl-dark);}
+.btn-ghost{background:var(--card);color:var(--ink);}
+.btn-accent{background:var(--hl);color:var(--ink);}
+.btn-sm{box-shadow:0 3px 0 var(--ink);padding:8px 12px;}
+input,textarea,select{border:2.5px solid var(--ink);border-radius:12px;font-weight:600;}
+input:focus,textarea:focus{outline:3px solid var(--hl);outline-offset:0;}
+.lrow{border:2.5px solid var(--ink);border-radius:14px;background:var(--card);box-shadow:3px 3px 0 var(--ink);margin-bottom:8px;}
+.lrow:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink);}
+.lrow.sel{background:var(--hl);}
+.avatar{border:2.5px solid var(--ink);}
+.pill{border:2px solid var(--ink);background:var(--card);box-shadow:none;font-weight:800;}
+.slabel{font-weight:900;text-transform:uppercase;font-size:.7rem;letter-spacing:.1em;color:var(--ink-dim);margin-bottom:8px;}
+.wordmark{font-size:3.6rem;text-shadow:4px 4px 0 var(--hl);}
+.gamecard{border:var(--stk);border-radius:20px;box-shadow:6px 6px 0 var(--ink);}
+.gamecard:hover{transform:translate(-2px,-2px) rotate(var(--r,0deg));box-shadow:8px 8px 0 var(--ink);}
+.gamecard:active{transform:translate(4px,4px)!important;box-shadow:2px 2px 0 var(--ink);}
+.gc-soon{border:2.5px dashed var(--ink-dim);background:rgba(255,255,255,.45);}
+.netcard{border:var(--stk);box-shadow:6px 6px 0 var(--hl-dark);}
+.pcard{border:var(--stk);box-shadow:var(--off);}
+.stepper button{border:var(--stk);box-shadow:0 3px 0 var(--ink);}
+.wsp-word{font-size:2.3rem;background:var(--hl);border:var(--stk);border-radius:14px;padding:10px 14px;box-shadow:var(--off);display:inline-block;transform:rotate(-1.5deg);}
+.chiprow{display:flex;flex-wrap:wrap;gap:8px;}
+.chip{border:2.5px solid var(--ink);background:var(--card);color:var(--ink);border-radius:999px;padding:7px 13px;font-weight:800;font-size:.82rem;box-shadow:2px 2px 0 var(--ink);cursor:pointer;}
+.chip.on{background:var(--ink);color:var(--hl);}
+.chip:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--ink);}
+.modecard{display:flex;gap:14px;align-items:center;border:var(--stk);border-radius:20px;box-shadow:6px 6px 0 var(--ink);padding:16px;margin-bottom:16px;cursor:pointer;transition:transform .12s,box-shadow .12s;}
+.modecard:active{transform:translate(4px,4px);box-shadow:2px 2px 0 var(--ink);}
+.modecard b{display:block;font-size:1.1rem;margin-bottom:3px;}
+.modecard span{font-size:.84rem;line-height:1.4;opacity:.85;}
+.mc-i{font-size:2.6rem;flex:none;}
+.mc-a{background:#BFEFE3;}.mc-b{background:#FFE08A;}
+.gc-wyr{background:linear-gradient(148deg,#3B82E6,#16407E);}
+.gc-cha{background:linear-gradient(148deg,#A04CC4,#4A1D63);}
+.gc-tri{background:linear-gradient(148deg,#14B3C6,#08505C);}
+.duel{background:var(--paper-deep);border:var(--stk);border-radius:14px;padding:14px;margin:8px 0;font-weight:800;text-align:center;line-height:1.35;}
+.gc-cn{background:linear-gradient(148deg,#D4483F,#2B4FA8);}
+.gc-tel{background:linear-gradient(148deg,#E4A11B,#8A4B00);}
+.cn-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;}
+.cn-card{border:2.5px solid var(--ink);border-radius:9px;background:var(--card);min-height:54px;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:800;font-size:clamp(.5rem,2.6vw,.72rem);padding:2px;word-break:break-word;cursor:pointer;box-shadow:2px 2px 0 var(--ink);}
+.cn-card.open{cursor:default;box-shadow:none;color:#fff;}
+.cn-R{background:#E15B5B;}.cn-B{background:#4C8DF0;}.cn-N{background:#D9CFAE;color:var(--ink)!important;}.cn-X{background:#1b1b1b;}
+.key-R{border-color:#E15B5B;background:#FFE3E3;}.key-B{border-color:#4C8DF0;background:#E0ECFF;}.key-N{background:#EFE8D2;}.key-X{background:#1b1b1b;color:#fff;}
+.gc-dg{background:linear-gradient(148deg,#EF6C9A,#8E1E57);}
+.gc-hz{background:linear-gradient(148deg,#3D4A5C,#12171F);}
+.dg-canvas{width:100%;aspect-ratio:1/1;background:#fff;border:var(--stk);border-radius:14px;touch-action:none;display:block;box-shadow:var(--off);}
+.dg-img{width:100%;aspect-ratio:1/1;object-fit:contain;background:#fff;border:var(--stk);border-radius:14px;display:block;margin:8px 0;}
+.dg-img:not([src]){visibility:hidden;}
+.dg-col{width:32px;height:32px;border-radius:50%;border:var(--stk);box-shadow:2px 2px 0 var(--ink);cursor:pointer;}
+.help-btn{background:var(--hl)!important;color:var(--ink)!important;font-weight:900;}
+.gc-help{margin-top:10px;background:rgba(255,255,255,.92);color:var(--ink);border:2.5px solid var(--ink);border-radius:999px;padding:6px 12px;font-weight:900;font-size:.76rem;cursor:pointer;box-shadow:2px 2px 0 var(--ink);}
+.gc-help:active{transform:translate(2px,2px);box-shadow:none;}
+.modal-box{max-height:88vh;overflow-y:auto;}
+.howto h4{margin:16px 0 6px;font-size:.95rem;}
+.howto p,.howto li{font-size:.9rem;line-height:1.5;}
+.how-meta{display:flex;flex-wrap:wrap;gap:6px;}
+.how-steps{padding-left:20px;margin:0;}.how-steps li{margin-bottom:8px;}
+.how-demo{background:var(--paper-deep);border:2.5px dashed var(--ink);border-radius:14px;padding:10px 12px;}
+.how-line{margin:6px 0;font-size:.88rem;line-height:1.45;}
+.how-note{margin:8px 0;padding:6px 10px;background:var(--hl);border-radius:10px;font-size:.84rem;font-weight:700;line-height:1.4;}
 </style>
 </head>
 <body>
@@ -310,11 +378,12 @@ function setRoster(v){S.set('idle_roster',v);}
 function parseNames(text,n){const ns=text.split('\n').map(s=>s.trim()).filter(Boolean);return Array.from({length:n},(_,i)=>ns[i]||'Player '+(i+1));}
 function fmtTime(s){const m=0|s/60,ss=s%60;return m+':'+(ss<10?'0':'')+ss;}
 function leaveLink(cb){return '<div class="leave-link"><a href="javascript:void(0)" onclick="'+cb+'()">↩ Leave game</a></div>';}
+const HELP={id:null};
 function hdr(title,sub,helpFn,backFn){
   const bf=backFn||'G.hub';
   return '<div class="hrow"><button class="iconbtn" onclick="'+bf+'()">←</button>'+
     '<div><div class="htitle">'+esc(title)+'</div>'+(sub?'<div class="hsub">'+esc(sub)+'</div>':'')+'</div>'+
-    (helpFn?'<button class="iconbtn" onclick="'+helpFn+'()">?</button>':'<div style="width:38px"></div>')+
+    (HELP.id?'<button class="iconbtn help-btn" onclick="Help.open()" aria-label="How to play">?</button>':helpFn?'<button class="iconbtn" onclick="'+helpFn+'()">?</button>':'<div style="width:38px"></div>')+
     '</div>';
 }
 
@@ -437,15 +506,27 @@ GAMES.push(
  {id:'hot',cls:'gc-hot',icon:'🔥',title:'Hot Takes',tag:'2–12 players · debate',desc:'A spicy opinion drops. Defend it, attack it, then everybody points: agree or disagree.',r:-1.3},
  {id:'nhie',cls:'gc-nhie',icon:'🫣',title:'Never Have I Ever',tag:'2–12 players · confessions',desc:'Five fingers each. Confess to a card and lose one. Last hand standing wins.',r:1.1},
  {id:'emo',cls:'gc-emo',icon:'📖',title:'Emoji Story',tag:'3–12 players · charades',desc:'Act out a title using emojis in your head — and mime. No words allowed!',r:-1.6});
-const SOON=['💼 Codenames Lite','🎨 Draw & Guess','🤝 Would You Rather Duel','🎭 Charades Deck','🧠 Trivia Showdown','📞 Telephone Whispers','🔐 Heist Planner'];
+GAMES.push(
+ {id:'wyr',cls:'gc-wyr',icon:'⚖️',title:'Would You Rather Duel',tag:'2–12 players · dilemmas',desc:'Two impossible choices. Everyone picks a side — the minority has to explain themselves.',r:1.4},
+ {id:'cha',cls:'gc-cha',icon:'🎭',title:'Charades Deck',tag:'3–12 players · mime',desc:'Secret word, 60 seconds, zero sounds. Mime it and score when the room guesses.',r:-1.2},
+ {id:'tri',cls:'gc-tri',icon:'🧠',title:'Trivia Showdown',tag:'2–12 players · quiz',desc:'Ten questions, fast fingers. Faster correct answers earn more points on different phones.',r:1.0});
+GAMES.push(
+ {id:'cn',cls:'gc-cn',icon:'🗝️',title:'Codenames Lite',tag:'4–12 players · teams',desc:'Red vs Blue. Spymasters give one-word clues; operatives find their agents and dodge the assassin.',r:-1.1},
+ {id:'tel',cls:'gc-tel',icon:'📞',title:'Telephone Whispers',tag:'3–12 players · chaos',desc:'Words become emojis become words again. Watch a message mutate down the line.',r:1.3});
+GAMES.push(
+ {id:'dg',cls:'gc-dg',icon:'🎨',title:'Draw & Guess',tag:'3–12 players · drawing',desc:'Sketch the secret word with your finger while the room shouts guesses. Live on every phone.',r:-1.4},
+ {id:'hz',cls:'gc-hz',icon:'🔐',title:'Heist Planner',tag:'3–10 players · deduction',desc:'Five jobs, six specialties, one hidden Rat. Plan the heist — and figure out who is sabotaging it.',r:1.2});
+const SOON=['🧩 Pictionary Relay','⚖️ Court of Lies','🌍 Geo Quiz Blitz','🕵️ Murder Mystery Night','🃏 Bluff Poker Lite','🧮 Math Rush','🏝️ Survival Island','🎯 Reaction Duel'];
 
 function renderHub(){
+  HELP.id=null;
   const name=S.get('idle_name','');
   const gcards=GAMES.map(g=>
     '<div class="gamecard '+g.cls+'" style="--r:'+g.r+'deg" onclick="G.launch(\''+g.id+'\')">'+
       '<div class="gc-top"><span class="gc-icon">'+g.icon+'</span><span class="gc-title">'+esc(g.title)+'</span></div>'+
       '<span class="gc-tag">'+esc(g.tag)+'</span>'+
       '<div class="gc-desc">'+esc(g.desc)+'</div>'+
+      '<button class="gc-help" onclick="event.stopPropagation();Help.show(\''+g.id+'\')">❓ How to play</button>'+
     '</div>'
   ).join('');
   const scards=SOON.map((t,i)=>'<div class="gc-soon" style="--r:'+((i%2===0?-1:1)*1.2)+'deg">📝 '+esc(t)+'<br><span style="font-size:.69rem;">coming soon</span></div>').join('');
@@ -457,7 +538,7 @@ function renderHub(){
         '<label class="ws-field">Your name: <input value="'+esc(name)+'" placeholder="you" oninput="S.set(\'idle_name\',this.value)"/></label>'+
         '<label class="ws-field">Period: <span class="ws-blank">Free</span></label>'+
       '</div>'+
-      '<div class="netcard"><div class="netcard-t">📡 Play on different phones</div><div class="netcard-s">Each player uses their own phone. One person makes the lobby and picks the game.</div><div class="brow"><button class="btn btn-accent" onclick="Net.host()">Host a lobby</button><button class="btn btn-ghost" style="background:var(--card)" onclick="Net.joinScreen()">Join a lobby</button></div></div>'+
+      '<div class="netcard"><div class="netcard-t">📡 Play on different phones</div><div class="netcard-s">Each player uses their own phone. Choose <b>📶 same Wi-Fi / hotspot</b> (free, no data) or <b>🌐 Online</b> (friends anywhere). <a href="javascript:void(0)" style="color:var(--hl)" onclick="Help.show(\'lobby\')">How lobbies work</a></div><div class="brow"><button class="btn btn-accent" onclick="Net.host()">Host a lobby</button><button class="btn btn-ghost" style="background:var(--card)" onclick="Net.joinScreen()">Join a lobby</button></div></div>'+
       '<div class="slabel">Pass the phone — pick a game</div>'+
       '<div class="gamecard-grid">'+gcards+scards+'</div>'+
       '<div class="footer-note">made for 9-Fullerene free periods · more games loading soon</div>'+
@@ -468,8 +549,8 @@ function renderHub(){
    GLOBAL G OBJECT
    ================================================================ */
 const G={
-  launch(id){SFX.unlock();SFX.click();({mafia:Mafia,spy:Spy,ttt:UTTT,dice:LiarsDice,wc:WordChain,tq:TwentyQ,hot:{start(){Party.start('hot')}},nhie:{start(){Party.start('nhie')}},emo:{start(){Party.start('emo')}}})[id].start();},
-  hub(){[Mafia,Spy,WordChain].forEach(g=>g.stop&&g.stop());SFX.click();renderHub();},
+  launch(id){SFX.unlock();SFX.click();HELP.id=id;({mafia:Mafia,spy:Spy,ttt:UTTT,dice:LiarsDice,wc:WordChain,tq:TwentyQ,dg:{start(){PP.start('dg')}},hz:{start(){PP.start('hz')}},cn:CN,tel:{start(){PP.start('tel')}},wyr:{start(){PP.start('wyr')}},cha:{start(){PP.start('cha')}},tri:{start(){PP.start('tri')}},hot:{start(){Party.start('hot')}},nhie:{start(){Party.start('nhie')}},emo:{start(){Party.start('emo')}}})[id].start();},
+  hub(){[Mafia,Spy,WordChain,WordSpy,PP].forEach(g=>g.stop&&g.stop());SFX.click();renderHub();},
   confirmLeave(){if(confirm('Leave this game? Progress will be lost.'))this.hub();},
   toggleMute(){const m=!SFX.isMuted();SFX.setMuted(m);document.getElementById('muteBtn').textContent=m?'🔇':'🔊';if(!m)SFX.tap();},
   closeModal,
@@ -820,7 +901,7 @@ Observatory 🔭;Astronomer,Student,Telescope Tech,Night Guard,Comet Hunter,Tour
   function lnk(){return leaveLink('G.confirmLeave');}
   function shdr(t,s){return hdr(t,s,'Spy.rules','G.confirmLeave');}
 
-  function start(){cfg=defCfg();setupRender();}
+  function startClassic(){HELP.id='spy';cfg=defCfg();setupRender();}function start(){SpyMode.choose();}
   function setupRender(){
     $a().innerHTML=
       '<div class="screen">'+hdr('Spy Hunt','Game setup','Spy.rules')+
@@ -970,7 +1051,7 @@ Observatory 🔭;Astronomer,Student,Telescope Tech,Night Guard,Comet Hunter,Tour
   }
 
   function stop(){timerOn=false;clearTimeout(_tt);}
-  return{LOCS,nextLoc,stop,start,rules,sc,sn,stc,deal,timerToggle,accuse,accuseOn,spyPass,spyGuess,spyPick};
+  return{LOCS,nextLoc,startClassic,stop,start,rules,sc,sn,stc,deal,timerToggle,accuse,accuseOn,spyPass,spyGuess,spyPick};
 })();
 
 /* ================================================================
@@ -1897,7 +1978,7 @@ NG.ttt={n:'Ultimate Tic-Tac-Toe',i:'⭕',min:2,max:12,
   const st=s.ph==='end'?'<b>'+(s.win==='D'?'Draw!':(s.win==='X'?nname(s,s.x):nname(s,s.o))+' wins! 🏆')+'</b>':mine?'<b>Your move</b> — '+(s.active===null?'any open board':'play in <b>'+UPOS[s.active]+'</b> ↓'):'<b>'+tn+'</b> is playing'+(s.active===null?'':' in '+UPOS[s.active]);
   return lg+'<div class="card card-tight"><div class="uttt-status">'+st+'</div>'+b+'</div>'+(s.ph==='end'?nhostBtn(pid,'Rematch (swap sides)','again'):(pid===s.x||pid===s.o?'':'<p class="helptext" style="text-align:center">You are spectating.</p>'));}};
 
-function emoNext(s,first){const c=Party.DK.emo.c;s.card=c[Party.bag('emo',c.length)].split('|');s.ph='act';s.end=Date.now()+60000;s.res='';if(!first){const i=s.ps.findIndex(p=>p.id===s.actor);s.actor=s.ps[(i+1)%s.ps.length].id;}s.n++;}
+function emoNext(s,first){const dk=s.dk||'emo',c=dk==='cha'?CHA:Party.DK.emo.c;s.card=c[Party.bag(dk,c.length)].split('|');s.ph='act';s.end=Date.now()+60000;s.res='';if(!first){const i=s.ps.findIndex(p=>p.id===s.actor);s.actor=s.ps[(i+1)%s.ps.length].id;}s.n++;}
 NG.emo={n:'Emoji Story',i:'📖',min:3,max:12,
  init(ps){const s={ps:ps.map(p=>({id:p.id,name:p.name,pts:0})),actor:ps[0|Math.random()*ps.length].id,n:0};emoNext(s,true);return s;},
  tick(s){if(s.ph==='act'&&Date.now()>s.end){s.ph='r';s.res='⏰ Time\'s up! Nobody got it.';return true;}return false;},
@@ -1936,20 +2017,566 @@ NG.ttt.kick=(s,pid)=>{if(s.ph==='end')return;if(pid===s.x||pid===s.o){s.win=pid=
 NG.emo.kick=(s,pid)=>{if(s.ph==='end'||!s.ps.some(p=>p.id===pid))return;const i=s.ps.findIndex(p=>p.id===pid);s.ps=s.ps.filter(p=>p.id!==pid);
  if(s.ps.length<2){s.ph='end';return;}if(pid===s.actor){s.actor=s.ps[i%s.ps.length].id;emoNext(s,true);}};
 
+/* ================================================================
+   SPY HUNT — WORD HINT MODE (pass-the-phone + lobby)
+   ================================================================ */
+const WGEN={
+ person:['👤 People','Albert Einstein,Cleopatra,Michael Jordan,Taylor Swift,Jose Rizal,Spider-Man,Beyonce,Leonardo da Vinci,Cristiano Ronaldo,Elon Musk,Shakespeare,Napoleon,Harry Potter,Pikachu,Mozart,Lapu-Lapu'],
+ place:['📍 Places','Eiffel Tower,Great Wall,Boracay,Mayon Volcano,Hospital,Library,Airport,Amusement Park,Pyramids,Mount Everest,Zoo,Cinema,Chocolate Hills,Supermarket,Beach,Prison'],
+ animal:['🐾 Animals','Elephant,Penguin,Carabao,Octopus,Giraffe,Tarsier,Kangaroo,Dolphin,Chameleon,Panda,Eagle,Crocodile,Bat,Sloth,Seahorse,Peacock'],
+ food:['🍜 Food','Adobo,Pizza,Halo-Halo,Sushi,Taho,Spaghetti,Lechon,Ice Cream,Burger,Sinigang,Ramen,Pancit,Cheesecake,Fried Chicken,Tacos,Chocolate'],
+ object:['🔦 Objects','Umbrella,Toothbrush,Smartphone,Backpack,Guitar,Scissors,Clock,Mirror,Bicycle,Flashlight,Headphones,Calculator,Key,Pillow,Camera,Ladder'],
+ event:['🎉 Moments','Birthday,Rainbow,Homework,Thunderstorm,Graduation,Sleepover,Fireworks,Recess,Exam,Blackout,Christmas,Wedding,Traffic Jam,Field Trip,Typhoon,Fiesta'],
+ school:['🏫 School','Whiteboard,Canteen,Locker,Chalk,School Bell,Homeroom,Uniform,Science Lab,Flag Ceremony,Group Project,Principal,Report Card,Library Card,Calculator,Backpack,Detention']
+};
+const wPool=g=>g==='random'?Object.keys(WGEN).flatMap(k=>WGEN[k][1].split(',').map(w=>({w,g:k}))):WGEN[g][1].split(',').map(w=>({w,g}));
+function wNext(g){const P=wPool(g),key=x=>x.g+'|'+x.w;let b=S.get('wbag_'+g,[]).filter(k=>P.some(x=>key(x)===k));if(!b.length)b=shuffle(P.map(key));const k=b.pop();S.set('wbag_'+g,b);return P.find(x=>key(x)===k);}
+function wChoices(it){const same=wPool(it.g).filter(x=>x.w!==it.w).map(x=>x.w);return shuffle(shuffle(same).slice(0,7).concat(it.w));}
+const wChips=(cur,fn)=>'<div class="chiprow">'+['random',...Object.keys(WGEN)].map(k=>'<button class="chip'+(cur===k?' on':'')+'" onclick="'+fn+'(\''+k+'\')">'+(k==='random'?'🎲 Random (all)':WGEN[k][0])+'</button>').join('')+'</div>';
+
+const SpyMode={choose(){$a().innerHTML='<div class="screen">'+hdr('Spy Hunt','Pick a mode',null,'G.hub')+
+ '<div class="modecard mc-a" onclick="Spy.startClassic()"><div class="mc-i">📍</div><div><b>Classic — Locations</b><span>Everyone gets a location and a role. The Spy gets nothing. Question each other until time runs out.</span></div></div>'+
+ '<div class="modecard mc-b" onclick="WordSpy.start()"><div class="mc-i">💬</div><div><b>Word Hint</b><span>Everyone gets the same secret word — except one. Take turns giving hints, then vote out the imposter.</span></div></div></div>';}};
+
+const WordSpy=(()=>{
+  let cfg,st,tm=null;
+  function stop(){clearInterval(tm);tm=null;}
+  function start(){HELP.id='wspy';cfg={n:clamp(S.get('p_count',5),3,12),names:getRoster(),genre:S.get('wgenre','random'),mins:3};setup();}
+  function setup(){
+    $a().innerHTML='<div class="screen">'+hdr('Word Hint','Setup',null,'G.hub')+
+     '<div class="card"><div class="slabel">Players</div><div class="stepper"><button onclick="WordSpy.sc(-1)">−</button><div class="val">'+cfg.n+'</div><button onclick="WordSpy.sc(1)">+</button></div></div>'+
+     '<div class="card"><div class="slabel">Names (one per line, optional)</div><textarea oninput="WordSpy.sn(this.value)" placeholder="Leave blank for Player 1, 2…">'+esc(cfg.names)+'</textarea></div>'+
+     '<div class="card"><div class="slabel">Word genre</div>'+wChips(cfg.genre,'WordSpy.sg')+'</div>'+
+     '<div class="card"><div class="slabel">Hint time (minutes)</div><div class="stepper"><button onclick="WordSpy.sm(-1)">−</button><div class="val">'+cfg.mins+'</div><button onclick="WordSpy.sm(1)">+</button></div></div>'+
+     '<button class="btn btn-ink btn-block" onclick="WordSpy.deal()">Deal words →</button></div>';}
+  function sc(x){cfg.n=clamp(cfg.n+x,3,12);S.set('p_count',cfg.n);setup();}
+  function sm(x){cfg.mins=clamp(cfg.mins+x,1,10);setup();}
+  function sn(v){cfg.names=v;setRoster(v);}
+  function sg(k){cfg.genre=k;S.set('wgenre',k);setup();}
+  function deal(){stop();const names=parseNames(cfg.names,cfg.n);st={names,it:wNext(cfg.genre),imp:0|Math.random()*cfg.n,i:0,shown:false,turn:0,order:shuffle([...names.keys()]),ph:'pass',left:cfg.mins*60,ch:[]};SFX.reveal();render();}
+  function reveal(){st.shown=true;SFX.reveal();render();}
+  function nextP(){st.i++;st.shown=false;if(st.i>=st.names.length){st.ph='talk';tm=setInterval(()=>{st.left--;const e=document.getElementById('wt');if(e){e.textContent=fmtTime(Math.max(0,st.left));e.classList.toggle('urgent',st.left<=30);}if(st.left<=0){stop();voteStart();}},1000);}render();}
+  function turn(){st.turn=(st.turn+1)%st.order.length;SFX.tap();render();}
+  function voteStart(){stop();st.ph='vote';SFX.fail();render();}
+  function accuse(i){if(i===st.imp){st.ch=wChoices(st.it);st.ph='guess';}else{st.res='imp';st.ph='end';}render();}
+  function guess(k){st.res=st.ch[k]===st.it.w?'imp':'town';st.ph='end';render();}
+  function render(){
+    const nm=i=>esc(st.names[i]);let b;
+    if(st.ph==='pass'){b=!st.shown?'<div class="pass-wrap"><div class="slabel">Pass the phone to</div><div class="pass-name">'+nm(st.i)+'</div><button class="btn btn-ink btn-block" onclick="WordSpy.reveal()">I\'m '+nm(st.i)+' — show my word</button></div>'
+      :'<div class="pass-wrap">'+(st.i===st.imp?'<div style="font-size:2.6rem">🕵️</div><div class="pass-name" style="color:var(--bad)">You are the IMPOSTER</div><p class="helptext">You have no word. The genre is <b>'+(st.it.g&&WGEN[st.it.g][0])+'</b>. Bluff with vague hints!</p>':'<div class="slabel">Your secret word</div><div class="pass-name wsp-word">'+esc(st.it.w)+'</div><p class="helptext">Give hints that prove you know it — without making it obvious.</p>')+'<button class="btn btn-ink btn-block" onclick="WordSpy.nextP()">Hide &amp; pass →</button></div>';}
+    else if(st.ph==='talk')b='<div class="card" style="text-align:center"><div class="slabel">Time left</div><div id="wt" class="timer-disp">'+fmtTime(Math.max(0,st.left))+'</div></div><div class="card" style="text-align:center"><div class="slabel">Hint turn</div><div class="pass-name">'+nm(st.order[st.turn])+'</div><p class="helptext">One hint — describe the word without saying it.</p><button class="btn btn-ink btn-block" onclick="WordSpy.turn()">Hint given — next player →</button></div><button class="btn btn-ghost btn-block" onclick="WordSpy.voteStart()">🗳️ Call the vote now</button>';
+    else if(st.ph==='vote')b='<div class="card" style="text-align:center"><div class="pass-name">Who is the imposter?</div><p class="helptext">Discuss, then everyone points at once. Tap the person with the most votes.</p></div><div class="llist">'+st.names.map((n,i)=>'<div class="lrow" onclick="WordSpy.accuse('+i+')"><div class="avatar">'+esc((n[0]||'?').toUpperCase())+'</div><div class="rname">'+esc(n)+'</div></div>').join('')+'</div>';
+    else if(st.ph==='guess')b='<div class="card" style="text-align:center"><div style="font-size:2.2rem">🎯</div><div class="pass-name">'+nm(st.imp)+' was caught!</div><p class="helptext">Hand over the phone. Guess the secret word to still win.</p></div><div class="llist">'+st.ch.map((w,k)=>'<div class="lrow" onclick="WordSpy.guess('+k+')"><div class="rname">'+esc(w)+'</div></div>').join('')+'</div>';
+    else {const iw=st.res==='imp';SFX[iw?'fail':'win']();if(!iw)burst();b='<div class="deskcard"><div style="font-size:2.6rem">'+(iw?'🕵️':'🏆')+'</div><div style="font-size:1.6rem;font-weight:800;margin:6px 0;color:'+(iw?'var(--bad)':'var(--ok-deep)')+'">'+(iw?'Imposter wins!':'Town wins!')+'</div><p class="helptext">The word was <b>'+esc(st.it.w)+'</b>. The imposter was <b>'+nm(st.imp)+'</b>.</p></div><div class="brow" style="margin-top:14px"><button class="btn btn-ink" onclick="WordSpy.deal()">Play again</button><button class="btn btn-ghost" onclick="G.hub()">Hub</button></div>';}
+    $a().innerHTML='<div class="screen">'+hdr('Word Hint',st.ph==='pass'?'Secret reveal':st.ph==='talk'?'Hint round':'Spy Hunt',null,'G.confirmLeave')+b+'</div>';
+  }
+  return{stop,start,sc,sm,sn,sg,deal,reveal,nextP,turn,voteStart,accuse,guess};
+})();
+
+/* ---- lobby version ---- */
+const wsCur=s=>s.order[s.t%s.order.length];
+function wsVote(s){s.ph='vote';s.votes={};}
+function wsTally(s){const c={};Object.values(s.votes).forEach(v=>c[v]=(c[v]||0)+1);const m=Math.max(...Object.values(c)),top=Object.keys(c).filter(k=>c[k]===m).map(Number);
+  if(top.length===1&&top[0]===s.imp){s.choices=wChoices(s.it);s.ph='guess';}else{s.res='imp';s.ph='end';}}
+NG.wspy={n:'Spy Hunt: Word Hint',i:'💬',min:3,max:12,
+ init(ps,o){const it=wNext((o&&o.genre)||'random');return{ps,it,imp:ps[0|Math.random()*ps.length].id,order:shuffle(ps.map(p=>p.id)),t:0,ph:'talk',end:Date.now()+180000,votes:{},choices:[],res:null};},
+ tick(s){if(s.ph==='talk'&&Date.now()>s.end){wsVote(s);return true;}return false;},
+ act(s,pid,a,g){
+  if(s.ph==='talk'){if(a==='done'&&wsCur(s)===pid)s.t++;else if(a==='vote')wsVote(s);}
+  else if(s.ph==='vote'&&a==='v'&&!(pid in s.votes)&&+g!==pid&&s.ps.some(p=>p.id===+g)){s.votes[pid]=+g;if(Object.keys(s.votes).length>=s.ps.length)wsTally(s);}
+  else if(s.ph==='guess'&&a==='g'&&pid===s.imp&&s.choices[+g]!=null){s.res=s.choices[+g]===s.it.w?'imp':'town';s.ph='end';}
+  else if(s.ph==='end'&&a==='again'&&pid===0)Object.assign(s,NG.wspy.init(s.ps,{genre:'random'}));},
+ kick(s,pid){if(s.ph==='end'||!s.ps.some(p=>p.id===pid))return;if(pid===s.imp||s.ps.length<=3){s.res='town';s.ph='end';return;}
+  const cur=wsCur(s);s.ps=s.ps.filter(p=>p.id!==pid);s.order=s.order.filter(x=>x!==pid);s.t=Math.max(0,s.order.indexOf(cur));delete s.votes[pid];Object.keys(s.votes).forEach(k=>{if(s.votes[k]===pid)delete s.votes[k];});
+  if(s.ph==='vote'&&Object.keys(s.votes).length>=s.ps.length)wsTally(s);},
+ view(s,pid){const me=pid===s.imp;
+  if(s.ph==='talk'){const cur=wsCur(s);return nbox((me?'<div style="font-size:2.4rem">🕵️</div><div class="pass-name" style="color:var(--bad)">You are the IMPOSTER</div><p class="helptext">No word for you. Genre: <b>'+WGEN[s.it.g][0]+'</b>. Bluff!</p>':'<div class="slabel">Your secret word</div><div class="pass-name wsp-word">'+nE(s.it.w)+'</div>')+'<div class="timer-disp" data-left="'+nsecs(s.end-Date.now())+'"></div>')+
+    nbox('<div class="slabel">Hint turn</div><div class="pass-name">'+nname(s,cur)+(cur===pid?' (you!)':'')+'</div>'+(cur===pid?'<p class="helptext">Say one hint out loud, then tap done.</p>':''))+(cur===pid?nbtn('Hint given ✔','done'):'')+nlist(s.order.map(i=>s.ps.find(p=>p.id===i)),p=>p.id===cur?'<span class="pill">🎤 now</span>':'')+nbtn('Call the vote 🗳️','vote','','btn-ghost');}
+  if(s.ph==='vote')return nbox('<div class="pass-name">Who is the imposter?</div><p class="helptext">'+Object.keys(s.votes).length+'/'+s.ps.length+' voted</p>')+(pid in s.votes?nwait('Vote locked…'):npick(s.ps.filter(p=>p.id!==pid),'v'));
+  if(s.ph==='guess')return me?nbox('<div class="pass-name">Caught! Guess the word</div><p class="helptext">Get it right and you still win.</p>')+'<div class="llist">'+s.choices.map((w,k)=>'<div class="lrow" onclick="Net.act(\'g\',\''+k+'\')"><div class="rname">'+nE(w)+'</div></div>').join('')+'</div>':nwait('The imposter is guessing the word…');
+  const iw=s.res==='imp';return nbox('<div style="font-size:2.4rem">'+(iw?'🕵️':'🏆')+'</div><div class="pass-name" style="color:'+(iw?'var(--bad)':'var(--ok-deep)')+'">'+(iw?'Imposter wins!':'Town wins!')+'</div><p class="helptext">The word was <b>'+nE(s.it.w)+'</b>. Imposter: <b>'+nname(s,s.imp)+'</b>.</p>')+nhostBtn(pid,'Play again','again');}};
+
+/* ================================================================
+   NEW GAMES: Would You Rather Duel · Charades Deck · Trivia Showdown
+   (pass-the-phone via PP, different-phones via NG)
+   ================================================================ */
+const WYR=['Never use a phone again|Never watch a video again','Fight one horse-sized duck|Fight 100 duck-sized horses','Always be 10 minutes late|Always be 20 minutes early','Have no homework forever|Have no exams forever','Speak every language|Talk to every animal','Eat only rice forever|Never eat rice again','Be invisible at school|Be able to fly at home','Lose your voice for a week|Lose your Wi-Fi for a month','Know the future|Change the past','Live in a treehouse|Live on a boat','Be famous but broke|Be rich but unknown','Have a pause button for life|Have a rewind button for 10 seconds','Sing every time you talk|Dance every time you walk','Always have hiccups|Always have a sneeze coming','Only whisper|Only shout','Have super strength|Have super speed','Eat spicy only|Eat sweet only','Be the smartest in class|Be the funniest in class','Teleport anywhere but only once a day|Fly but only 2 meters high','Have a free period every day|Have a free lunch every day'];
+const CHA=['🎬 Movie|Titanic','🎬 Movie|Frozen','🎬 Movie|Spider-Man','🎬 Movie|Jaws','🎬 Movie|Shrek','🎬 Action|Brushing teeth','🎬 Action|Taking a selfie','🎬 Action|Playing basketball','🎬 Action|Washing clothes','🎬 Action|Riding a tricycle','🎬 Action|Cooking adobo','🐾 Animal|Monkey','🐾 Animal|Penguin','🐾 Animal|Elephant','🐾 Animal|Snake','🐾 Animal|Chicken','💼 Job|Teacher','💼 Job|Doctor','💼 Job|Chef','💼 Job|Police officer','💼 Job|Farmer','💼 Job|Pilot','🏫 School|Flag ceremony','🏫 School|Taking an exam','🏫 School|Science experiment','🇵🇭 Pinoy|Singing karaoke','🇵🇭 Pinoy|Eating halo-halo','🇵🇭 Pinoy|Dancing tinikling','🇵🇭 Pinoy|Pabebe wave'];
+const TRI=['Capital of Australia?|Sydney|Melbourne|Canberra|Perth|2','Largest planet in our solar system?|Saturn|Jupiter|Neptune|Earth|1','Capital city of the Philippines?|Cebu|Davao|Manila|Baguio|2','Chemical symbol for gold?|Ag|Gd|Go|Au|3','How many continents are there?|5|6|7|8|2','Hardest natural substance?|Diamond|Quartz|Steel|Granite|0','Philippine independence was declared in…|1896|1898|1946|1935|1','Which language makes web pages interactive?|HTML|CSS|JavaScript|SQL|2','CPU stands for…|Central Processing Unit|Computer Power Unit|Core Program Utility|Central Print Unit|0','Largest ocean on Earth?|Atlantic|Indian|Arctic|Pacific|3','Fastest land animal?|Lion|Cheetah|Horse|Ostrich|1','Largest organ of the human body?|Liver|Brain|Skin|Lungs|2','Square root of 144?|10|11|12|14|2','Who painted the Mona Lisa?|Picasso|Van Gogh|Michelangelo|Leonardo da Vinci|3','Which planet is the Red Planet?|Venus|Mars|Mercury|Jupiter|1','Longest river in the Philippines?|Pasig|Agno|Cagayan|Mindanao|2','How many sides does a hexagon have?|5|6|7|8|1','Which gas do plants absorb?|Oxygen|Nitrogen|Carbon dioxide|Helium|2','Highest mountain in the Philippines?|Mayon|Apo|Pulag|Taal|1','HTML stands for…|HyperText Markup Language|High Tech Modern Language|Hyper Transfer Mark Language|Home Tool Markup Language|0','Water boils at what °C at sea level?|90|100|110|120|1','Smallest prime number?|0|1|2|3|2','Who wrote Noli Me Tangere?|Andres Bonifacio|Jose Rizal|Emilio Aguinaldo|Apolinario Mabini|1','Which blood cells fight infection?|Red|White|Platelets|Plasma|1','How many bits in a byte?|4|8|16|32|1','Atomic number 1 is…|Helium|Oxygen|Hydrogen|Carbon|2','Which instrument has 88 keys?|Guitar|Violin|Piano|Flute|2','Which planet is famous for its rings?|Mars|Saturn|Mercury|Earth|1','Who is famous for the falling apple and gravity?|Einstein|Newton|Galileo|Darwin|1','Most populous country right now?|China|USA|India|Indonesia|2'].map(q=>{const p=q.split('|');return{q:p[0],o:p.slice(1,5),c:+p[5]};});
+const triPick=()=>TRI[Party.bag('tri',TRI.length)];
+const ppRank=s=>nlist(s.ps.slice().sort((a,b)=>b.pts-a.pts),p=>'<span class="pill">⭐ '+p.pts+'</span>');
+
+/* ---------- pass-the-phone engine ---------- */
+const PPG={
+ wyr:{t:'Would You Rather Duel',h:'A dilemma appears. Everyone secretly decides, then each player taps their side. The minority must explain their choice.',
+  next(s){s.card=WYR[Party.bag('wyr',WYR.length)].split('|');s.v={};s.ph='a';s.n++;},
+  act(s,a,g){if(a==='v'&&s.ph==='a'){const[i,x]=g.split(':');s.v[i]=x;if(s.ps.every(p=>p.id in s.v))s.ph='r';}else if(a==='next')PPG.wyr.next(s);},
+  view(s){const h='<div class="slabel">Would you rather…</div><div class="duel">🅰️ '+esc(s.card[0])+'</div><div class="slabel" style="text-align:center">or</div><div class="duel">🅱️ '+esc(s.card[1])+'</div>';
+   if(s.ph==='a')return nbox(h)+'<div class="slabel">Tap each player\'s pick</div>'+s.ps.map(p=>'<div class="lrow" style="cursor:default"><div class="rname">'+esc(p.name)+'</div>'+['A','B'].map(x=>'<button class="chip'+(s.v[p.id]===x?' on':'')+'" onclick="PP.do(\'v\',\''+p.id+':'+x+'\')">'+x+'</button>').join('')+'</div>').join('');
+   const A=s.ps.filter(p=>s.v[p.id]==='A'),B=s.ps.filter(p=>s.v[p.id]==='B'),m=A.length===B.length?null:A.length<B.length?A:B;
+   return nbox(h+'<p class="helptext">🅰️ '+A.length+' · 🅱️ '+B.length+'</p>')+nbox(m?'<b>Minority explains:</b> '+m.map(p=>esc(p.name)).join(', '):'<b>Perfect split!</b> Everybody defend your side.')+'<button class="btn btn-ink btn-block" onclick="PP.do(\'next\')">Next dilemma →</button>';}},
+ cha:{t:'Charades Deck',h:'The spotlight player secretly sees a word and mimes it — no sounds or words! Tap who guessed it within 60 seconds. Both score a point.',
+  next(s,first){PP.stop();if(!first)s.act=(s.act+1)%s.ps.length;else s.act=0|Math.random()*s.ps.length;s.card=CHA[Party.bag('cha',CHA.length)].split('|');s.ph='h';s.left=60;s.res='';s.n++;},
+  act(s,a,g){
+   if(a==='show'&&s.ph==='h'){s.ph='a';PP.tm=setInterval(()=>{s.left--;const e=document.getElementById('ppt');if(e)e.textContent=fmtTime(Math.max(0,s.left));if(s.left<=0){PP.stop();s.ph='r';s.res="⏰ Time's up!";PP.draw();}},1000);}
+   else if(a==='got'&&s.ph==='a'){PP.stop();s.ps[+g].pts++;s.ps[s.act].pts++;s.res='🎉 '+esc(s.ps[+g].name)+' guessed it! +1 each for '+esc(s.ps[+g].name)+' and '+esc(s.ps[s.act].name)+'.';s.ph='r';}
+   else if(a==='skip'&&s.ph==='a'){PP.stop();s.res='⏭ Skipped.';s.ph='r';}
+   else if(a==='next'&&s.ph==='r')PPG.cha.next(s);
+   else if(a==='fin'){PP.stop();s.ph='e';}},
+  view(s){const an=esc(s.ps[s.act].name);
+   if(s.ph==='h')return '<div class="pass-wrap"><div class="slabel">Pass the phone to</div><div class="pass-name">'+an+'</div><button class="btn btn-ink btn-block" onclick="PP.do(\'show\')">I\'m '+an+' — show my word</button></div>'+ppRank(s);
+   if(s.ph==='a')return nbox('<div class="slabel">'+esc(s.card[0])+' — mime it, no words!</div><div class="pass-name wsp-word">'+esc(s.card[1])+'</div><div id="ppt" class="timer-disp">'+fmtTime(Math.max(0,s.left))+'</div>')+'<div class="slabel">Who guessed it?</div><div class="llist">'+s.ps.filter((p,i)=>i!==s.act).map(p=>'<div class="lrow" onclick="PP.do(\'got\',\''+p.id+'\')"><div class="rname">'+esc(p.name)+'</div></div>').join('')+'</div><button class="btn btn-ghost btn-block" onclick="PP.do(\'skip\')">Skip</button>';
+   if(s.ph==='r')return nbox('<div class="slabel">The word was</div><div class="pass-name">'+esc(s.card[1])+'</div><p class="helptext">'+s.res+'</p>')+ppRank(s)+'<button class="btn btn-ink btn-block" onclick="PP.do(\'next\')">Next player →</button><button class="btn btn-ghost btn-block" style="margin-top:8px" onclick="PP.do(\'fin\')">Finish game</button>';
+   return nbox('<div style="font-size:2.4rem">🏆</div><div class="pass-name">'+esc(s.ps.slice().sort((a,b)=>b.pts-a.pts)[0].name)+' leads!</div>')+ppRank(s)+'<div class="brow"><button class="btn btn-ink" onclick="PP.go()">Play again</button><button class="btn btn-ghost" onclick="G.hub()">Hub</button></div>';}},
+ tri:{t:'Trivia Showdown',h:'One person reads each question aloud to the group (10 questions). Reveal the answer, then tap everyone who got it right. Most points wins.',
+  next(s){s.q=triPick();s.ok={};s.ph='a';s.n++;},
+  act(s,a,g){
+   if(a==='rev')s.ph='r';else if(a==='tog')s.ok[g]=!s.ok[g];
+   else if(a==='next'){s.ps.forEach(p=>{if(s.ok[p.id])p.pts++;});if(s.n>=10)s.ph='e';else PPG.tri.next(s);}},
+  view(s){
+   if(s.ph==='e'){const top=Math.max(...s.ps.map(p=>p.pts)),w=s.ps.filter(p=>p.pts===top);return nbox('<div style="font-size:2.4rem">🏆</div><div class="pass-name">'+w.map(p=>esc(p.name)).join(' & ')+' win'+(w.length>1?'':'s')+'!</div>')+ppRank(s)+'<div class="brow"><button class="btn btn-ink" onclick="PP.go()">Play again</button><button class="btn btn-ghost" onclick="G.hub()">Hub</button></div>';}
+   const L='ABCD',opts='<div class="llist">'+s.q.o.map((o,i)=>'<div class="lrow" style="cursor:default'+(s.ph==='r'&&i===s.q.c?';background:var(--ok);color:#fff':'')+'"><div class="avatar">'+L[i]+'</div><div class="rname">'+esc(o)+'</div></div>').join('')+'</div>';
+   if(s.ph==='a')return nbox('<div class="slabel">Question '+s.n+' of 10 — read it out loud</div><div class="pcard">'+esc(s.q.q)+'</div>')+opts+'<button class="btn btn-ink btn-block" onclick="PP.do(\'rev\')">Reveal answer</button>';
+   return nbox('<div class="slabel">Answer</div><div class="pcard">'+L[s.q.c]+'. '+esc(s.q.o[s.q.c])+'</div><p class="helptext">Tap everyone who got it right</p>')+'<div class="llist">'+s.ps.map(p=>'<div class="lrow'+(s.ok[p.id]?' sel':'')+'" onclick="PP.do(\'tog\',\''+p.id+'\')"><div class="rname">'+esc(p.name)+'</div><span class="pill">⭐ '+p.pts+'</span></div>').join('')+'</div><button class="btn btn-ink btn-block" onclick="PP.do(\'next\')">'+(s.n>=10?'Finish →':'Next question →')+'</button>';}}
+};
+const PP={g:null,n:4,names:'',st:null,tm:null,
+ stop(){clearInterval(this.tm);this.tm=null;DrawPad.stop();},
+ start(g){this.stop();this.g=g;this.n=clamp(S.get('p_count',4),2,12);this.names=getRoster();this.setup();},
+ setup(){const d=PPG[this.g];$a().innerHTML='<div class="screen">'+hdr(d.t,'Setup',null,'G.hub')+'<div class="card"><div class="slabel">Players</div><div class="stepper"><button onclick="PP.sc(-1)">−</button><div class="val">'+this.n+'</div><button onclick="PP.sc(1)">+</button></div></div><div class="card"><div class="slabel">Names (one per line, optional)</div><textarea oninput="PP.sn(this.value)" placeholder="Leave blank for Player 1, 2…">'+esc(this.names)+'</textarea></div><div class="card"><div class="slabel">How to play</div><p class="helptext">'+d.h+'</p></div><button class="btn btn-ink btn-block" onclick="PP.go()">Start →</button></div>';},
+ sc(x){this.n=clamp(this.n+x,2,12);S.set('p_count',this.n);this.setup();},
+ sn(v){this.names=v;setRoster(v);},
+ go(){this.stop();const names=parseNames(this.names,this.n);this.st={ps:names.map((n,i)=>({id:i,name:n,pts:0})),n:0};PPG[this.g].next(this.st,true);SFX.reveal();this.draw();},
+ do(a,g){PPG[this.g].act(this.st,a,g);this.draw();},
+ draw(){const d=PPG[this.g],s=this.st;$a().innerHTML='<div class="screen">'+hdr(d.t,'Round '+s.n,null,'G.confirmLeave')+d.view(s)+'</div>';if(document.getElementById('dcv'))DrawPad.init(null);else DrawPad.stop();}};
+
+/* ---------- different-phones versions ---------- */
+NG.wyr={n:'Would You Rather Duel',i:'⚖️',min:2,max:12,
+ init(ps){return{ps,ph:'v',votes:{},n:1,card:WYR[Party.bag('wyr',WYR.length)].split('|')};},
+ act(s,pid,a,g){if(s.ph==='v'&&a==='v'&&(g==='A'||g==='B')&&!(pid in s.votes)){s.votes[pid]=g;if(Object.keys(s.votes).length>=s.ps.length)s.ph='r';}
+  else if(s.ph==='r'&&a==='next'&&pid===0){s.card=WYR[Party.bag('wyr',WYR.length)].split('|');s.ph='v';s.votes={};s.n++;}},
+ view(s,pid){const h='<div class="slabel">Would you rather… #'+s.n+'</div>';
+  if(s.ph==='v')return nbox(h+'<p class="helptext">'+Object.keys(s.votes).length+'/'+s.ps.length+' voted</p>')+(pid in s.votes?nwait('Locked in…'):'<button class="btn btn-ink btn-block" style="white-space:normal;margin:6px 0" onclick="Net.act(\'v\',\'A\')">🅰️ '+nE(s.card[0])+'</button><div class="slabel" style="text-align:center">or</div><button class="btn btn-accent btn-block" style="white-space:normal" onclick="Net.act(\'v\',\'B\')">🅱️ '+nE(s.card[1])+'</button>');
+  const A=s.ps.filter(p=>s.votes[p.id]==='A'),B=s.ps.filter(p=>s.votes[p.id]==='B'),m=A.length===B.length?null:A.length<B.length?A:B;
+  return nbox(h+'<div class="duel">🅰️ '+nE(s.card[0])+' — <b>'+A.length+'</b></div><div class="duel">🅱️ '+nE(s.card[1])+' — <b>'+B.length+'</b></div>')+nlist(s.ps,p=>'<span class="pill">'+s.votes[p.id]+'</span>')+nbox(m?'<b>Minority explains:</b> '+m.map(p=>nE(p.name)).join(', '):'<b>Perfect split!</b>')+nhostBtn(pid,'Next →','next');}};
+NG.wyr.kick=NG.hot.kick;
+
+NG.cha=Object.assign({},NG.emo,{n:'Charades Deck',i:'🎭',min:3,max:12,
+ init(ps){const s={ps:ps.map(p=>({id:p.id,name:p.name,pts:0})),actor:ps[0|Math.random()*ps.length].id,n:0,dk:'cha'};emoNext(s,true);return s;},
+ act(s,pid,a,g){if(s.ph==='end'&&a==='again'&&pid===0){Object.assign(s,NG.cha.init(s.ps));return;}NG.emo.act(s,pid,a,g);},
+ view(s,pid){if(s.ph!=='act')return NG.emo.view(s,pid);const sc=nlist(s.ps.slice().sort((a,b)=>b.pts-a.pts),p=>'<span class="pill">⭐ '+p.pts+'</span>'),tm='<div class="timer-disp" data-left="'+nsecs(s.end-Date.now())+'"></div>';
+  if(pid===s.actor)return nbox('<div class="slabel">'+nE(s.card[0])+' — mime it, NO words!</div><div class="pass-name wsp-word">'+nE(s.card[1])+'</div>'+tm)+'<div class="slabel" style="margin-top:10px">Who guessed it?</div>'+npick(s.ps.filter(p=>p.id!==pid),'got',nbtn('Nobody — skip','out','','btn-ghost'));
+  return nbox('<div class="slabel">'+nname(s,s.actor)+' is miming…</div><div class="pass-name">'+nE(s.card[0])+'</div><p class="helptext">Shout your guesses!</p>'+tm)+sc;}});
+function triNext(s){s.n++;s.q=triPick();s.ans={};s.end=Date.now()+15000;s.ph='q';}
+function triReveal(s){s.ps.forEach(p=>{const a=s.ans[p.id];if(a&&a.k===s.q.c)p.pts+=Math.round(500+500*Math.max(0,s.end-a.t)/15000);});s.ph='r';}
+NG.tri={n:'Trivia Showdown',i:'🧠',min:2,max:12,
+ init(ps){const s={ps:ps.map(p=>({id:p.id,name:p.name,pts:0})),n:0};triNext(s);return s;},
+ tick(s){if(s.ph==='q'&&Date.now()>s.end){triReveal(s);return true;}return false;},
+ act(s,pid,a,g){
+  if(s.ph==='q'&&a==='a'&&!(pid in s.ans)&&s.q.o[+g]!=null){s.ans[pid]={k:+g,t:Date.now()};if(s.ps.every(p=>p.id in s.ans))triReveal(s);}
+  else if(s.ph==='r'&&a==='next'&&pid===0){if(s.n>=10)s.ph='end';else triNext(s);}
+  else if(s.ph==='end'&&a==='again'&&pid===0)Object.assign(s,NG.tri.init(s.ps));},
+ kick(s,pid){if(!s.ps.some(p=>p.id===pid)||s.ph==='end')return;s.ps=s.ps.filter(p=>p.id!==pid);delete s.ans[pid];if(s.ps.length<2){s.ph='end';return;}if(s.ph==='q'&&s.ps.every(p=>p.id in s.ans))triReveal(s);},
+ view(s,pid){const sc=nlist(s.ps.slice().sort((a,b)=>b.pts-a.pts),p=>'<span class="pill">⭐ '+p.pts+'</span>'),L='ABCD';
+  if(s.ph==='end'){const top=Math.max(...s.ps.map(p=>p.pts)),w=s.ps.filter(p=>p.pts===top);return nbox('<div style="font-size:2.4rem">🏆</div><div class="pass-name">'+w.map(p=>nE(p.name)).join(' & ')+' win'+(w.length>1?'':'s')+'!</div>')+sc+nhostBtn(pid,'Play again','again');}
+  const q=nbox('<div class="slabel">Question '+s.n+' of 10</div><div class="pcard">'+nE(s.q.q)+'</div>'+(s.ph==='q'?'<div class="timer-disp" data-left="'+nsecs(s.end-Date.now())+'"></div>':''));
+  if(s.ph==='q')return q+(pid in s.ans?nwait('Locked in ('+Object.keys(s.ans).length+'/'+s.ps.length+')…'):'<div class="llist">'+s.q.o.map((o,i)=>'<div class="lrow" onclick="Net.act(\'a\',\''+i+'\')"><div class="avatar">'+L[i]+'</div><div class="rname">'+nE(o)+'</div></div>').join('')+'</div>');
+  const mine=s.ans[pid],ok=mine&&mine.k===s.q.c;
+  return q+nbox('<div style="font-size:2rem">'+(ok?'✅':'❌')+'</div><div class="pass-name" style="font-size:1.2rem">'+L[s.q.c]+'. '+nE(s.q.o[s.q.c])+'</div>')+sc+nhostBtn(pid,s.n>=10?'Final results →':'Next question →','next');}};
+
+/* ================================================================
+   Codenames Lite · Telephone Whispers
+   ================================================================ */
+const CNW='Apple,Bridge,Castle,Dragon,Engine,Forest,Ghost,Harbor,Island,Jungle,Knight,Lantern,Mirror,Needle,Ocean,Palace,Queen,River,Shadow,Tiger,Umbrella,Volcano,Window,Yacht,Zebra,Anchor,Bamboo,Candle,Diamond,Eagle,Feather,Guitar,Hammer,Igloo,Jacket,Kite,Ladder,Magnet,Net,Orbit,Pirate,Quartz,Rocket,Saddle,Tower,Unicorn,Vampire,Whale,Spider,Piano,Pepper,Compass,Dolphin,Mango,Tricycle,Carabao,Jeepney,Adobo,Mayon,Barong,Sampaguita,Tarsier,Typhoon,Lechon,School,Teacher,Chalk,Robot,Laser,Planet,Comet,Crown,Tent,Bat,Bank,Check,Scale,Spring,Board,Date,Court,Cell'.split(',');
+const TELP=['A pirate eating halo-halo','A robot teaching math','A cat riding a tricycle','A typhoon at the fiesta','A ghost in the library','A dragon at the canteen','A penguin on a jeepney','A teacher dancing tinikling','Aliens in the school gym','A giant carabao at the beach','A wizard stuck in traffic','A chicken running for mayor'];
+const cnOther=t=>t==='R'?'B':'R';
+function cnMake(){const f=Math.random()<.5?'R':'B',o=cnOther(f),used=new Set(),w=[];while(w.length<25){const x=CNW[Party.bag('cn',CNW.length)];if(!used.has(x)){used.add(x);w.push(x);}}
+ const ks=shuffle([...Array(9).fill(f),...Array(8).fill(o),...Array(7).fill('N'),'X']);
+ return{b:w.map((x,i)=>({w:x,k:ks[i],r:false})),turn:f,left:{[f]:9,[o]:8},win:null,msg:''};}
+function cnReveal(s,i){const c=s.b[i];if(!c||c.r||s.win)return;c.r=true;
+ if(c.k==='X'){s.win=cnOther(s.turn);s.msg='💥 The assassin was hit!';return;}
+ if(c.k==='R'||c.k==='B'){s.left[c.k]--;if(s.left[c.k]===0){s.win=c.k;s.msg='All agents found!';return;}}
+ if(c.k!==s.turn)s.turn=cnOther(s.turn);}
+const cnName=t=>t==='R'?'🔴 Red':'🔵 Blue';
+function cnBoard(s,key,fn){return '<div class="cn-grid">'+s.b.map((c,i)=>'<div class="cn-card'+(c.r?' open cn-'+c.k:(key?' key-'+c.k:''))+'"'+(fn&&!c.r?' onclick="'+fn(i)+'"':'')+'>'+nE(c.w)+'</div>').join('')+'</div>';}
+const cnScore=s=>'<div class="brow" style="margin-bottom:10px"><div class="pill">🔴 '+(s.left.R||0)+' left</div><div class="pill">🔵 '+(s.left.B||0)+' left</div></div>';
+
+const CN={s:null,key:false,
+ start(){this.s=cnMake();this.key=false;SFX.reveal();this.draw();},
+ tap(i){const s=this.s;if(s.win)return;cnReveal(s,i);SFX.tap();if(s.win){SFX.win();burst();}this.draw();},
+ end(){this.s.turn=cnOther(this.s.turn);SFX.click();this.draw();},
+ tog(){this.key=!this.key;this.draw();},
+ draw(){const s=this.s;$a().innerHTML='<div class="screen">'+hdr('Codenames Lite',s.win?'Game over':cnName(s.turn)+' to play',null,'G.confirmLeave')+cnScore(s)+
+  (s.win?'<div class="deskcard" style="margin-bottom:12px"><div style="font-size:2.2rem">🏆</div><div class="pass-name">'+cnName(s.win)+' wins!</div><p class="helptext">'+s.msg+'</p></div>':'<p class="helptext" style="text-align:center;margin:0 0 8px"><b>'+cnName(s.turn)+'</b> — spymaster gives a one-word clue + number out loud, operatives tap cards.</p>')+
+  cnBoard(s,this.key||!!s.win,i=>'CN.tap('+i+')')+
+  '<div class="brow" style="margin-top:12px">'+(s.win?'<button class="btn btn-ink" onclick="CN.start()">New game</button><button class="btn btn-ghost" onclick="G.hub()">Hub</button>':'<button class="btn btn-ink" onclick="CN.end()">End turn</button><button class="btn btn-ghost" onclick="CN.tog()">'+(this.key?'🙈 Hide key':'🗝️ Spymaster key')+'</button>')+'</div>'+
+  (this.key&&!s.win?'<p class="helptext" style="text-align:center">Only spymasters should look! Hide the key before passing the phone.</p>':'')+'</div>';}};
+
+NG.cn={n:'Codenames Lite',i:'🗝️',min:4,max:12,
+ init(ps){const sh=shuffle(ps.map(p=>p.id)),t={R:[],B:[]};sh.forEach((id,i)=>t[i%2?'B':'R'].push(id));return Object.assign(cnMake(),{ps,t,sp:{R:t.R[0],B:t.B[0]},ph:'clue',clue:null,gl:0});},
+ act(s,pid,a,g){const T=s.turn,op=s.t[T].includes(pid)&&pid!==s.sp[T];
+  if(s.ph==='clue'&&a==='clue'&&pid===s.sp[T]){const m=String(g).trim().toLowerCase().match(/^([a-z'-]+)\s*(\d+)?/);if(!m)return;s.clue={w:m[1],n:+(m[2]||0)};s.gl=s.clue.n?s.clue.n+1:99;s.ph='guess';}
+  else if(s.ph==='guess'&&op){
+   if(a==='tap'){const c=s.b[+g];if(!c||c.r)return;cnReveal(s,+g);if(s.win){s.ph='end';return;}if(s.turn!==T||--s.gl<=0){if(s.turn===T)s.turn=cnOther(T);s.ph='clue';s.clue=null;}}
+   else if(a==='end'){s.turn=cnOther(T);s.ph='clue';s.clue=null;}}
+  else if(s.ph==='end'&&a==='again'&&pid===0)Object.assign(s,NG.cn.init(s.ps));},
+ kick(s,pid){if(s.ph==='end'||!s.ps.some(p=>p.id===pid))return;const T=s.t.R.includes(pid)?'R':'B';s.t[T]=s.t[T].filter(x=>x!==pid);s.ps=s.ps.filter(p=>p.id!==pid);
+  if(s.t[T].length<2){s.win=cnOther(T);s.msg='A whole team left.';s.ph='end';return;}
+  if(s.sp[T]===pid){s.sp[T]=s.t[T][0];if(s.turn===T&&s.ph==='guess'){s.ph='clue';s.clue=null;}}},
+ view(s,pid){const T=s.t.R.includes(pid)?'R':'B',sp=s.sp[T]===pid,mine=s.turn===T,
+   me='<div class="pill" style="margin:0 auto 8px;display:flex;width:max-content">'+cnName(T)+(sp?' · 🗝️ Spymaster':' · Operative')+'</div>',canTap=s.ph==='guess'&&mine&&!sp;
+  const board=cnBoard(s,sp||s.ph==='end',canTap?i=>"Net.act('tap','"+i+"')":null);
+  if(s.ph==='end')return me+cnScore(s)+nbox('<div style="font-size:2.2rem">🏆</div><div class="pass-name">'+cnName(s.win)+' wins!</div><p class="helptext">'+s.msg+'</p>')+board+nhostBtn(pid,'Play again','again');
+  let st;
+  if(s.ph==='clue')st=mine&&sp?nbox('<div class="slabel">Your clue</div><input id="cnc" placeholder="one word + number, e.g. ocean 3" autocomplete="off"/>')+'<button class="btn btn-ink btn-block" style="margin:8px 0" onclick="Net.actIn(\'clue\',\'cnc\')">Give clue →</button>':nwait(cnName(s.turn)+' spymaster is thinking of a clue…');
+  else st=nbox('<div class="slabel">'+cnName(s.turn)+' clue</div><div class="pass-name">'+nE(s.clue.w.toUpperCase())+' · '+s.clue.n+'</div>')+(canTap?nbtn('End turn','end','','btn-ghost'):'');
+  return me+cnScore(s)+st+board;}};
+
+/* ---------- Telephone Whispers ---------- */
+PPG.tel={t:'Telephone Whispers',h:'Player 1 writes a silly phrase. Player 2 turns it into EMOJIS only. Player 3 turns the emojis back into words… and so on. At the end, see how the message mutated!',
+ next(s){s.chain=[];s.i=0;s.ph='h';s.err='';s.idea='';s.n=1;},
+ act(s,a,g){
+  if(a==='show')s.ph='w';
+  else if(a==='idea')s.idea=TELP[Party.bag('tel',TELP.length)];
+  else if(a==='sub'&&s.ph==='w'){const t=String(g).trim().slice(0,80),emo=s.i%2===1;if(!t)return;if(emo&&/[A-Za-z]/.test(t)){s.err='Emojis only! No letters.';return;}s.chain.push({n:s.ps[s.i].name,t,e:emo});s.i++;s.err='';s.idea='';s.ph=s.i>=s.ps.length?'e':'h';}},
+ view(s){
+  if(s.ph==='e')return nbox('<div class="slabel">The whole chain</div>')+telChain(s.chain)+'<div class="brow"><button class="btn btn-ink" onclick="PP.go()">Play again</button><button class="btn btn-ghost" onclick="G.hub()">Hub</button></div>';
+  const nm=esc(s.ps[s.i].name);
+  if(s.ph==='h')return '<div class="pass-wrap"><div class="slabel">Pass the phone to</div><div class="pass-name">'+nm+'</div><button class="btn btn-ink btn-block" onclick="PP.do(\'show\')">I\'m '+nm+' — show me</button></div>';
+  const emo=s.i%2===1,prev=s.chain[s.i-1];
+  return nbox('<div class="slabel">'+nm+' — '+(s.i===0?'write a silly phrase':emo?'turn this into EMOJIS only':'what does this mean? Write it in words')+'</div>'+(prev?'<div class="pcard"'+(emo?'':' style="font-size:2.2rem"')+'>'+esc(prev.t)+'</div>':(s.idea?'<div class="pcard">'+esc(s.idea)+'</div>':'<button class="btn btn-ghost btn-sm" onclick="PP.do(\'idea\')">💡 Give me an idea</button>'))+
+   '<input id="tw" placeholder="'+(emo?'🍕🚀🐱':'type here…')+'" autocomplete="off" style="margin:10px 0"/><div style="color:var(--bad);font-weight:700;font-size:.82rem;min-height:16px">'+esc(s.err)+'</div>')+'<button class="btn btn-ink btn-block" onclick="PP.do(\'sub\',document.getElementById(\'tw\').value)">Lock it in 🔒</button>';}};
+const telChain=ch=>ch.map((c,i)=>'<div class="card" style="padding:12px 14px;margin-bottom:8px"><div class="slabel" style="margin-bottom:2px">'+(i+1)+'. '+nE(c.n)+(c.e?' · emojis':' · words')+'</div><div style="font-weight:800;font-size:'+(c.e?'1.7rem':'1.05rem')+'">'+nE(c.t)+'</div></div>').join('');
+const trOwner=(s,i)=>{const n=s.ps.length;return s.ps[((i-s.r)%n+n)%n].id;};
+function trFill(s){s.ps.forEach(p=>{if(s.gone[p.id]&&!(p.id in s.sub))s.sub[p.id]='(left)';});}
+function trDone(s){const n=s.ps.length;if(!s.ps.every(p=>p.id in s.sub))return;
+ s.ps.forEach((p,i)=>s.ch[trOwner(s,i)].push({n:p.name,t:s.sub[p.id],e:s.r%2===1}));
+ s.r++;s.sub={};s.err={};if(s.r>=n){s.ph='end';return;}trFill(s);s.end=Date.now()+90000;trDone(s);}
+NG.tel={n:'Telephone Whispers',i:'📞',min:3,max:10,
+ init(ps){const ch={};ps.forEach(p=>ch[p.id]=[]);return{ps,ch,r:0,sub:{},gone:{},ph:'w',end:Date.now()+90000,err:{}};},
+ tick(s){if(s.ph==='w'&&Date.now()>s.end){s.ps.forEach(p=>{if(!(p.id in s.sub))s.sub[p.id]='(no answer)';});trDone(s);return true;}return false;},
+ act(s,pid,a,g){
+  if(s.ph==='w'&&a==='sub'&&s.ps.some(p=>p.id===pid)&&!(pid in s.sub)){const t=String(g).trim().slice(0,80);if(!t)return;if(s.r%2===1&&/[A-Za-z]/.test(t)){s.err[pid]='Emojis only! No letters.';return;}s.sub[pid]=t;trDone(s);}
+  else if(s.ph==='end'&&a==='again'&&pid===0)Object.assign(s,NG.tel.init(s.ps));},
+ kick(s,pid){if(s.ph==='end')return;s.gone[pid]=1;if(s.ph==='w'&&!(pid in s.sub))s.sub[pid]='(left)';trDone(s);},
+ view(s,pid){
+  if(s.ph==='end')return nbox('<div class="pass-name">📞 The chains</div><p class="helptext">Everyone started their own message. See how each one mutated.</p>')+s.ps.map(p=>'<div class="slabel" style="margin-top:12px">'+nE(p.name)+'\'s chain</div>'+telChain(s.ch[p.id])).join('')+nhostBtn(pid,'Play again','again');
+  const n=s.ps.length,i=s.ps.findIndex(p=>p.id===pid),r=s.r,hd='<div class="slabel">Round '+(r+1)+' of '+n+'</div>';
+  if(pid in s.sub)return nbox(hd+'<p class="helptext">Locked in. Waiting for others ('+Object.keys(s.sub).length+'/'+n+')…</p><div class="timer-disp" data-left="'+nsecs(s.end-Date.now())+'"></div>');
+  const emo=r%2===1,ch=s.ch[trOwner(s,i)],prev=ch[ch.length-1];
+  return nbox(hd+'<div class="slabel">'+(r===0?'Write a silly phrase':emo?'Turn this into EMOJIS only':'What does this mean? Write it in words')+'</div>'+(prev?'<div class="pcard"'+(emo?'':' style="font-size:2.2rem"')+'>'+nE(prev.t)+'</div>':'')+
+   '<input id="tw" placeholder="'+(emo?'🍕🚀🐱':'type here…')+'" autocomplete="off" style="margin:10px 0"/><div style="color:var(--bad);font-weight:700;font-size:.82rem;min-height:16px">'+nE(s.err[pid]||'')+'</div><div class="timer-disp" data-left="'+nsecs(s.end-Date.now())+'"></div>')+'<button class="btn btn-ink btn-block" onclick="Net.actIn(\'sub\',\'tw\')">Lock it in 🔒</button>';}};
+
+/* ================================================================
+   Draw & Guess · Heist Planner
+   ================================================================ */
+const DGW='Pizza,Jeepney,House,Rainbow,Cat,Umbrella,Volcano,Robot,Guitar,Bicycle,Fish,Tree,Sun,Spider,Airplane,Clock,Pencil,Banana,Castle,Fire,Heart,Moon,Ghost,Dragon,Crown,Boat,Carabao,Tricycle,Basketball,Mango,Cake,Book,Key,Snowman,Pirate,Star,Mountain,Phone,Bridge,Shoe'.split(',');
+const DrawPad={iv:null,col:'#1F2454',sz:5,dirty:false,
+ html(){return '<canvas id="dcv" width="320" height="320" class="dg-canvas"></canvas><div class="chiprow" style="margin:8px 0;justify-content:center">'+['#1F2454','#D6555F','#27A060','#4A6FA5','#E8B800'].map(c=>'<button class="dg-col" style="background:'+c+'" onclick="DrawPad.setCol(\''+c+'\')"></button>').join('')+'<button class="chip" onclick="DrawPad.setCol(\'#ffffff\')">🧽</button><button class="chip" onclick="DrawPad.big()">● / •</button><button class="chip" onclick="DrawPad.clear()">🗑</button></div>';},
+ setCol(c){this.col=c;},big(){this.sz=this.sz>5?5:14;},
+ clear(){const c=document.getElementById('dcv');if(c){const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);this.dirty=true;}},
+ snap(){const c=document.getElementById('dcv');return c?c.toDataURL('image/jpeg',.55):'';},
+ dot(x,px,py){x.fillStyle=this.col;x.beginPath();x.arc(px,py,this.sz/2,0,6.3);x.fill();this.dirty=true;},
+ init(cb){const c=document.getElementById('dcv');if(!c){this.stop();return;}if(c._i)return;c._i=1;const x=c.getContext('2d');if(!x)return;x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);x.lineCap=x.lineJoin='round';let d=false,lx=0,ly=0;
+  const pt=e=>{const r=c.getBoundingClientRect();return[(e.clientX-r.left)*c.width/r.width,(e.clientY-r.top)*c.height/r.height];};
+  c.onpointerdown=e=>{d=true;[lx,ly]=pt(e);try{c.setPointerCapture(e.pointerId);}catch{}this.dot(x,lx,ly);e.preventDefault();};
+  c.onpointermove=e=>{if(!d)return;const[px,py]=pt(e);x.strokeStyle=this.col;x.lineWidth=this.sz;x.beginPath();x.moveTo(lx,ly);x.lineTo(px,py);x.stroke();lx=px;ly=py;this.dirty=true;e.preventDefault();};
+  c.onpointerup=c.onpointercancel=()=>{d=false;};
+  clearInterval(this.iv);this.iv=null;if(cb)this.iv=setInterval(()=>{if(this.dirty){this.dirty=false;cb(this.snap());}},800);},
+ stop(){clearInterval(this.iv);this.iv=null;}};
+const dgOk=d=>typeof d==='string'&&d.startsWith('data:image/')&&d.length<250000;
+const dgImg=s=>'<img id="live" class="dg-img"'+(s.img?' src="'+s.img+'"':'')+'>';
+
+/* ---------- Heist data/logic ---------- */
+const SPC=[['Hacker','💻'],['Driver','🚗'],['Safecracker','🔐'],['Lookout','👀'],['Forger','🪪'],['Muscle','💪']];
+const HOB=[['Laser grid blocks the hallway',0],['Security cameras watch the lobby',0],['The getaway truck needs hotwiring',1],['Police chase through the city',1],['The vault door is sealed shut',2],['Safe deposit boxes need cracking',2],['Guards patrol in random shifts',3],['A plainclothes guard hides in the crowd',3],['Reception wants a VIP pass',4],['The guest list needs a forged name',4],['A steel door blocks the way',5],['A panicking crowd must be controlled',5]];
+const HTAR=['City Bank','National Museum','Diamond Casino','Gold Exchange','Royal Jewelry Vault','Crypto Tower'];
+function hzInit(ps){const n=ps.length,pool=shuffle([0,1,2,3,4,5]),spec={};ps.forEach((p,i)=>spec[p.id]=pool[i%6]);
+ return{ps,rat:ps[0|Math.random()*n].id,spec,tar:HTAR[0|Math.random()*HTAR.length],st:shuffle(HOB.slice()).slice(0,5),i:0,ph:'pick',votes:{},h:null,res:[]};}
+function hzRun(s,a){const need=s.st[s.i][1],ok=a==='sab'?false:s.spec[s.h]===need?true:Math.random()<.4;s.res.push({ok,h:s.h,sab:a==='sab'});}
+const hzCount=s=>({w:s.res.filter(r=>r.ok).length,l:s.res.filter(r=>!r.ok).length});
+const hzDone=s=>{const c=hzCount(s);return c.w>=3||c.l>=3;};
+const hzBar=s=>{const c=hzCount(s);return '<div class="brow" style="margin-bottom:8px"><div class="pill">🎯 '+nE(s.tar)+'</div><div class="pill">✅ '+c.w+'/3</div><div class="pill">❌ '+c.l+'/3</div></div>';};
+const hzMe=(s,pid)=>'<div class="pill" style="margin:0 auto 8px;display:flex;width:max-content">'+SPC[s.spec[pid]][1]+' '+SPC[s.spec[pid]][0]+(pid===s.rat?' · 🐀 RAT':'')+'</div>'+(pid===s.rat?'<p class="helptext" style="text-align:center;margin:0 0 8px">You are the <b>Rat</b>. Make 3 jobs fail without getting caught!</p>':'');
+const hzEnd=s=>{const c=hzCount(s),w=c.w>=3;return nbox('<div style="font-size:2.4rem">'+(w?'💰':'🚨')+'</div><div class="pass-name">'+(w?'The crew pulled it off!':'The heist failed!')+'</div><p class="helptext">The Rat was <b>'+nname(s,s.rat)+'</b>.</p>')+nlist(s.ps,p=>'<span class="pill">'+SPC[s.spec[p.id]][1]+' '+SPC[s.spec[p.id]][0]+(p.id===s.rat?' 🐀':'')+'</span>')+(s.res.filter(r=>r.sab).length?'<p class="helptext" style="text-align:center">🐀 Sabotaged: '+s.res.filter(r=>r.sab).length+' job(s)</p>':'');};
+
+/* ---------- pass-the-phone ---------- */
+PPG.dg={t:'Draw & Guess',h:'The spotlight player secretly sees a word and draws it on the phone in 60 seconds — no letters or words! Then everyone shouts guesses; tap who got it right. Both score a point.',
+ next(s,first){PP.stop();DrawPad.stop();s.act=first?0|Math.random()*s.ps.length:(s.act+1)%s.ps.length;s.word=DGW[Party.bag('dg',DGW.length)];s.ph='h';s.left=60;s.img='';s.res='';s.n++;},
+ act(s,a,g){
+  if(a==='show'&&s.ph==='h'){s.ph='a';PP.tm=setInterval(()=>{s.left--;const e=document.getElementById('ppt');if(e)e.textContent=fmtTime(Math.max(0,s.left));if(s.left<=0){PP.stop();s.img=DrawPad.snap();s.ph='g';PP.draw();}},1000);}
+  else if(a==='done'&&s.ph==='a'){PP.stop();s.img=DrawPad.snap();s.ph='g';}
+  else if(a==='got'&&s.ph==='g'){s.ps[+g].pts++;s.ps[s.act].pts++;s.res='🎉 '+esc(s.ps[+g].name)+' guessed it! +1 each.';s.ph='r';}
+  else if(a==='out'&&s.ph==='g'){s.res='😅 Nobody got it.';s.ph='r';}
+  else if(a==='next'&&s.ph==='r')PPG.dg.next(s);
+  else if(a==='fin')s.ph='e';},
+ view(s){const an=esc(s.ps[s.act].name),im='<img class="dg-img" src="'+s.img+'">';
+  if(s.ph==='h')return '<div class="pass-wrap"><div class="slabel">Pass the phone to</div><div class="pass-name">'+an+'</div><button class="btn btn-ink btn-block" onclick="PP.do(\'show\')">I\'m '+an+' — show my word</button></div>'+ppRank(s);
+  if(s.ph==='a')return nbox('<div class="slabel">Draw this — no words!</div><div class="pass-name wsp-word">'+esc(s.word)+'</div><div id="ppt" class="timer-disp">'+fmtTime(Math.max(0,s.left))+'</div>')+DrawPad.html()+'<button class="btn btn-ink btn-block" onclick="PP.do(\'done\')">Done — show everyone</button>';
+  if(s.ph==='g')return nbox(im+'<p class="helptext">Everyone shout your guesses! Who got it?</p>')+'<div class="llist">'+s.ps.filter((p,i)=>i!==s.act).map(p=>'<div class="lrow" onclick="PP.do(\'got\',\''+p.id+'\')"><div class="rname">'+esc(p.name)+'</div></div>').join('')+'</div><button class="btn btn-ghost btn-block" onclick="PP.do(\'out\')">Nobody</button>';
+  if(s.ph==='r')return nbox(im+'<div class="slabel">It was</div><div class="pass-name">'+esc(s.word)+'</div><p class="helptext">'+s.res+'</p>')+ppRank(s)+'<button class="btn btn-ink btn-block" onclick="PP.do(\'next\')">Next artist →</button><button class="btn btn-ghost btn-block" style="margin-top:8px" onclick="PP.do(\'fin\')">Finish game</button>';
+  return nbox('<div style="font-size:2.4rem">🏆</div><div class="pass-name">'+esc(s.ps.slice().sort((a,b)=>b.pts-a.pts)[0].name)+' leads!</div>')+ppRank(s)+'<div class="brow"><button class="btn btn-ink" onclick="PP.go()">Play again</button><button class="btn btn-ghost" onclick="G.hub()">Hub</button></div>';}};
+
+PPG.hz={t:'Heist Planner',h:'Everyone secretly gets a specialty — and one of you is the RAT. Five jobs stand between you and the loot. Talk it out, pick who handles each job, and that person secretly acts. 3 wins takes the heist; 3 fails ends it.',
+ next(s){Object.assign(s,hzInit(s.ps));s.ph='rh';s.ri=0;s.n=1;},
+ act(s,a,g){
+  if(a==='show'&&s.ph==='rh')s.ph='rs';
+  else if(a==='hide'&&s.ph==='rs'){s.ri++;s.ph=s.ri>=s.ps.length?'p':'rh';}
+  else if(a==='pick'&&s.ph==='p'&&s.ps[+g]){s.h=+g;s.ph='hh';}
+  else if(a==='show2'&&s.ph==='hh')s.ph='a';
+  else if((a==='do'||a==='sab')&&s.ph==='a'&&(a==='do'||s.h===s.rat)){hzRun(s,a);s.ph='o';}
+  else if(a==='next'&&s.ph==='o'){if(hzDone(s)||s.i>=4)s.ph='e';else{s.i++;s.n++;s.ph='p';}}},
+ view(s){
+  const nm=i=>esc(s.ps[i].name);
+  if(s.ph==='rh')return '<div class="pass-wrap"><div class="slabel">Pass the phone to</div><div class="pass-name">'+nm(s.ri)+'</div><button class="btn btn-ink btn-block" onclick="PP.do(\'show\')">I\'m '+nm(s.ri)+' — show my role</button></div>';
+  if(s.ph==='rs'){const r=s.ri===s.rat;return '<div class="pass-wrap"><div class="slabel">Your specialty</div><div style="font-size:3rem">'+SPC[s.spec[s.ri]][1]+'</div><div class="pass-name">'+SPC[s.spec[s.ri]][0]+'</div>'+(r?'<p class="helptext" style="color:var(--bad);font-weight:800">🐀 You are the RAT. Make 3 jobs fail without being caught. Lie about your specialty if you want!</p>':'<p class="helptext">Target: <b>'+esc(s.tar)+'</b>. Work out who is lying about their skills.</p>')+'<button class="btn btn-ink btn-block" onclick="PP.do(\'hide\')">Hide &amp; pass →</button></div>';}
+  if(s.ph==='e')return hzEnd(s)+'<div class="brow"><button class="btn btn-ink" onclick="PP.go()">Play again</button><button class="btn btn-ghost" onclick="G.hub()">Hub</button></div>';
+  const ob=s.st[s.i],job=nbox('<div class="slabel">Job '+(s.i+1)+' of 5 — needs '+SPC[ob[1]][1]+' '+SPC[ob[1]][0]+'</div><div class="pcard">'+esc(ob[0])+'</div>');
+  if(s.ph==='p')return hzBar(s)+job+'<div class="slabel">Discuss, then tap who handles it</div><div class="llist">'+s.ps.map(p=>'<div class="lrow" onclick="PP.do(\'pick\',\''+p.id+'\')"><div class="avatar">'+esc((p.name[0]||'?').toUpperCase())+'</div><div class="rname">'+esc(p.name)+'</div></div>').join('')+'</div>';
+  if(s.ph==='hh')return '<div class="pass-wrap"><div class="slabel">Pass the phone to</div><div class="pass-name">'+nm(s.h)+'</div><button class="btn btn-ink btn-block" onclick="PP.do(\'show2\')">I\'m '+nm(s.h)+' — do the job</button></div>';
+  if(s.ph==='a')return hzBar(s)+job+'<button class="btn btn-ok btn-block" onclick="PP.do(\'do\')">🛠 Do the job</button>'+(s.h===s.rat?'<button class="btn btn-bad btn-block" style="margin-top:8px" onclick="PP.do(\'sab\')">🐀 Sabotage it</button>':'');
+  const r=s.res[s.res.length-1];return hzBar(s)+nbox('<div style="font-size:2.4rem">'+(r.ok?'✅':'❌')+'</div><div class="pass-name">'+(r.ok?'Job done!':'Job failed!')+'</div><p class="helptext">'+nm(r.h)+' handled it.</p>')+'<button class="btn btn-ink btn-block" onclick="PP.do(\'next\')">'+(hzDone(s)||s.i>=4?'See the result →':'Next job →')+'</button>';}};
+
+/* ---------- different phones ---------- */
+function dgNext(s,first){if(!first){const i=s.ps.findIndex(p=>p.id===s.actor);s.actor=s.ps[(i+1)%s.ps.length].id;}s.word=DGW[Party.bag('dg',DGW.length)];s.ph='d';s.end=Date.now()+60000;s.img='';s.res='';s.n++;}
+NG.dg={n:'Draw & Guess',i:'🎨',min:3,max:12,
+ init(ps){const s={ps:ps.map(p=>({id:p.id,name:p.name,pts:0})),actor:ps[0|Math.random()*ps.length].id,n:0};dgNext(s,true);return s;},
+ tick(s){if(s.ph==='d'&&Date.now()>s.end){s.ph='g';return true;}return false;},
+ act(s,pid,a,g){
+  if(s.ph==='d'&&pid===s.actor){if(a==='img'&&dgOk(g)){s.img=g;return 'img';}if(a==='done'){if(dgOk(g))s.img=g;s.ph='g';}}
+  else if(s.ph==='g'&&pid===s.actor){if(a==='got'){const w=s.ps.find(p=>p.id===+g&&p.id!==s.actor);if(!w)return;w.pts++;s.ps.find(p=>p.id===s.actor).pts++;s.res='🎉 '+nE(w.name)+' guessed it! +1 each.';s.ph='r';}else if(a==='out'){s.res='😅 Nobody got it.';s.ph='r';}}
+  else if(s.ph==='r'&&pid===0){if(a==='next')dgNext(s);else if(a==='fin')s.ph='end';}
+  else if(s.ph==='end'&&a==='again'&&pid===0)Object.assign(s,NG.dg.init(s.ps));},
+ kick(s,pid){if(s.ph==='end'||!s.ps.some(p=>p.id===pid))return;const i=s.ps.findIndex(p=>p.id===pid);s.ps=s.ps.filter(p=>p.id!==pid);if(s.ps.length<2){s.ph='end';return;}if(pid===s.actor){s.actor=s.ps[i%s.ps.length].id;s.n--;dgNext(s,true);}},
+ view(s,pid){const sc=nlist(s.ps.slice().sort((a,b)=>b.pts-a.pts),p=>'<span class="pill">⭐ '+p.pts+'</span>'),me=pid===s.actor,tm='<div class="timer-disp" data-left="'+nsecs(s.end-Date.now())+'"></div>';
+  if(s.ph==='end'){const m=Math.max(...s.ps.map(p=>p.pts)),w=s.ps.filter(p=>p.pts===m);return nbox('<div style="font-size:2.4rem">🏆</div><div class="pass-name">'+w.map(p=>nE(p.name)).join(' & ')+' win'+(w.length>1?'':'s')+'!</div>')+sc+nhostBtn(pid,'Play again','again');}
+  if(s.ph==='d')return me?nbox('<div class="slabel">Draw this — no words!</div><div class="pass-name wsp-word">'+nE(s.word)+'</div>'+tm)+DrawPad.html()+'<button class="btn btn-ink btn-block" onclick="Net.act(\'done\',DrawPad.snap())">Done drawing</button>':nbox('<div class="slabel">'+nname(s,s.actor)+' is drawing…</div>'+dgImg(s)+tm+'<p class="helptext">Shout your guesses out loud!</p>')+sc;
+  if(s.ph==='g')return nbox(dgImg(s)+(me?'<p class="helptext">Who guessed it?</p>':'<p class="helptext">Shout it out! '+nname(s,s.actor)+' is judging.</p>'))+(me?npick(s.ps.filter(p=>p.id!==pid),'got',nbtn('Nobody','out','','btn-ghost')):'');
+  return nbox(dgImg(s)+'<div class="slabel">It was</div><div class="pass-name">'+nE(s.word)+'</div><p class="helptext">'+s.res+'</p>')+sc+(pid===0?nbtn('Next artist →','next')+nbtn('Finish game','fin','','btn-ghost'):'<p class="helptext" style="text-align:center">Waiting for the lobby master…</p>');}};
+
+NG.hz={n:'Heist Planner',i:'🔐',min:3,max:10,
+ init:hzInit,
+ act(s,pid,a,g){
+  if(s.ph==='pick'&&a==='v'&&!(pid in s.votes)&&s.spec[+g]!=null&&s.ps.some(p=>p.id===+g)){s.votes[pid]=+g;if(Object.keys(s.votes).length>=s.ps.length)hzTally(s);}
+  else if(s.ph==='act'&&pid===s.h&&(a==='do'||(a==='sab'&&pid===s.rat))){hzRun(s,a);s.ph='res';}
+  else if(s.ph==='res'&&a==='next'&&pid===0){if(hzDone(s)||s.i>=4)s.ph='end';else{s.i++;s.ph='pick';s.votes={};s.h=null;}}
+  else if(s.ph==='end'&&a==='again'&&pid===0)Object.assign(s,hzInit(s.ps));},
+ kick(s,pid){if(s.ph==='end'||!s.ps.some(p=>p.id===pid))return;
+  if(pid===s.rat||s.ps.length<=3){const ok=pid===s.rat;s.ph='end';for(let k=0;k<3;k++)s.res.push({ok,h:pid,sab:false});return;}
+  s.ps=s.ps.filter(p=>p.id!==pid);delete s.votes[pid];Object.keys(s.votes).forEach(k=>{if(s.votes[k]===pid)delete s.votes[k];});
+  if(s.ph==='pick'&&Object.keys(s.votes).length>=s.ps.length)hzTally(s);else if(s.ph==='act'&&s.h===pid){s.ph='pick';s.votes={};s.h=null;}},
+ view(s,pid){
+  if(s.ph==='end')return hzEnd(s)+nhostBtn(pid,'Play again','again');
+  const me=hzMe(s,pid),bar=hzBar(s),ob=s.st[s.i],job=nbox('<div class="slabel">Job '+(s.i+1)+' of 5 — needs '+SPC[ob[1]][1]+' '+SPC[ob[1]][0]+'</div><div class="pcard">'+nE(ob[0])+'</div>');
+  if(s.ph==='pick')return me+bar+job+nbox('<p class="helptext">Talk it out! Who should handle this job? ('+Object.keys(s.votes).length+'/'+s.ps.length+' voted)</p>')+(pid in s.votes?nwait('Vote locked…'):npick(s.ps,'v'));
+  if(s.ph==='act')return me+bar+job+(pid===s.h?nbox('<p class="helptext"><b>You were chosen!</b></p>')+nbtn('🛠 Do the job','do','','btn-ok')+(pid===s.rat?nbtn('🐀 Sabotage it','sab','','btn-bad'):''):nwait(nname(s,s.h)+' is working on it…'));
+  const r=s.res[s.res.length-1];return me+bar+nbox('<div style="font-size:2.4rem">'+(r.ok?'✅':'❌')+'</div><div class="pass-name">'+(r.ok?'Job done!':'Job failed!')+'</div><p class="helptext">'+nname(s,r.h)+' handled it.</p>')+nhostBtn(pid,hzDone(s)||s.i>=4?'See the result →':'Next job →','next');}};
+function hzTally(s){const c={};Object.values(s.votes).forEach(v=>c[v]=(c[v]||0)+1);const m=Math.max(...Object.values(c)),top=Object.keys(c).filter(k=>c[k]===m).map(Number);s.h=top[0|Math.random()*top.length];s.ph='act';}
+
+/* ================================================================
+   HOW TO PLAY — full guides with step-by-step + worked examples
+   ================================================================ */
+const HOW={
+lobby:{t:'📡 Lobbies',meta:['👥 any game','📱 each player uses their own phone','🌐 2 connection types'],
+ goal:`Let every player use their **own phone**. One person is the **Lobby Master** (the host). The host's phone runs the game; everyone else's phone shows only what *they* are allowed to see (their secret role, their dice, their word…).`,
+ need:`Everyone opens this same IDLE file/page on their own phone. Pick ONE connection type: **📶 Same Wi-Fi / hotspot** (free, no mobile data needed, everyone must be in the same room/network) or **🌐 Online** (friends can be anywhere, uses mobile data or internet Wi-Fi).`,
+ steps:[`**Host:** on the home screen tap **Host a lobby**, then choose **📶 Same Wi-Fi / hotspot** or **🌐 Online**.`,`**Host:** tap **➕ Invite a phone**. A long code appears ("Send this code to the friend"). Tap **Copy code** and send it to ONE friend using any chat app (Messenger, Viber, Telegram, SMS…). For the hotspot type you can also read it from your screen if chats don't work.`,`**Friend:** open IDLE, tap **Join a lobby**, choose a connection type (it switches automatically to match the host's code), **paste** the code, then tap **Make my reply code**.`,`**Friend:** tap **Copy reply code** and send it back to the host.`,`**Host:** paste the reply code into the box under "Paste the reply code they send back" and tap **Connect**. The friend appears in the player list as **online** within a few seconds.`,`Repeat steps 2–5 for each friend. Every friend gets their **own** code (a code only works for one person).`,`**Host:** pick a game from the list (you can change it any time) and tap **Start**. The button turns on when you have enough players for that game.`,`When the game ends the host can tap **Play again**, or tap ← to return everyone to the lobby and choose another game.`],
+ ex:[`> Example: Ana hosts a lobby for Mafia with Ben and Cara, who are at home in different towns.`,`**Ana:** taps Host a lobby → 🌐 Online → Invite a phone → Copy code → pastes it into Messenger to Ben.`,`**Ben:** opens IDLE → Join a lobby → pastes the code → Make my reply code → Copy reply code → sends it back to Ana.`,`**Ana:** pastes Ben's reply → Connect. "Ben — online" shows up. She does the same for Cara.`,`**Ana:** picks "Mafia" in the list. It needs 4+ players, so she invites Dan too. Then she taps Start.`,`> Now each phone shows a private screen: Ben sees "Your role: Detective", Cara sees "Civilian", and so on. Nobody passes a phone around.`],
+ win:`There is no winner here — the lobby is just how you connect. Each game explains its own win condition (tap **?** inside a game).`,
+ net:`**📶 Same Wi-Fi / hotspot:** best for a classroom. One person turns on their phone's hotspot (or everyone joins the same Wi-Fi) and everybody connects to it. It works even with **no mobile data**. **🌐 Online:** works across different networks but uses mobile data. Some strict mobile networks block direct phone-to-phone links; if a friend can't connect, try again once, or switch to the hotspot type.`,
+ tips:[`The Lobby Master's phone **is the game** — keep the screen on and don't close the page, or everyone is disconnected.`,`If someone drops out mid-game, the host sees "⚠ Name disconnected" with a **Remove & continue** button.`,`Codes contain your network address. Only send them to people you trust.`,`Can't connect? Check both phones use the same connection type and that you copied the **whole** code (no missing end).`]},
+
+mafia:{t:'🎭 Mafia',meta:['👥 4–15 players (best 6–10)','⏱ 15–30 min','📱 1 shared phone or own phones'],
+ goal:`A secret **Mafia** team is hiding among the **Town**. Town wins by voting out every Mafia member. Mafia wins when they **equal or outnumber** everyone else.`,
+ need:`A group of friends in a circle. Pass-the-phone: ONE phone, passed around. Different phones: everyone uses their own.`,
+ steps:[`**Set up:** choose the number of players, type the names (one per line), and choose how many Mafia there are. Switch the **Doctor** and **Detective** on or off (they're recommended with 5+ players). Tap Start.`,`**Roles are secretly dealt.** The phone says "Pass the phone to <name>". That person takes it, taps **Reveal**, reads their role privately, then taps **Hide & pass it on**. Never let anyone peek!`,`**Night:** everyone closes their eyes or puts their head down. Tap **Begin night actions**. The phone calls the roles one at a time: the **Mafia** (huddle together and quietly choose one victim), the **Doctor** (chooses one person to protect), the **Detective** (chooses one person to investigate — the phone secretly tells them if that person is Mafia).`,`**Morning:** the phone announces who was eliminated overnight. If the Doctor protected the victim, **nobody dies**. Eliminated players are out, but may watch silently.`,`**Day:** everyone talks. Accuse people, defend yourself, share clues — and lie if you are Mafia! You can use the timer to keep the discussion moving.`,`**Vote:** when the group agrees on a suspect, tap that player. They are eliminated and their role is revealed.`,`Night → Morning → Day → Vote repeats until one team wins.`],
+ ex:[`> Example: 6 players. 1 Mafia, 1 Doctor, 1 Detective, 3 Civilians. Secretly: Ana = Mafia, Ben = Detective, Cara = Doctor, Dan / Eli / Fay = Civilians.`,`> **Night 1.** Ana (Mafia) picks Dan. Cara (Doctor) protects Fay. Ben (Detective) investigates Ana — the phone whispers "Ana is MAFIA".`,`> **Morning 1.** The phone says "Dan was eliminated." Dan is out.`,`**Ben:** "I'm the Detective. I checked Ana last night — she's Mafia!"`,`**Ana:** "That's a lie! Ben is the Mafia, he's trying to frame me!"`,`**Eli:** "Ben didn't have a reason to invent this… I vote Ana."`,`> Most players vote Ana. Her role is revealed: Mafia. Town wins because no Mafia is left!`],
+ win:`**Town:** vote out all Mafia. **Mafia:** be equal to or more than the remaining Town.`,
+ net:`Everyone sees their own role on their own phone. At night, only the roles that act see buttons (Mafia see their teammates). In the day, tap **Ready to vote** (when more than half are ready, voting starts), then everyone votes on their phone or taps **Skip — no elimination**. Needs 4+ players; Doctor + Detective appear with 5+.`,
+ tips:[`Detective: revealing too early gets you killed. Wait for a moment you can prove it.`,`Mafia: copy what Town says. Pretend to be as confused as everyone else.`,`Everyone: watch who votes quickly or who always votes with the crowd.`]},
+
+spy:{t:'🕵️ Spy Hunt',meta:['👥 3–12 players','⏱ 5–10 min','🔀 2 modes: Classic + Word Hint'],
+ goal:`**Classic (locations):** everyone except one player knows a secret **location**. Town must find the **Spy**; the Spy must work out the location. *(For the other mode, choose **Word Hint** and tap ? there.)*`,
+ need:`Pass-the-phone: one phone. Different phones: each player's phone shows their own card.`,
+ steps:[`**Set up:** choose players, names, and the time limit. The phone secretly picks one location and one Spy.`,`**Card reveal:** pass the phone to each player. They tap Reveal. Everyone EXCEPT the Spy sees the **location** and their **role** there (like "Doctor" at a Hospital). The Spy sees only "You are the SPY". Hide, then pass.`,`**Start the timer.** Players take turns asking **any** other player **one question** about the location. Good questions are specific but not obvious: "Is it loud here?" ✔  "Is this a hospital?" ✘.`,`Answers must be **true but vague** — prove you belong without handing the Spy the answer.`,`The Spy tries to blend in and figure out the location from what they hear.`,`**Accuse** anyone at any time (or when time ends). The group votes. If the accused person is the Spy, the Spy gets **one last chance**: pick the location from a list of 8. A correct guess still wins for the Spy!`],
+ ex:[`> Location: **Hospital**. Ana = Doctor, Ben = Nurse, Cara = Patient, Dan = **Spy**.`,`**Ana → Ben:** "Do you have to wear something special here?"`,`**Ben:** "Yes, and it's usually a bit colorful."`,`**Ben → Dan:** "How busy is it today?"`,`**Dan (Spy):** "Pretty busy… as usual."  *(He bluffs.)*`,`**Dan → Cara:** "Is it loud where you are?"`,`**Cara:** "Not really. People speak softly."`,`**Cara → Dan:** "What did you do before you came here?"`,`**Dan:** "Uh… the usual stuff."  *(Suspiciously vague!)*`,`> The group accuses Dan. He's the Spy, so he gets the final guess from 8 locations. If he picks Hospital, he wins anyway — which is why answers shouldn't be too obvious!`],
+ win:`**Town wins** if they correctly accuse the Spy and the Spy guesses the wrong location. **Spy wins** if they guess the location, or if the group accuses the wrong person.`,
+ net:`Each phone privately shows the location + role (or "You are the SPY"). A 5-minute timer runs. Anyone can tap **Call a vote**; everyone then taps who they suspect. If the Spy is voted out they guess from 8 locations. The Spy can also tap **I know the location!** at any time to guess early — right = Spy wins, wrong = Town wins. There are 55 locations and none repeat until all are used.`,
+ tips:[`Spy: ask questions that sound clever but work for many places.`,`Town: don't give away too much, or the Spy simply guesses at the end.`,`Roles matter! If you're the Nurse, answer like a nurse.`]},
+
+wspy:{t:'💬 Spy Hunt: Word Hint',meta:['👥 3–12 players','⏱ 3–8 min','🎲 choose a genre or Random'],
+ goal:`Everyone gets the **same secret word — except one imposter** who only knows the **genre**. Take turns giving hints. Town finds the imposter; the imposter tries to blend in or guess the word.`,
+ need:`Pass-the-phone: one phone. Different phones: each phone shows your word privately.`,
+ steps:[`**Pick a genre:** People, Places, Animals, Food, Objects, Moments, School — or **🎲 Random**, which draws from ALL genres. Choose how many minutes the hint round lasts.`,`**Secret reveal:** pass the phone around. Most players see the **word**. The imposter sees "You are the IMPOSTER" and the **genre** only.`,`**Hint round:** players take turns in the order shown. On your turn say **one hint** out loud (a single word or short phrase), then tap **Hint given — next player**.`,`Hints must **prove you know the word** without making it too easy. Too obvious = the imposter learns it. Too vague = you look like the imposter.`,`Keep going around until the timer ends (or anyone taps **Call the vote now**).`,`**Vote:** everyone points at their suspect at the same time. Tap the person with the most votes.`,`If the imposter is caught, they get **one guess** at the word from 8 choices in the same genre.`],
+ ex:[`> Genre: **Food**. Secret word: **Halo-Halo**. Ana, Ben, Dan know it. **Cara is the imposter** (she only knows "Food").`,`**Ana:** "Cold."`,`**Ben:** "Layers."`,`**Cara (imposter):** "Popular."  *(a safe, vague hint)*`,`**Dan:** "Summer."`,`**Ana (round 2):** "Purple."`,`**Cara:** "Sweet."`,`> Vote → Cara is caught. Her 8 choices all look like foods: Halo-Halo, Pizza, Sushi, Taho… Using the clues "Cold, Layers, Summer, Purple" she picks Halo-Halo and **wins anyway**! Better hints would have been trickier.`],
+ win:`**Town** wins if the imposter is voted out AND guesses wrongly. **Imposter** wins if not caught, or if they guess the word.`,
+ net:`The Lobby Master picks the genre before starting. Each phone shows the word (or the imposter screen). The player whose turn it is sees **Hint given ✔**. A 3-minute timer runs, then everyone votes on their own phone. The imposter's guess screen appears only on their phone.`,
+ tips:[`Imposter: copy the style of earlier hints, and don't hesitate.`,`Town: avoid hints like the word's first letter.`,`Genre "Random" is the hardest — the imposter has less to go on, but so do you.`]},
+
+ttt:{t:'⭕ Ultimate Tic-Tac-Toe',meta:['👥 2 players (others watch)','⏱ 10–15 min','🧠 thinking game'],
+ goal:`Win **three small boards in a row** on the big 3×3 board — like tic-tac-toe, but every square is its own tic-tac-toe game.`,
+ need:`Pass-the-phone: 2 players share one phone. Different phones: the first two players in the lobby are ✕ and ○, everyone else spectates live.`,
+ steps:[`The big board has **9 small boards**. ✕ goes first and may play in **any** small board.`,`**The Golden Rule:** the square you pick inside a small board decides where your opponent must play next. If you pick the **top-right** square of any small board, your opponent must play in the **top-right small board**.`,`Win a small board by getting 3 in a row there. That board is now claimed by you (it shows a big ✕ or ○) and can't be played in anymore.`,`If you're sent to a board that is **already won or full**, you may play in **any open board**.`,`The glowing board(s) show where you're allowed to play.`,`Win the game by claiming 3 small boards in a **row, column or diagonal**. If all boards are done and nobody has a line, it's a draw.`],
+ ex:[`> Players: **Ana (✕)** and **Ben (○)**.`,`**Ana:** plays the **center** square of the **center** board.`,`> The center square means Ben must play in the **center board**.`,`**Ben:** plays the **top-right** square of the center board.`,`> Now Ana must play in the **top-right board**.`,`**Ana:** wins that board with three ✕ in the middle row. It turns into a big ✕.`,`> Later Ben is sent to the top-right board — but it's already won — so he may play **anywhere**. That freedom is powerful: use it to attack!`],
+ win:`Claim three small boards in a line. Draw if all boards are finished with no line.`,
+ net:`The first two players in the lobby are ✕ and ○; extra players see the live board as spectators. Only the player whose turn it is can tap the glowing squares. The host can start a **Rematch (swap sides)**.`,
+ tips:[`Think about where your move SENDS your opponent, not just what it does here.`,`Sending someone to a nearly-won board can be a trap — or a gift.`,`It is often smart to sacrifice a small board to control where the opponent plays.`]},
+
+dice:{t:`🎲 Liar's Dice`,meta:['👥 2–8 players','⏱ 10–20 min','🤥 bluffing game'],
+ goal:`Everyone has secret dice. Bid on how many dice of one face exist **on the whole table**. Catch bluffers to make them lose dice. **Last player with dice wins.**`,
+ need:`Pass-the-phone: one phone — each player looks at their dice privately when it is handed to them. Different phones: your dice are on your own screen.`,
+ steps:[`Choose players and **dice per player** (5 is classic). Tap Roll & start. Everyone secretly looks at their own dice (pass-the-phone: look, **hide**, pass).`,`The first player makes a **bid**: a quantity and a face — for example "**3 × ⚃**" means "there are at least three 4s among ALL dice on the table".`,`Each next player must either **raise the bid** (a higher quantity, **or** the same quantity with a higher face) **or call 🚨 Liar!**`,`When someone calls Liar, **all dice are revealed** and counted. In this version **1s are NOT wild** — only the exact face counts.`,`If the true count is **at least** the bid → the bid was honest and the **caller** loses one die. If it's lower → the bidder bluffed and **the bidder** loses one die.`,`Everyone re-rolls. The loser starts the next round. A player with 0 dice is out.`],
+ ex:[`> Ana, Ben and Cara each have 3 dice (9 in total).`,`**Ana** (secretly 2, 2, 5) bids **3 × ⚁** (three 2s).`,`**Ben** (1, 4, 6) raises: **4 × ⚁**.`,`**Cara** (3, 3, 2) raises with a higher face: **4 × ⚂** (four 3s).`,`**Ana** bluffs bigger: **5 × ⚂**.`,`**Ben:** "Liar!" — all dice are shown. 3s: Ana 0 + Ben 0 + Cara 2 = **2**. Only 2 threes, the bid was 5.`,`> The bid was a bluff → **Ana loses a die**. She starts the next round.`],
+ win:`Be the last player who still has dice.`,
+ net:`Your dice are only on your phone. When it's your turn use **− / +** for quantity, tap a face, then **Bid** or **🚨 Liar!**. The game tells you whose turn it is, shows everyone's dice at the reveal (the bid face is highlighted), and removes the die automatically.`,
+ tips:[`Count your own dice first: if you hold three 4s, bidding on 4s is safer.`,`Bluff when the bid is already high — others can't be sure.`,`Don't always raise by one — sudden big jumps confuse people.`]},
+
+wc:{t:'🔤 Word Chain Blitz',meta:['👥 2–10 players','⏱ 5–10 min','⚡ fast thinking'],
+ goal:`Say a word that **starts with the last letter of the previous word** before your timer runs out. Run out of lives and you're eliminated. **Last player standing wins.**`,
+ need:`Pass-the-phone: one phone, passed to the player whose turn it is (or the phone stays on the table and each player types). Different phones: type on your own phone when it's your turn.`,
+ steps:[`Choose the number of players, **lives** (1–5) and the **timer** per turn (10–30 seconds).`,`The first player may type **any word**. The last letter of that word becomes the **starting letter** for the next player (shown in big letters on screen).`,`On your turn: type a word that starts with that letter and tap **Submit →**.`,`You lose a life if you: run out of time, type a word that starts with the wrong letter, repeat a word that was already used, or tap **💀 Skip**.`,`When you lose all lives you're out. The game checks the starting letter and repeats only — **the group** decides if a word is real, so challenge fake words!`],
+ ex:[`> 3 lives each, 20-second timer. Players: Ana, Ben, Cara.`,`**Ana:** "tiger" → next letter is **R**.`,`**Ben:** "river" → next letter is **R** again.`,`**Cara:** "rabbit" → letter **T**.`,`**Ana:** "tiger" → ❌ already used! Ana loses a life (2 ❤ left).`,`**Ben (after Ana's penalty, still T):** "table" → letter **E**.`,`**Cara:** "eagle" → **E**. And so on until only one player has lives.`],
+ win:`Be the last player with lives left.`,
+ net:`The phone of the player whose turn it is shows a typing box and a big timer; everyone else watches the chain grow. Timeouts and mistakes are announced to everyone.`,
+ tips:[`Words ending in X, Q or Z are traps — try ending your word with a hard letter!`,`Keep a few long words ready for common letters.`]},
+
+tq:{t:'🤔 20 Questions',meta:['👥 3–12 players','⏱ 5–10 min','🕵️ yes/no questions'],
+ goal:`The **Thinker** secretly picks something. Everyone else asks **yes/no/maybe** questions to guess it in **20 questions or fewer**.`,
+ need:`Pass-the-phone: one phone is passed to the Thinker first. Different phones: the Thinker types their secret on their own phone.`,
+ steps:[`Choose the players, then pick the **Thinker** (tap a name or **🎲 Pick randomly**).`,`The Thinker takes the phone secretly, types the secret (an animal, person, place, object…) and an optional **category**, then taps **Lock in 🔒**.`,`Hand the phone back to the group. Tap **Start questions →**.`,`Players take turns asking a question **out loud** that can be answered with yes / no / maybe.`,`The Thinker taps **✅ Yes**, **🤔 Maybe** or **❌ No**. The counter goes down and the answers are listed.`,`When someone guesses right, tap **🎉 Guessed it!**. If the counter reaches 0 or the group gives up, the Thinker wins.`],
+ ex:[`> Ben is the Thinker. Secret: **Penguin**. Category: Animal.`,`**Ana:** "Does it live in water?" → Ben taps 🤔 Maybe.`,`**Cara:** "Can it fly?" → ❌ No.`,`**Dan:** "Is it black and white?" → ✅ Yes.`,`**Ana:** "Does it live somewhere cold?" → ✅ Yes.`,`**Cara:** "Is it a penguin?" → ✅ Yes!`,`> Ben taps 🎉 Guessed it! — they needed only 5 of the 20 questions.`],
+ win:`**The group** wins by guessing in time. **The Thinker** wins if all 20 questions are used up.`,
+ net:`The Thinker types on their own phone. Everyone sees the question counter and answers list; only the Thinker sees the secret and the Yes/Maybe/No buttons. The host can start the **next Thinker** after each round.`,
+ tips:[`Start with big questions: alive? bigger than a person? found in the Philippines?`,`Thinker: pick something fair — not too obscure!`]},
+
+hot:{t:'🔥 Hot Takes',meta:['👥 2–12 players','⏱ endless','🗣 debate game'],
+ goal:`A spicy opinion appears. Defend it, attack it, then everybody picks a side. The **minority** has to explain their choice. There's no score — it's all about the arguments!`,
+ need:`Pass-the-phone: one phone on the table, everyone points on "three". Different phones: tap 👍 or 👎 secretly on your own phone.`,
+ steps:[`Choose the players. A **hot take** card appears: for example "Homework should be banned on weekends."`,`Discuss for a moment. The player in the spotlight starts by defending (or attacking) it.`,`On "three", everyone shows their opinion: **👍 Agree** or **👎 Disagree** (pass-the-phone: point; different phones: tap a button).`,`Count the votes. The **smaller side (the minority)** explains why they think that. If it's an even split, everyone defends their side!`,`Tap **Next card** for a new take.`],
+ ex:[`> Card: "**Pineapple belongs on pizza.**" 6 players.`,`**Ana (spotlight):** "Yes! The sweet and salty combo is perfect."`,`> On three: 4 players point 👍, 2 point 👎.`,`> 👎 is the minority → **Ben and Dan must explain.**`,`**Ben:** "Fruit is for dessert, not dinner."`,`**Dan:** "The pineapple makes the pizza soggy."`,`> Tap Next card. Another take appears!`],
+ win:`Nobody wins or loses — it's a conversation starter. Play as long as you like.`,
+ net:`Everyone secretly taps 👍/👎, then the results show who voted what and who the minority is. The host taps **Next take**.`,
+ tips:[`Defend a take even if you disagree — it's more fun!`,`Keep explanations short so everyone gets a turn.`]},
+
+nhie:{t:'🫣 Never Have I Ever',meta:['👥 2–12 players','⏱ 10–15 min','🖐 elimination'],
+ goal:`Everyone starts with **5 fingers**. Confess to things you've done and lose fingers. **Last player with fingers wins.**`,
+ need:`Pass-the-phone: one phone shows the card and the finger list. Different phones: each player answers honestly on their own phone.`,
+ steps:[`Choose the players. Everyone starts with 🖐 ×5.`,`A card appears, like "Never have I ever… fallen asleep in class."`,`**Anyone who HAS done it loses a finger** — tap their name (pass-the-phone) or tap **✋ I have** (different phones). If you haven't, tap **🙅 I have not**.`,`Tap **Next card**. New card, new confessions.`,`A player with **0 fingers is out**. The last player left wins!`],
+ ex:[`> Players: Ana, Ben, Cara (🖐×5 each).`,`> Card 1: "…fallen asleep in class."  Ana and Cara have → both drop to 4 fingers.`,`> Card 2: "…sent a text to the wrong person."  Only Ben has → Ben 4 fingers.`,`> Card 3: "…waved at someone who wasn't waving at me."  Everyone has → Ana 3, Ben 3, Cara 3.`,`> …after many cards, Cara reaches 0 and is out. Ana and Ben keep going until one finger decides it.`],
+ win:`Be the last with at least 1 finger.`,
+ net:`Everyone answers privately on their phone. After all have answered, the results show who confessed and everyone's fingers update. The host taps **Next card**.`,
+ tips:[`It's a game of honesty — no fibbing!`,`Strategy: nothing. Just embarrassment. 😅`]},
+
+emo:{t:'📖 Emoji Story',meta:['👥 3–12 players','⏱ 10–15 min','🎭 charades with emojis'],
+ goal:`A movie or title is shown only as **emojis**. The spotlight player **mimes** it (no words!) and the others guess the title.`,
+ need:`Pass-the-phone: one phone on the table shows the emojis. Different phones: everyone sees the emojis, but only the actor sees the title.`,
+ steps:[`Choose the players. The spotlight player for the round is shown.`,`The emojis for a title appear (like 🦁👑). Everyone can see them — they're the clue!`,`The spotlight player **mimes** or acts the title. **No talking or sounds!**`,`Everyone else shouts out guesses.`,`Pass-the-phone: tap **Reveal answer** when someone guesses or time runs out, then **Next card**.`],
+ ex:[`> Emojis: **🦁👑**. Spotlight: Ana.`,`> Ana roars like a lion, then places an imaginary crown on her head.`,`**Ben:** "Lion King!"`,`> Ana taps Ben. **+1 point each** for Ana and Ben (different phones). Pass-the-phone: tap Reveal answer → "The Lion King".`,`> Next round: the next player takes the spotlight.`],
+ win:`Different phones: whoever has the most points when the host taps **Finish game**. Pass-the-phone: for fun — no scoring.`,
+ net:`60-second timer per round. Everyone sees the emojis. The **actor** also sees the title and taps **who guessed it** — both get +1. The host moves to the next round or finishes the game.`,
+ tips:[`Act out the **number of words** and **syllables** with your fingers.`,`Mime the most famous scene.`]},
+
+wyr:{t:'⚖️ Would You Rather Duel',meta:['👥 2–12 players','⏱ endless','🤔 dilemmas'],
+ goal:`Two impossible choices appear. Everyone picks a side. The **minority has to explain** why they chose differently.`,
+ need:`Pass-the-phone: one phone — tap each player's pick. Different phones: everyone taps A or B on their own phone.`,
+ steps:[`Choose the players. A dilemma appears with **🅰️** and **🅱️**.`,`Think! Decide silently.`,`Pass-the-phone: for each player, tap **A** or **B** in their row (everyone says their choice out loud). Different phones: tap your own choice.`,`When everyone has picked, the result shows how many chose each side.`,`The **minority explains** their choice. Perfect split? Everyone defends their side!`,`Tap **Next** for a new dilemma.`],
+ ex:[`> Dilemma: **A) Have no homework forever** or **B) Have no exams forever.**`,`> Ana picks A, Ben A, Cara B, Dan A, Eli B.`,`> Result: 🅰️ 3 · 🅱️ 2 → the minority is **Cara and Eli**.`,`**Cara:** "Homework takes my free time every day!"`,`**Eli:** "Exams are what stress me, not homework."`],
+ win:`No scoring — enjoy the debate.`,
+ net:`Everyone's choice is hidden until all have voted; then the split and the minority are shown to everyone. The host taps **Next**.`,
+ tips:[`Make people explain *why* — that's where the fun is.`,`Pass-the-phone: each person should say their choice out loud *before* the host taps it, so nobody copies the crowd.`,`Make up a follow-up question for the minority: "Would you still choose that if…?"`]},
+
+cha:{t:'🎭 Charades Deck',meta:['👥 3–12 players','⏱ 60 sec per round','🎬 acting game'],
+ goal:`The spotlight player **mimes a secret word** in 60 seconds, **no sounds or words**. Score points when the room guesses it.`,
+ need:`Pass-the-phone: pass the phone to the actor first, then put it where everyone can see the timer. Different phones: only the actor's phone shows the word.`,
+ steps:[`Choose the players. The phone says whose turn it is — pass it to them.`,`The actor taps **show my word** and reads it privately (with its category, like Movie / Animal / Job / Pinoy).`,`The 60-second timer starts. The actor mimes — **no talking, no pointing at words!**`,`The others shout guesses. When someone is right, the actor taps **who guessed it**. Both get **+1 point**.`,`If the time runs out or you want to skip, the word is revealed. Tap **Next player**.`,`Tap **Finish game** to see the final ranking.`],
+ ex:[`> Actor: Cara. Secret: **Taking a selfie** (category 🎬 Action).`,`> Cara holds up an imaginary phone, makes a duck face, and clicks.`,`**Ana:** "Taking a photo!"  **Ben:** "Selfie!"`,`> Cara taps **Ben** → +1 for Cara and +1 for Ben.`,`> The phone moves to the next actor.`],
+ win:`Highest points when the game is finished.`,
+ net:`Guessers only see the **category** and the timer. The actor sees the word and taps who guessed. The host moves to the next round.`,
+ tips:[`Start by showing the **category** (movie? animal?).`,`Use big movements — small ones are easy to miss.`]},
+
+tri:{t:'🧠 Trivia Showdown',meta:['👥 2–12 players','⏱ 10 questions','⚡ speed bonus (online)'],
+ goal:`Answer 10 multiple-choice questions. **Most points wins.**`,
+ need:`Pass-the-phone: one person reads the questions aloud and everyone answers out loud. Different phones: everyone answers on their own screen.`,
+ steps:[`Choose the players. A question with four answers A–D appears.`,`**Pass-the-phone:** the phone-holder reads the question and answers aloud; everyone decides; tap **Reveal answer**; then tap **everyone who got it right** (+1 each); tap **Next question**.`,`**Different phones:** tap your answer within **15 seconds**. Faster correct answers earn **more points** (500–1000).`,`After 10 questions the winner is shown.`],
+ ex:[`> Question 3: "**Capital city of the Philippines?** A) Cebu B) Davao C) Manila D) Baguio"`,`> Ana taps C in 2 seconds → about 930 points. Ben taps C in 12 seconds → about 600 points. Cara taps A → 0.`,`> The correct answer (C) is shown. Everyone sees the score list. The host taps **Next question**.`,`> **Pass-the-phone version of the same question:** the reader says the question and options aloud. Ana and Ben shout "C!", Cara says "A!". The reader taps **Reveal answer** (C is green), then taps **Ana** and **Ben** (they get +1 each) and taps **Next question**.`,`> After question 10 the phone shows the winners and the final score list.`],
+ win:`Highest score after 10 questions.`,
+ net:`Everyone answers privately. When all have answered (or time runs out) the right answer and the leaderboard appear. The host taps **Next question**.`,
+ tips:[`Don't rush if you aren't sure — a wrong answer scores 0, but a slow right one still scores!`,`Pass-the-phone: the reader should read all four answers before anyone answers, so nobody gets a head start.`,`Different phones: you can only answer once per question — tap carefully.`]},
+
+cn:{t:'🗝️ Codenames Lite',meta:['👥 4–12 players (teams)','⏱ 15–20 min','🔴 vs 🔵'],
+ goal:`Two teams (**🔴 Red** and **🔵 Blue**). Each team's **Spymaster** knows which of the 25 words belong to their team. They give one-word clues so their **operatives** find all of their team's agents first.`,
+ need:`Pass-the-phone: one phone in the middle; spymasters peek at the key. Different phones: teams are assigned automatically and spymasters see the key on their phones.`,
+ steps:[`The board has 25 words. The starting team has **9 agents**, the other has **8**. There are **7 neutral** bystanders and **1 💥 assassin**.`,`The **Spymaster** gives a clue: **one word + one number** (e.g. "ocean 3" = 3 words relate to "ocean"). The clue must NOT be a word on the board.`,`The team's **operatives** discuss and tap words one by one.`,`If it's **your agent** → keep guessing (up to the number + 1). Neutral or the **other team's** agent → your turn ends. **Assassin → your team loses immediately!**`,`Tap **End turn** when you want to stop.`,`The first team to find **all** of their agents wins.`],
+ ex:[`> Red team. Red words include: **Whale, Dolphin, Anchor**. The assassin is **Spider**.`,`**Red Spymaster:** "Ocean 3."`,`**Operatives:** tap **Whale** → it turns red ✓. Tap **Dolphin** → red ✓. Tap **Anchor** → red ✓.`,`> They've used their 3 guesses. They may use one bonus guess but stop and tap **End turn**.`,`**Blue Spymaster:** "Web 1." Operatives tap **Spider** — it's the assassin! 💥 → **Blue loses**, Red wins.`],
+ win:`Find all your team's words first. Hit the assassin and your team loses.`,
+ net:`Players are split into Red and Blue; the first player on each team is the **Spymaster** (they see the colored key). Spymasters type their clue ("ocean 3") on their phone, then only that team's operatives can tap words. Needs 4+ players.`,
+ tips:[`Pass-the-phone: make sure only spymasters look at the **🗝️ Spymaster key**.`,`Spymasters: connect 2–3 words with a clean clue; avoid clues that point to the assassin.`]},
+
+tel:{t:'📞 Telephone Whispers',meta:['👥 3–12 players','⏱ 5–10 min','😂 chaos'],
+ goal:`A message is passed down the line **alternating between words and emojis**. At the end, laugh at how it changed!`,
+ need:`Pass-the-phone: one phone passed to each player in turn. Different phones: everyone plays at the same time.`,
+ steps:[`Player 1 **writes a silly phrase** (tap 💡 for ideas).`,`Player 2 sees the phrase and writes it using **only emojis** — no letters!`,`Player 3 sees only the emojis and writes what they **think it means in words**.`,`The chain continues (words → emojis → words…) until everyone has played.`,`At the end, the **whole chain** is revealed in order with every player's name.`],
+ ex:[`> Players: Ana, Ben, Cara, Dan.`,`**1. Ana (words):** "A pirate eating halo-halo".`,`**2. Ben (emojis):** 🏴‍☠️🍧.`,`**3. Cara (words):** "A pirate with ice cream".`,`**4. Dan (emojis):** 🍦🌊.`,`> The final reveal shows the chain: phrase → emojis → new phrase → emojis. It's now far from the original.`],
+ win:`Nobody wins — the laughs are the prize.`,
+ net:`Everyone starts their **own** chain, and each round every chain moves to the next player. A 90-second timer per round; at the end you see **every** chain.`,
+ tips:[`Emoji turns: don't type letters, only emojis.`,`Be creative — the weirder, the funnier.`]},
+
+dg:{t:'🎨 Draw & Guess',meta:['👥 3–12 players','⏱ 60 sec per round','✏️ drawing game'],
+ goal:`The artist secretly draws a word; the others shout guesses. When someone is right, both the artist and the guesser score.`,
+ need:`Your finger! Pass-the-phone: the artist draws, then shows the drawing to everyone. Different phones: the drawing appears **live** on everyone's phone.`,
+ steps:[`The phone shows whose turn it is. Pass it to the artist (pass-the-phone).`,`The artist taps **show my word** and sees it — like "Pizza".`,`Draw it with your finger. No letters or numbers! Use the colors, **🧽 eraser**, **● / •** (brush size) and **🗑** (clear).`,`When done (or when time runs out), tap **Done**. Everyone sees the final drawing.`,`Others shout guesses. The artist taps **who guessed it** (+1 each). Nobody? Tap **Nobody**.`,`Tap **Next artist** or **Finish game**.`],
+ ex:[`> Artist: Ben. Word: **Jeepney**.`,`> Ben draws a long bus, a front hood and wheels. Ana shouts "Bus!", Cara shouts "Jeepney!"`,`> Ben taps **Cara** → +1 point for Ben and +1 point for Cara.`,`> The phone moves to the next artist.`],
+ win:`Most points when the game ends.`,
+ net:`Everyone else sees your drawing update about every second. The artist's screen doesn't refresh while drawing, so nothing gets erased. The host picks Next artist.`,
+ tips:[`Draw the **most recognizable part** first.`,`Short on time? Draw outlines, not details.`]},
+
+hz:{t:'🔐 Heist Planner',meta:['👥 3–10 players','⏱ 10–15 min','🐀 hidden traitor'],
+ goal:`The crew must pull off a heist by passing **3 out of 5 jobs**. But a secret **🐀 Rat** is among you, trying to make **3 jobs fail**.`,
+ need:`Pass-the-phone: one phone passed in private. Different phones: your role is on your own screen.`,
+ steps:[`Each player secretly gets a **specialty**: 💻 Hacker, 🚗 Driver, 🔐 Safecracker, 👀 Lookout, 🪪 Forger or 💪 Muscle. One player is also the **Rat**. Reveal privately (pass-the-phone: Reveal, then Hide & pass).`,`A job appears, such as "Laser grid blocks the hallway — needs 💻 Hacker".`,`**Talk it out:** who should handle it? Claim your specialty (the Rat may lie!). Then choose one person (everyone votes on different phones; pass-the-phone: tap the name).`,`The chosen player secretly acts: **🛠 Do the job** (or, if they're the Rat, **🐀 Sabotage it**).`,`**Result:** the **right specialty always succeeds**. A **wrong specialty** succeeds only **40%** of the time. Sabotage always fails.`,`The first side to reach **3 successes (✅)** or **3 failures (❌)** ends the heist. The Rat and everyone's specialty are revealed.`],
+ ex:[`> Players: Ana (Hacker), Ben (Driver 🐀 **the Rat**), Cara (Safecracker), Dan (Lookout).`,`> **Job 1: "Laser grid blocks the hallway" → needs Hacker.** Ana: "I'm the Hacker, I'll do it." Ben: "Me too, I'm the Hacker!" (a lie). The crew trusts Ana and picks her. She taps Do the job → ✅ success.`,`> **Job 2: "The vault door is sealed" → needs Safecracker.** The crew picks Cara → ✅ again (2/3).`,`> **Job 3: "The getaway truck needs hotwiring" → needs Driver.** Ben (the Rat) says "I'm the Driver!" — the crew picks him since he's telling the truth. But he taps 🐀 **Sabotage** → ❌ fail.`,`> **Job 4:** the crew assigns Dan; he's a Lookout doing a Hacker job → 40% chance, fails ❌. Job 5 succeeds (3/3 ✅). **The crew wins!** The Rat is revealed: Ben.`],
+ win:`**Crew:** 3 successful jobs. **Rat:** 3 failed jobs without being caught.`,
+ net:`Your specialty is always shown at the top of your own screen (Rat players also get the Rat reminder). Everyone votes who should do each job. Only the chosen player sees the action buttons.`,
+ tips:[`Crew: ask who has the matching specialty — then watch who volunteers too eagerly.`,`Rat: sometimes do the job honestly to build trust, then sabotage on a key job.`]}
+};
+const Help={
+ fmt:t=>esc(t).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/\*(.+?)\*/g,'<i>$1</i>'),
+ html(id){const h=HOW[id];if(!h)return '<p>No guide for this screen yet.</p>';const f=Help.fmt;
+  let o='<div class="howto"><div class="how-meta">'+h.meta.map(m=>'<span class="pill">'+f(m)+'</span>').join('')+'</div>';
+  o+='<h4>🎯 The goal</h4><p>'+f(h.goal)+'</p>';
+  if(h.need)o+='<h4>🧰 What you need</h4><p>'+f(h.need)+'</p>';
+  o+='<h4>📖 Step by step</h4><ol class="how-steps">'+h.steps.map(s=>'<li>'+f(s)+'</li>').join('')+'</ol>';
+  if(h.ex)o+='<h4>🎬 Full example</h4><div class="how-demo">'+h.ex.map(l=>l.startsWith('>')?'<div class="how-note">'+f(l.slice(1).trim())+'</div>':'<div class="how-line">'+f(l)+'</div>').join('')+'</div>';
+  if(h.win)o+='<h4>🏆 How to win</h4><p>'+f(h.win)+'</p>';
+  if(h.net)o+='<h4>📡 On different phones</h4><p>'+f(h.net)+'</p>';
+  if(h.tips)o+='<h4>💡 Tips</h4><ul>'+h.tips.map(x=>'<li>'+f(x)+'</li>').join('')+'</ul>';
+  return o+'</div>';},
+ show(id){const h=HOW[id];if(!h)return;modal(h.t+' — How to play',Help.html(id));},
+ open(){Help.show(HELP.id);}
+};
+
 const Net=(()=>{
-  const RTC={iceServers:[]},$e=id=>document.getElementById(id);
-  let role=null,roster=[],pending=[],nid=1,lg='spy',game=null,gst=null,hc=null,myId=0,run=false,inGame=false,joinReply='',peers={};
-  const enc=d=>btoa(JSON.stringify({type:d.type,sdp:d.sdp})),dec=t=>JSON.parse(atob(t.replace(/\s+/g,'')));
-  const gathered=pc=>new Promise(r=>{if(pc.iceGatheringState==='complete')return r();const f=()=>{if(pc.iceGatheringState==='complete'){pc.removeEventListener('icegatheringstatechange',f);r();}};pc.addEventListener('icegatheringstatechange',f);setTimeout(r,3500);});
+  const $e=id=>document.getElementById(id);let mode='local';
+  const rtcCfg=()=>mode==='online'?{iceServers:[{urls:'stun:stun.l.google.com:19302'},{urls:'stun:stun1.l.google.com:19302'},{urls:'stun:global.stun.twilio.com:3478'}]}:{iceServers:[]};
+  let wgenre='random',role=null,roster=[],pending=[],nid=1,lg='spy',game=null,gst=null,hc=null,myId=0,run=false,inGame=false,joinReply='',peers={};
+  const enc=d=>btoa(JSON.stringify({type:d.type,sdp:d.sdp,m:mode==='online'?'o':'l'})),dec=t=>JSON.parse(atob(t.replace(/\s+/g,'')));
+  const gathered=pc=>new Promise(r=>{if(pc.iceGatheringState==='complete')return r();const f=()=>{if(pc.iceGatheringState==='complete'){pc.removeEventListener('icegatheringstatechange',f);r();}};pc.addEventListener('icegatheringstatechange',f);setTimeout(r,mode==='online'?7000:3500);});
   const send=(p,o)=>{try{if(p&&p.dc&&p.dc.readyState==='open')p.dc.send(JSON.stringify(o));}catch{}};
   const on=()=>roster.filter(r=>!r.off);
   function copyTa(id){const t=$e(id);if(!t)return;t.select();try{navigator.clipboard.writeText(t.value);}catch{}try{document.execCommand('copy');}catch{}SFX.success();}
   function netOk(){if(typeof RTCPeerConnection==='undefined'){alert('This browser does not support phone-to-phone play. Try Chrome or Safari.');return false;}return true;}
 
   /* ---------- HOST ---------- */
-  function host(){if(!netOk())return;SFX.unlock();role='host';roster=[{id:0,name:(S.get('idle_name','')||'').trim()||'Host'}];nid=1;pending=[];lg='spy';gst=null;game=null;peers={};render();}
+  function chooser(kind){SFX.unlock();HELP.id='lobby';role=null;
+    const h=kind==='host';
+    $a().innerHTML='<div class="screen">'+hdr(h?'Host a lobby':'Join a lobby','Choose how to connect',null,'Net.leave')+
+     '<div class="modecard mc-a" onclick="Net.'+(h?'hostGo':'joinGo')+'(\'local\')"><div class="mc-i">📶</div><div><b>Same Wi-Fi / hotspot</b><span>Free — no mobile data needed. Everyone must be on the same Wi-Fi, or connected to one person\'s hotspot. Best for the classroom.</span></div></div>'+
+     '<div class="modecard mc-b" onclick="Net.'+(h?'hostGo':'joinGo')+'(\'online\')"><div class="mc-i">🌐</div><div><b>Online</b><span>Friends can be anywhere, on different networks. Uses mobile data or internet Wi-Fi.</span></div></div>'+
+     '<p class="helptext" style="text-align:center">'+(h?'Not sure? Tap <b>?</b> at the top for step-by-step help.':'The code your host sends decides the type — we switch automatically.')+'</p></div>';}
+  function host(){if(!netOk())return;chooser('host');}
+  function hostGo(m){mode=m==='online'?'online':'local';hostStart();}
+  function hostStart(){if(!netOk())return;SFX.unlock();HELP.id='lobby';role='host';roster=[{id:0,name:(S.get('idle_name','')||'').trim()||'Host'}];nid=1;pending=[];lg='spy';gst=null;game=null;peers={};render();}
   async function invite(){
-    const pc=new RTCPeerConnection(RTC),dc=pc.createDataChannel('g'),p={pc,dc,code:'',ans:'',pid:null};pending.push(p);render();
+    const pc=new RTCPeerConnection(rtcCfg()),dc=pc.createDataChannel('g'),p={pc,dc,code:'',ans:'',pid:null};pending.push(p);render();
     dc.onmessage=m=>onPeer(p,JSON.parse(m.data));
     dc.onclose=()=>{if(p.pid!=null){const r=roster.find(x=>x.id===p.pid);if(r)r.off=true;lobbyPush();if(gst)push();else render();}};
     await pc.setLocalDescription(await pc.createOffer());await gathered(pc);p.code=enc(pc.localDescription);render();
@@ -1965,30 +2592,34 @@ const Net=(()=>{
     else if(m.t==='act'&&gst&&p.pid!=null)onAct(p.pid,m.a,m.g);
   }
   function lobbyPush(){const o={t:'lobby',roster,lg,run:!!gst};Object.values(peers).forEach(p=>send(p,o));}
+  function setGenre(k){if(role==='host'&&(k==='random'||WGEN[k])){wgenre=k;SFX.tap();render();}}
   function pick(id){if(role==='host'&&NG[id]){lg=id;SFX.tap();lobbyPush();render();}}
-  function start(){const g=NG[lg],ps=on();if(ps.length<g.min||ps.length>g.max)return;game=lg;gst=g.init(ps.map(r=>({id:r.id,name:r.name})));SFX.reveal();push();}
+  function start(){const g=NG[lg],ps=on();if(ps.length<g.min||ps.length>g.max)return;game=lg;HELP.id=lg;gst=g.init(ps.map(r=>({id:r.id,name:r.name})),lg==='wspy'?{genre:wgenre}:undefined);SFX.reveal();push();}
   function wrap(pid,h){const off=pid===0?roster.filter(r=>r.off&&!r.gone):[];return '<div class="screen">'+hdr(NG[game].n,pid===0?'You are the lobby master':'Lobby game',null,'Net.leaveAsk')+off.map(r=>'<div class="card" style="background:var(--hl);display:flex;align-items:center;gap:10px;font-weight:700;font-size:.85rem;padding:12px 14px"><span style="flex:1">⚠ '+nE(r.name)+' disconnected</span><button class="btn btn-ink btn-sm" onclick="Net.kick('+r.id+')">Remove &amp; continue</button></div>').join('')+h+'</div>';}
-  function push(){if(!gst)return;on().forEach(r=>{let h;try{h=wrap(r.id,NG[game].view(gst,r.id));}catch(e){console.error(e);return;}if(r.id===0)showView(h);else send(peers[r.id],{t:'view',html:h});});}
-  function onAct(pid,a,g){if(!gst)return;try{NG[game].act(gst,pid,a,g);}catch(e){console.error(e);}push();}
+  function push(){if(!gst)return;on().forEach(r=>{let h;try{h=wrap(r.id,NG[game].view(gst,r.id));}catch(e){console.error(e);return;}if(r.id===0)showView(h);else send(peers[r.id],{t:'view',html:h,g:game});});}
+  function setImg(d){const e=$e('live');if(e&&d)e.src=d;}
+  function onAct(pid,a,g){if(!gst)return;let r;try{r=NG[game].act(gst,pid,a,g);}catch(e){console.error(e);}
+    if(r==='img'){on().forEach(x=>{if(x.id===pid)return;if(x.id===0)setImg(gst.img);else send(peers[x.id],{t:'img',d:gst.img});});return;}push();}
   function kick(id){const r=roster.find(x=>x.id===id);if(!r||!r.off)return;r.gone=true;if(gst&&NG[game].kick){try{NG[game].kick(gst,id);}catch(e){console.error(e);}}push();}
-  function toLobby(){if(role!=='host')return;gst=null;game=null;Object.values(peers).forEach(p=>send(p,{t:'toLobby'}));lobbyPush();render();}
+  function toLobby(){if(role!=='host')return;HELP.id='lobby';gst=null;game=null;Object.values(peers).forEach(p=>send(p,{t:'toLobby'}));lobbyPush();render();}
   function act(a,g){if(role==='host')onAct(0,a,g);else send(hc,{t:'act',a,g});}
   function actIn(a,id){const e=$e(id);act(a,e?e.value:'');}
   function leaveAsk(){if(role==='host'&&gst){if(confirm('Back to the lobby? The game will end for everyone.'))toLobby();}else if(confirm('Leave the lobby?'))leave();}
   function leave(){try{Object.values(peers).forEach(p=>p.pc.close());pending.forEach(p=>p.pc.close());if(hc&&hc.pc)hc.pc.close();}catch{}role=null;gst=null;game=null;hc=null;peers={};pending=[];inGame=false;joinReply='';renderHub();}
 
-  function showView(h){$a().innerHTML=h;tickDom();const i=$e('wcn');if(i)i.focus();}
+  function showView(h){const keep={},fa=document.activeElement&&document.activeElement.id;document.querySelectorAll('#app input[id],#app textarea[id]').forEach(e=>keep[e.id]=e.value);$a().innerHTML=h;Object.keys(keep).forEach(k=>{const e=$e(k);if(e&&keep[k])e.value=keep[k];});if($e('dcv'))DrawPad.init(d=>act('img',d));else DrawPad.stop();tickDom();const f=$e(fa||'wcn');if(f&&f.tagName==='INPUT'){f.focus();try{f.setSelectionRange(f.value.length,f.value.length);}catch{}}}
   function tickDom(){document.querySelectorAll('[data-left]').forEach(e=>{if(!e.dataset.end)e.dataset.end=Date.now()+ +e.dataset.left*1000;});document.querySelectorAll('[data-end]').forEach(e=>{const s=nsecs(+e.dataset.end-Date.now());e.textContent=fmtTime(s);e.classList.toggle('urgent',s<=30&&s>0);});}
   setInterval(()=>{tickDom();if(role==='host'&&gst&&NG[game].tick&&NG[game].tick(gst))push();},1000);
 
-  function chips(){return Object.keys(NG).map(k=>{const g=NG[k];return '<div class="lrow'+(k===lg?' sel':'')+'" '+(role==='host'?'onclick="Net.pick(\''+k+'\')"':'style="cursor:default"')+'><div class="avatar" style="background:none;font-size:1.3rem">'+g.i+'</div><div class="rname">'+nE(g.n)+'</div><span class="pill">'+g.min+'–'+g.max+'</span></div>';}).join('');}
+  function chips(){return Object.keys(NG).map(k=>{const g=NG[k];return '<div class="lrow'+(k===lg?' sel':'')+'" '+(role==='host'?'onclick="Net.pick(\''+k+'\')"':'style="cursor:default"')+'><div class="avatar" style="background:none;font-size:1.3rem">'+g.i+'</div><div class="rname">'+nE(g.n)+'</div><span class="pill">'+g.min+'–'+g.max+'</span><button class="chip" style="padding:3px 9px" onclick="event.stopPropagation();Help.show(\''+k+'\')">?</button></div>';}).join('');}
   function render(){
+    DrawPad.stop();
     if(role==='host'){
       pending.forEach((p,i)=>{const t=$e('ans'+i);if(t)p.ans=t.value;});
       if(gst)return;
       const ps=on(),g=NG[lg],ok=ps.length>=g.min&&ps.length<=g.max;
       $a().innerHTML='<div class="screen">'+hdr('Lobby','You are the lobby master',null,'Net.leaveAsk')+
-        '<div class="card"><div class="slabel">In the lobby ('+ps.length+')</div>'+nlist(ps,r=>r.id===0?'<span class="pill">👑 master</span>':'<span class="pill" style="background:var(--ok);color:#fff">online</span>')+'</div>'+
+        '<div class="card"><div class="slabel">In the lobby ('+ps.length+') · '+(mode==='online'?'🌐 Online':'📶 Wi-Fi / hotspot')+'</div>'+nlist(ps,r=>r.id===0?'<span class="pill">👑 master</span>':'<span class="pill" style="background:var(--ok);color:#fff">online</span>')+'</div>'+
         pending.map((p,i)=>'<div class="card"><div class="slabel">New phone '+(i+1)+'</div>'+
           (p.code?'<p class="helptext">1. Send this code to the friend (any chat app):</p><textarea id="code'+i+'" readonly style="font-family:var(--fmono);font-size:.62rem;height:64px">'+p.code+'</textarea><button class="btn btn-ghost btn-sm" style="margin:6px 0" onclick="Net.copy(\'code'+i+'\')">Copy code</button>'+
             '<p class="helptext">2. Paste the reply code they send back:</p><textarea id="ans'+i+'" style="font-family:var(--fmono);font-size:.62rem;height:64px" placeholder="Reply code">'+nE(p.ans||'')+'</textarea>'+
@@ -1996,8 +2627,8 @@ const Net=(()=>{
             :'<p class="helptext">Making a code…</p>')+
           ' <button class="btn btn-ghost btn-sm" style="margin-top:6px" onclick="Net.drop('+i+')">Cancel</button></div>').join('')+
         '<button class="btn btn-accent btn-block" onclick="Net.invite()">➕ Invite a phone</button>'+
-        '<p class="helptext" style="margin:6px 2px 14px">Everyone must be on the same hotspot or Wi-Fi.</p>'+
-        '<div class="card"><div class="slabel">Pick a game (you can change it any time)</div><div class="llist">'+chips()+'</div></div>'+
+        '<p class="helptext" style="margin:6px 2px 14px">'+(mode==='online'?'🌐 <b>Online</b> — friends can be anywhere. Everyone needs mobile data or internet Wi-Fi. If someone can\'t connect, try again once or use hotspot mode.':'📶 <b>Same Wi-Fi / hotspot</b> — everyone must be on the same network. No mobile data needed.')+' Codes contain your network address — only send them to friends.</p>'+
+        '<div class="card"><div class="slabel">Pick a game (you can change it any time)</div><div class="llist">'+chips()+'</div></div>'+(lg==='wspy'?'<div class="card"><div class="slabel">Word genre</div>'+wChips(wgenre,'Net.setGenre')+'</div>':'')+
         '<button class="btn btn-ink btn-block" '+(ok?'':'disabled')+' onclick="Net.start()">'+(ok?'Start '+nE(g.n)+' →':nE(g.n)+' needs '+g.min+'–'+g.max+' players')+'</button></div>';
     }else if(role==='client'){
       const ps=on();
@@ -2007,18 +2638,20 @@ const Net=(()=>{
   }
 
   /* ---------- JOIN ---------- */
-  function joinScreen(){if(!netOk())return;SFX.unlock();role='client';joinReply='';renderJoin();}
+  function joinScreen(){if(!netOk())return;chooser('join');}
+  function joinGo(m){mode=m==='online'?'online':'local';SFX.unlock();HELP.id='lobby';role='client';joinReply='';renderJoin();}
   function renderJoin(){
     $a().innerHTML='<div class="screen">'+hdr('Join a lobby','Different phone',null,'Net.leave')+
       '<div class="card"><div class="slabel">Your name</div><input value="'+nE(S.get('idle_name',''))+'" placeholder="you" oninput="S.set(\'idle_name\',this.value)"/></div>'+
-      (joinReply?
+      '<p class="helptext" style="text-align:center">'+(mode==='online'?'🌐 Online mode':'📶 Same Wi-Fi / hotspot mode')+'</p>'+(joinReply?
         '<div class="card"><p class="helptext">Send this reply code to the lobby master. You will connect automatically.</p><textarea id="reply" readonly style="font-family:var(--fmono);font-size:.62rem;height:80px">'+joinReply+'</textarea><button class="btn btn-ink btn-block" style="margin-top:8px" onclick="Net.copy(\'reply\')">Copy reply code</button></div>'
         :'<div class="card"><p class="helptext">Paste the code the lobby master sent you.</p><textarea id="jc" style="font-family:var(--fmono);font-size:.62rem;height:80px" placeholder="Lobby code"></textarea><button class="btn btn-ink btn-block" style="margin-top:8px" onclick="Net.joinMake()">Make my reply code</button></div>')+'</div>';
   }
   async function joinMake(){
     let off;try{off=dec($e('jc').value.trim());}catch{return alert('That code is not valid. Copy the whole thing again.');}
+    if(off.m){const nm2=off.m==='o'?'online':'local';if(nm2!==mode){mode=nm2;alert('This code is for '+(mode==='online'?'🌐 Online':'📶 Same Wi-Fi / hotspot')+' mode — switched automatically.');}}
     const nm=(S.get('idle_name','')||'').trim().slice(0,18)||'Player';
-    const pc=new RTCPeerConnection(RTC);hc={pc};
+    const pc=new RTCPeerConnection(rtcCfg());hc={pc};
     pc.ondatachannel=e=>{const dc=e.channel;hc.dc=dc;
       dc.onopen=()=>{inGame=false;dc.send(JSON.stringify({t:'hi',name:nm}));};
       dc.onmessage=m=>onHost(JSON.parse(m.data));
@@ -2029,10 +2662,11 @@ const Net=(()=>{
   function onHost(m){
     if(m.t==='you'){myId=m.id;}
     else if(m.t==='lobby'){roster=m.roster;lg=m.lg;run=m.run;if(!inGame)render();}
-    else if(m.t==='view'){inGame=true;showView(m.html);}
-    else if(m.t==='toLobby'){inGame=false;render();}
+    else if(m.t==='view'){inGame=true;HELP.id=m.g||'lobby';showView(m.html);}
+    else if(m.t==='toLobby'){inGame=false;HELP.id='lobby';render();}
+    else if(m.t==='img')setImg(m.d);
   }
-  return{host,invite,accept,drop,pick,start,act,actIn,kick,toLobby,leave,leaveAsk,joinScreen,joinMake,copy:copyTa,render};
+  return{host,hostGo,joinGo,invite,accept,drop,setGenre,pick,start,act,actIn,kick,toLobby,leave,leaveAsk,joinScreen,joinMake,copy:copyTa,render};
 })();
 
 /* ================================================================
