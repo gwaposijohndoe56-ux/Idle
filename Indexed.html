@@ -354,6 +354,7 @@ input:focus,textarea:focus{outline:3px solid var(--hl);outline-offset:0;}
 .how-demo{background:var(--paper-deep);border:2.5px dashed var(--ink);border-radius:14px;padding:10px 12px;}
 .how-line{margin:6px 0;font-size:.88rem;line-height:1.45;}
 .how-note{margin:8px 0;padding:6px 10px;background:var(--hl);border-radius:10px;font-size:.84rem;font-weight:700;line-height:1.4;}
+  .host-game-control{scroll-margin-top:14px;}
 </style>
 </head>
 <body>
@@ -2792,28 +2793,71 @@ const Net=(()=>{
       if(m.t==='hi'&&p.pid==null){
         let nm=String(m.name||'Player').trim().slice(0,18)||'Player',k=2,b=nm;
         while(roster.some(r=>r.name.toLowerCase()===nm.toLowerCase()&&!r.off&&!r.gone))nm=b+' '+k++;
-        p.pid=nid++;roster.push({id:p.pid,name:nm});peers[p.pid]=p;
+        p.pid=nid++;
+        p.name=nm;
+        p.connected=true;
+        roster.push({id:p.pid,name:nm});
+        peers[p.pid]=p;
         peers.__pending=(peers.__pending||[]).filter(x=>x!==p);
         pending=pending.filter(x=>x!==p);
-        send(p,{t:'you',id:p.pid});SFX.success();lobbyPush();
-        if(!gst)render();
+        send(p,{t:'you',id:p.pid});
+        SFX.success();
+        setStatus(nm+' joined the lobby.');
+        // IMPORTANT: render the HOST lobby from the host's own state first.
+        // The host is the source of truth; never depend on the joining phone's
+        // render to make the host controls appear.
+        if(role==='host'&&!gst)render();
+        lobbyPush();
       }else if(m.t==='act'&&gst&&p.pid!=null)onAct(p.pid,m.a,m.g);
-    }catch(e){console.error('IDLE peer message error',e);}
+    }catch(e){console.error('IDLE peer message error',e);setStatus('A lobby message could not be processed.');if(role==='host'&&!gst)render();}
   }
 
   function lobbyPush(){
     const snap=roster.map(r=>({id:r.id,name:r.name,off:!!r.off,gone:!!r.gone}));
-    const o={t:'lobby',roster:snap,lg,run:!!gst};
+    const o={t:'lobby',roster:snap,lg,run:!!gst,hostId:peerId||null};
     Object.keys(peers).filter(k=>k!=='__pending').forEach(k=>send(peers[k],o));
   }
-  function setGenre(k){if(role==='host'&&(k==='random'||WGEN[k])){wgenre=k;S.set('wgenre',k);SFX.tap();lobbyPush();render();}}
-  function pick(id){if(role==='host'&&!gst&&NG[id]){lg=id;SFX.tap();lobbyPush();render();}}
+  function setGenre(k){
+    if(role==='host'&&!gst&&(k==='random'||WGEN[k])){
+      wgenre=k;S.set('wgenre',k);SFX.tap();
+      render();
+      lobbyPush();
+    }
+  }
+  function pick(id){
+    if(role==='host'&&!gst&&NG[id]){
+      lg=id;
+      SFX.tap();
+      setStatus('Selected '+NG[id].n+'.');
+      // Paint the host UI immediately, then broadcast the selection.
+      render();
+      lobbyPush();
+    }
+  }
 
   function start(){
     if(role!=='host')return;
-    const g=NG[lg],ps=on();if(!g||ps.length<g.min||ps.length>g.max)return;
-    try{game=lg;HELP.id=lg;gst=g.init(ps.map(r=>({id:r.id,name:r.name})),lg==='wspy'?{genre:wgenre}:undefined);SFX.reveal();lobbyPush();push();}
-    catch(e){console.error('IDLE game init error',e);setStatus('Could not start that game.');render();}
+    const g=NG[lg],ps=on();
+    if(!g){setStatus('Choose a game first.');render();return;}
+    if(ps.length<g.min||ps.length>g.max){
+      setStatus(g.n+' needs '+g.min+'–'+g.max+' players.');
+      render();
+      return;
+    }
+    try{
+      game=lg;
+      HELP.id=lg;
+      gst=g.init(ps.map(r=>({id:r.id,name:r.name})),lg==='wspy'?{genre:wgenre}:undefined);
+      setStatus('Game started.');
+      SFX.reveal();
+      lobbyPush();
+      push();
+    }catch(e){
+      console.error('IDLE game init error',e);
+      game=null;gst=null;
+      setStatus('Could not start that game.');
+      render();
+    }
   }
 
   function wrap(pid,h){
@@ -2905,10 +2949,25 @@ const Net=(()=>{
   function render(){
     DrawPad.stop();
     if(role==='host'){
+      // Host is the authoritative lobby UI. Re-rendering is intentionally
+      // deterministic from host-owned state so a joining phone can never
+      // replace or hide the host's game controls.
       pending.forEach((p,i)=>{const t=$e('ans'+i);if(t)p.ans=t.value;});
       if(gst)return;
-      const ps=on(),g=NG[lg],ok=!!g&&ps.length>=g.min&&ps.length<=g.max;
+
+      const ps=on(),g=NG[lg]||NG.spy,ok=ps.length>=g.min&&ps.length<=g.max;
       const onlineCode=mode==='online'&&peerId?'IDLE-O:'+peerId:'';
+      const gameControls=
+        '<div class="card host-game-control" id="hostGameControl">'+
+          '<div class="slabel">🎮 Host controls — choose the game</div>'+
+          '<div class="llist">'+chips()+'</div>'+
+          (lg==='wspy'?'<div style="margin-top:12px"><div class="slabel">Word genre</div>'+wChips(wgenre,'Net.setGenre')+'</div>':'')+
+          '<div style="margin-top:12px"><button class="btn btn-ink btn-block" '+(ok?'':'disabled')+' onclick="Net.start()">'+
+            (ok?'▶ Start '+nE(g.n):nE(g.n)+' needs '+g.min+'–'+g.max+' players')+
+          '</button></div>'+
+          '<p class="helptext" style="margin:8px 0 0;text-align:center">This section stays on the lobby master’s phone while friends join.</p>'+
+        '</div>';
+
       const inviteBlock=mode==='online'
         ?'<div class="card"><div class="slabel">Online lobby code</div>'+(onlineCode?'<p class="helptext">Send this ONE code to every friend. They do not need a reply code.</p><textarea id="ocode" readonly style="font-family:var(--fmono);font-size:.72rem;height:70px">'+nE(onlineCode)+'</textarea><button class="btn btn-ink btn-block" style="margin-top:8px" onclick="Net.copy(\'ocode\')">Copy lobby code</button>':'<p class="helptext">'+nE(netStatus||'Starting online lobby…')+'</p>')+'</div>'
         :pending.map((p,i)=>'<div class="card"><div class="slabel">New phone '+(i+1)+'</div>'+
@@ -2918,18 +2977,22 @@ const Net=(()=>{
             :'<p class="helptext">Making a code…</p>')+
           ' <button class="btn btn-ghost btn-sm" style="margin-top:6px" onclick="Net.drop('+i+')">Cancel</button></div>').join('')+
         '<button class="btn btn-accent btn-block" onclick="Net.invite()">'+(mode==='online'?'📋 Copy lobby code':'➕ Invite a phone')+'</button>'+
-        '<p class="helptext" style="margin:6px 2px 14px">'+(mode==='online'?'🌐 <b>Online</b> uses an internet connection for lobby signaling. Game data still travels between players when possible.':'📶 <b>Same Wi-Fi / hotspot</b> — everyone must be on the same network. No mobile data needed.')+'</p>'+
-        '<div class="card"><div class="slabel">Pick a game (you can change it any time)</div><div class="llist">'+chips()+'</div></div>'+(lg==='wspy'?'<div class="card"><div class="slabel">Word genre</div>'+wChips(wgenre,'Net.setGenre')+'</div>':'')+
-        '<button class="btn btn-ink btn-block" '+(ok?'':'disabled')+' onclick="Net.start()">'+(ok?'Start '+nE(g.n)+' →':nE(g?.n||'Game')+' needs '+(g?.min||'?')+'–'+(g?.max||'?')+' players')+'</button></div>';
+        '<p class="helptext" style="margin:6px 2px 14px">'+(mode==='online'?'🌐 <b>Online</b> uses an internet connection for lobby signaling. Game data still travels between players when possible.':'📶 <b>Same Wi-Fi / hotspot</b> — everyone must be on the same network. No mobile data needed.')+'</p>';
+
       $a().innerHTML='<div class="screen">'+hdr('Lobby','You are the lobby master',null,'Net.leaveAsk')+
         (netStatus?'<div class="card" style="background:var(--hl);padding:10px 12px;font-size:.82rem;font-weight:800">📡 '+nE(netStatus)+'</div>':'')+
-        '<div class="card"><div class="slabel">In the lobby ('+ps.length+') · '+(mode==='online'?'🌐 Online':'📶 Wi-Fi / hotspot')+'</div>'+nlist(ps,r=>r.id===0?'<span class="pill">👑 master</span>':'<span class="pill" style="background:var(--ok);color:#fff">online</span>')+'</div>'+inviteBlock+'';
+        '<div class="card"><div class="slabel">In the lobby ('+ps.length+') · '+(mode==='online'?'🌐 Online':'📶 Wi-Fi / hotspot')+'</div>'+nlist(ps,r=>r.id===0?'<span class="pill">👑 master</span>':'<span class="pill" style="background:var(--ok);color:#fff">online</span>')+'</div>'+
+        gameControls+inviteBlock+
+        '<div class="card" style="margin-top:2px"><div class="slabel">How this works</div><p class="helptext" style="margin:0">Only the <b>Lobby Master</b> chooses the game and starts it. Joining phones only wait for that choice. Your selection is broadcast automatically to everyone.</p></div>'+
+        '</div>';
     }else if(role==='client'){
-      const ps=on();
+      const ps=on(),g=NG[lg]||NG.spy;
       $a().innerHTML='<div class="screen">'+hdr('Lobby','Connected',null,'Net.leaveAsk')+
         (netStatus?'<div class="card" style="background:var(--hl);padding:10px 12px;font-size:.82rem;font-weight:800">📡 '+nE(netStatus)+'</div>':'')+
         '<div class="card"><div class="slabel">In the lobby ('+ps.length+')</div>'+nlist(ps,r=>(r.id===0?'<span class="pill">👑 master</span>':r.id===myId?'<span class="pill">you</span>':''))+'</div>'+
-        '<div class="card"><div class="slabel">Next game</div><div class="llist">'+chips()+'</div></div>'+nwait(run?'A game is running. You will join the next one.':'Waiting for the lobby master to start…')+'</div>';
+        '<div class="card"><div class="slabel">Game chosen by the host</div><div class="wsp-word" style="display:block;text-align:center;transform:rotate(-.5deg);font-size:1.15rem">'+g.i+' '+nE(g.n)+'</div><p class="helptext" style="text-align:center;margin:10px 0 0">The Lobby Master chooses and starts the game.</p></div>'+
+        nwait(run?'A game is running. You will join the current game.':'Waiting for the Lobby Master to start…')+
+        '</div>';
     }
   }
 
