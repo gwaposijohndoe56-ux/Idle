@@ -354,20 +354,148 @@ input:focus,textarea:focus{outline:3px solid var(--hl);outline-offset:0;}
 .how-demo{background:var(--paper-deep);border:2.5px dashed var(--ink);border-radius:14px;padding:10px 12px;}
 .how-line{margin:6px 0;font-size:.88rem;line-height:1.45;}
 .how-note{margin:8px 0;padding:6px 10px;background:var(--hl);border-radius:10px;font-size:.84rem;font-weight:700;line-height:1.4;}
+
+/* ===== LOBBY v2 + per-game identity ===== */
+html{-webkit-text-size-adjust:100%;touch-action:manipulation;}
+input,textarea,select{font-size:16px!important;}
+.btn,.lrow,.chip,.iconbtn{touch-action:manipulation;min-height:44px;}
+.btn:disabled,.btn.busy{opacity:.65;pointer-events:none;}
+.btn.busy::after{content:"";display:inline-block;width:.9em;height:.9em;margin-left:8px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;vertical-align:-2px;animation:spin .7s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.hubjoin{display:flex;gap:8px;margin-top:10px;}
+.hubjoin input{flex:1;min-width:0;text-align:center;letter-spacing:.35em;font-weight:900;font-size:20px!important;text-transform:uppercase;font-family:var(--fmono);}
+.hubjoin .btn{flex:0 0 auto;}
+.neterr{display:none;margin-top:10px;background:#ffe1e3;color:#8a1f2b;border-radius:10px;padding:9px 12px;font-size:.84rem;font-weight:700;}
+.neterr.show{display:block;animation:popIn .2s both;}
+.roomcode{background:var(--ink);color:var(--paper);border-radius:var(--radius);padding:14px 14px 12px;margin-bottom:14px;text-align:center;box-shadow:6px 6px 0 var(--hl-dark);}
+.rc-l{font-size:.7rem;letter-spacing:.2em;opacity:.75;font-weight:800;}
+.rc-c{display:flex;justify-content:center;gap:8px;margin:8px 0 12px;}
+.rc-c span{background:var(--paper);color:var(--ink);font:900 clamp(2rem,10vw,2.8rem)/1 var(--fmono);padding:8px 0;width:clamp(48px,15vw,64px);border-radius:10px;}
+.roomcode .brow{justify-content:center;}
+.pill.off{background:var(--warn);color:#fff;}
+.pill.live{background:var(--ok);color:#fff;}
+.lobstat{display:flex;align-items:center;gap:8px;font-weight:800;font-size:.9rem;margin:2px 0 12px;}
+.lobstat i{width:10px;height:10px;border-radius:50%;background:var(--warn);}
+.lobstat.ready i{background:var(--ok);animation:pulseBig 1.4s infinite;}
+#toasts{position:fixed;left:0;right:0;top:max(10px,env(safe-area-inset-top));z-index:999;display:flex;flex-direction:column;align-items:center;gap:6px;pointer-events:none;}
+.toast{background:var(--ink);color:var(--paper);padding:9px 16px;border-radius:99px;font-weight:700;font-size:.85rem;box-shadow:0 6px 18px rgba(0,0,0,.25);animation:popIn .18s both;}
+.gbar{display:flex;align-items:center;gap:10px;background:var(--ga);color:#fff;border-radius:12px;padding:9px 14px;margin-bottom:12px;font-weight:900;letter-spacing:.02em;box-shadow:0 4px 0 var(--ga2);}
+.gbar b{font-size:1.4rem;}
+.gscreen .card{border-top:5px solid var(--ga);}
+.gscreen .btn-ink{background:var(--ga);color:#fff;box-shadow:0 5px 0 var(--ga2);}
+.gscreen .btn-ink:active:not(:disabled){box-shadow:0 1px 0 var(--ga2);}
+.gscreen .lrow:active{background:var(--ga);color:#fff;}
+@media(min-width:700px){:root{--maxw:620px;}}
+@media(max-height:480px) and (orientation:landscape){#app{padding-bottom:40px;}.rc-c span{padding:4px 0;}}
+
+/* ===== per-game stage themes (body.g-<game>) — each game gets its own "table" ===== */
+body[class*="g-"]{background-blend-mode:normal;transition:background-color .3s;}
+body[class*="g-"] .hrow{border-bottom:3px solid var(--ga);padding-bottom:8px;margin-bottom:14px;}
+body.g-mafia{background:radial-gradient(circle at 80% 8%,rgba(255,236,170,.5) 0 28px,rgba(255,236,170,.1) 29px 90px,transparent 91px),linear-gradient(#1a1030,#2d1536 60%,#40182f);background-attachment:fixed;}
+body.g-spy,body.g-wspy{background:linear-gradient(rgba(31,158,137,.16) 1px,transparent 1px) 0 0/32px 32px,linear-gradient(90deg,rgba(31,158,137,.16) 1px,transparent 1px) 0 0/32px 32px,#0c2a2a;background-attachment:fixed;}
+body.g-ttt{background:linear-gradient(rgba(105,87,214,.18) 1.5px,transparent 1.5px) 0 0/28px 28px,linear-gradient(90deg,rgba(105,87,214,.18) 1.5px,transparent 1.5px) 0 0/28px 28px,#eceafc;background-attachment:fixed;}
+body.g-dice{background:radial-gradient(ellipse at 50% 30%,#2f8a58,#14502f 70%,#0a3320);background-attachment:fixed;}
+body.g-wc{background:radial-gradient(circle,rgba(39,160,96,.22) 2px,transparent 2.5px) 0 0/22px 22px,#e7f5ec;background-attachment:fixed;}
+body.g-tq{background:radial-gradient(circle at 50% -10%,#6f95cf,#3f5f94 55%,#243558);background-attachment:fixed;}
+body.g-hot{background:repeating-linear-gradient(135deg,#ffe3d0 0 18px,#ffd2b3 18px 36px);background-attachment:fixed;}
+body.g-nhie{background:radial-gradient(circle,rgba(194,37,92,.18) 3px,transparent 3.5px) 0 0/26px 26px,#fde8f0;background-attachment:fixed;}
+body.g-emo{background:radial-gradient(circle,rgba(232,161,0,.28) 2px,transparent 2.5px) 0 0/20px 20px,#fff4cc;background-attachment:fixed;}
+body.g-wyr{background:linear-gradient(115deg,#d9ccff 0 50%,#ffd1b8 50% 100%);background-attachment:fixed;}
+body.g-cha{background:radial-gradient(ellipse at 50% 0,rgba(255,255,255,.35),transparent 55%),linear-gradient(#1b1f3b,#0b0d22);background-attachment:fixed;}
+body.g-tri{background:repeating-conic-gradient(from 0deg at 50% 18%,#1f66bf 0 9deg,#1a58a8 9deg 18deg);background-attachment:fixed;}
+body.g-cn{background:linear-gradient(90deg,#f3c9ce 0 50%,#c9d6ee 50% 100%);background-attachment:fixed;}
+body.g-tel{background:repeating-linear-gradient(0deg,#e6f6e9 0 22px,#d6efdb 22px 24px);background-attachment:fixed;}
+body.g-dg{background:linear-gradient(rgba(232,89,12,.12) 1px,transparent 1px) 0 0/24px 24px,linear-gradient(90deg,rgba(232,89,12,.12) 1px,transparent 1px) 0 0/24px 24px,#fffaf3;background-attachment:fixed;}
+body.g-hz{background:repeating-linear-gradient(0deg,rgba(80,255,160,.06) 0 2px,transparent 2px 4px),#10151a;background-attachment:fixed;}
+body.g-mafia .htitle,body.g-mafia .hsub,body.g-mafia>#app>.screen>.slabel,body.g-mafia .leave-link a,
+body.g-spy .htitle,body.g-spy .hsub,body.g-spy .leave-link a,body.g-wspy .htitle,body.g-wspy .hsub,
+body.g-dice .htitle,body.g-dice .hsub,body.g-tq .htitle,body.g-tq .hsub,body.g-cha .htitle,body.g-cha .hsub,
+body.g-tri .htitle,body.g-tri .hsub,body.g-hz .htitle,body.g-hz .hsub{color:#fff;}
+body[class*="g-"] .leave-link a{color:inherit;opacity:.8;}
+body.g-cha .leave-link a,body.g-dice .leave-link a,body.g-tq .leave-link a,body.g-tri .leave-link a,body.g-hz .leave-link a,body.g-mafia .leave-link a,body.g-spy .leave-link a{color:#fff;}
+body.g-hz .card,body.g-mafia .card{box-shadow:0 0 0 1px var(--ga),0 8px 24px rgba(0,0,0,.4);}
+body.g-dice .card{box-shadow:0 10px 0 rgba(0,0,0,.25);}
+body.g-tri .card{box-shadow:0 6px 0 #0b3c73;}
+
+body[class*="g-"] .btn-ink{background:var(--ga);color:#fff;box-shadow:0 5px 0 var(--ga2);}
+body[class*="g-"] .btn-ink:active:not(:disabled){box-shadow:0 1px 0 var(--ga2);transform:translateY(4px);}
+body.g-emo .btn-ink{color:#2a1c00;}
+#app>.screen>.hrow{padding-right:46px;}
 </style>
 </head>
 <body>
 
 <button class="iconbtn mute-fab" id="muteBtn" onclick="G.toggleMute()" aria-label="Toggle sound">🔊</button>
 <canvas id="confetti"></canvas>
+<div id="toasts" aria-live="polite"></div>
 <div id="app"></div>
 
+<script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js"></script>
 <script>
 "use strict";
 
 /* ================================================================
    SHARED UTILITIES
    ================================================================ */
+
+/* ================================================================
+   GAME_DATA — central content. Appended to the built-in pools at boot
+   (deduplicated) so every game stays easy to expand in one place.
+   ================================================================ */
+const GAME_DATA={
+ spyLocs:`Night Market Stall 🏮;Takoyaki Vendor,Haggling Auntie,Pickpocket,Street Musician,Food Blogger,Tourist,Lantern Seller,Night Guard
+Supermarket 🛒;Cashier,Bagger,Shopper,Stock Clerk,Security Guard,Manager,Butcher,Lost Child
+Airport Terminal 🛫;Check-in Agent,Pilot,Customs Officer,Tired Traveler,Baggage Handler,Duty-Free Clerk,Lost Tourist,Air Traffic Controller
+Cinema 🍿;Usher,Projectionist,Popcorn Seller,Movie Critic,Couple on a Date,Noisy Kid,Manager,Ticket Seller
+Swimming Pool 🏊;Lifeguard,Swim Coach,Diver,Kid with Floaties,Senior Swimmer,Snack Vendor,Cleaner,Triathlete
+Basketball Court 🏀;Coach,Point Guard,Referee,Cheerleader,Water Boy,Bench Warmer,Scorekeeper,Loud Fan
+Church Wedding 💒;Bride,Groom,Priest,Flower Girl,Photographer,Choir Singer,Ninong,Crying Mother
+Farm 🐄;Farmer,Veterinarian,Egg Collector,Tractor Driver,Scarecrow Maker,Visiting Student,Milkmaid,Feed Seller
+Campsite ⛺;Camp Leader,Marshmallow Roaster,Lost Hiker,Ranger,Storyteller,Scared Camper,Fire Starter,Fisherman
+Ski Resort ⛷️;Instructor,Snowboarder,Lift Operator,Ski Patrol,Beginner,Hot Chocolate Seller,Photographer,Tourist
+Desert Caravan 🐪;Camel Driver,Guide,Merchant,Lost Traveler,Navigator,Water Carrier,Storyteller,Bandit
+Castle 🏰;King,Queen,Knight,Court Jester,Royal Cook,Dragon Keeper,Wizard,Prisoner
+Space Station 🛰️;Commander,Scientist,Mechanic,Space Tourist,Doctor,Botanist,Communications Officer,Cleaner
+Volcano Island 🌋;Volcanologist,Local Guide,Tourist,Boat Captain,Journalist,Villager,Photographer,Rescue Worker
+Art Museum 🖼️;Curator,Security Guard,Art Student,Tour Guide,Art Thief,Painter,Critic,Gift Shop Clerk
+Science Fair 🔬;Judge,Young Scientist,Parent,Volcano Builder,Photographer,Teacher,Sponsor,Rival Student
+Music Concert 🎤;Lead Singer,Drummer,Sound Engineer,Bouncer,Superfan,Merch Seller,Backup Dancer,Photographer
+Barber Shop ✂️;Barber,Regular Customer,Kid Getting First Haircut,Shampoo Boy,Gossiping Neighbor,Salesman,Manager,Apprentice
+Laundromat 🧺;Attendant,Student,Busy Parent,Sock Thief,Night Worker,Repairman,Vending Seller,Traveler
+Farmers Market 🥕;Fruit Seller,Fish Vendor,Suki Customer,Chef,Bargain Hunter,Delivery Boy,Tourist,Market Inspector
+Bus Terminal 🚌;Bus Driver,Dispatcher,Ticket Seller,Commuter,Pickpocket,Lugaw Vendor,Sleepy Passenger,Guard
+Pet Shop 🐕;Owner,Groomer,Customer,Vet,Kid Begging for a Puppy,Delivery Rider,Fish Specialist,Trainer
+Mall Food Court 🍟;Cashier,Cook,Shopper,Mascot,Mall Guard,Cleaner,Teen Group,Server
+Recording Studio 🎧;Producer,Singer,Sound Engineer,Guitarist,Songwriter,Intern,Manager,Fan Outside
+Fishing Village 🎣;Fisherman,Fish Seller,Boat Builder,Net Mender,Tourist,Harbor Master,Kid Swimmer,Cook
+Rainforest Expedition 🌴;Explorer,Botanist,Native Guide,Photographer,Biologist,Cook,Radio Operator,Lost Student
+Hotel 🏨;Receptionist,Bellboy,Guest,Housekeeper,Manager,Chef,Honeymooner,Night Guard
+Wedding Reception 🥂;Emcee,DJ,Caterer,Bridesmaid,Drunk Uncle,Photographer,Wedding Singer,Cake Cutter
+Ice Cream Parlor 🍨;Scooper,Owner,Kid with Sprinkles,Taste Tester,Delivery Driver,Couple,Diet Customer,Cashier
+Court Room ⚖️;Judge,Lawyer,Witness,Defendant,Court Clerk,Jury Member,Reporter,Bailiff
+Robotics Lab 🤖;Engineer,Robot,Lab Intern,Professor,Programmer,Investor,Test Driver,Safety Officer
+Treehouse 🌳;Kid Leader,Best Friend,Little Sibling,Secret Keeper,Squirrel Watcher,Snack Supplier,Lookout,Neighbor Kid
+Rooftop Party 🎆;DJ,Host,Neighbor Complaining,Bartender,Photographer,Shy Guest,Dancer,Security`,
+ words:{
+  person:'Marie Curie,Isaac Newton,Abraham Lincoln,Mother Teresa,Bruce Lee,Superman,Batman,Dora the Explorer,Mickey Mouse,Mario,Sherlock Holmes,Santa Claus,Albert Dumbledore,Gordon Ramsay,Lionel Messi,Manny Pacquiao,Andres Bonifacio,Anne Hathaway,Thomas Edison,Walt Disney,Wonder Woman,Iron Man,Pocahontas,Robin Hood,Tarzan,Cinderella,Genie,Pinocchio,Albert Camus',
+  place:'Statue of Liberty,Taj Mahal,Colosseum,Niagara Falls,Grand Canyon,Disneyland,Banaue Rice Terraces,Intramuros,Palawan,Sahara Desert,North Pole,Hospital Ward,Train Station,Bakery,Gas Station,Playground,Haunted House,Swimming Pool,Ice Rink,Planetarium,Farm,Castle,Lighthouse,Jungle,Cave,Waterfall,Bowling Alley,Aquarium,Parking Lot,Rooftop',
+  animal:'Hippopotamus,Flamingo,Octopus,Owl,Wolf,Fox,Rhinoceros,Hedgehog,Jellyfish,Platypus,Cobra,Whale,Gorilla,Lobster,Parrot,Camel,Koala,Bee,Firefly,Starfish,Butterfly,Turtle,Shark,Hamster,Goat,Cockroach,Bull,Duck,Frog,Lizard',
+  food:'Kare-Kare,Sisig,Lumpia,Bibingka,Puto,Siopao,Turon,Balut,Mango Float,Fries,Hotdog,Donut,Pancakes,Lasagna,Dumplings,Steak,Popcorn,Waffles,Salad,Sandwich,Cupcake,Pineapple,Watermelon,Coffee,Milk Tea,Dimsum,Curry,Shawarma,Kimchi,Egg Pie',
+  object:'Remote Control,Wallet,Spoon,Toothpaste,Hammer,Candle,Globe,Telescope,Stapler,Rubber Duck,Skateboard,Trampoline,Compass,Sunglasses,Typewriter,Microwave,Fan,Doorbell,Piggy Bank,Whistle,Padlock,Kite,Hourglass,Binoculars,Blender,Drum,Trophy,Bookmark,Alarm Clock,Hair Dryer',
+  event:'Earthquake,Power Outage,Birthday Surprise,Pop Quiz,Lunch Break,Road Trip,Camping,Talent Show,Prom,Job Interview,Flat Tire,New Year Countdown,Spelling Bee,School Dance,Wedding Proposal,Garage Sale,Pillow Fight,Marathon,Treasure Hunt,Karaoke Night,Moving House,First Day of School,Snow Day,Flood,Elevator Ride',
+  school:'Eraser,Ruler,Chalkboard,Notebook,Pencil Case,Textbook,School Bus,Recess Bell,Hall Pass,Substitute Teacher,Cafeteria Tray,Student Council,Quiz Bee,Grade Sheet,Sharpener,Gym Class,Library Fine,ID Lace,Class Picture,Scratch Paper,Seatwork,Field Day,Bulletin Board'
+ },
+ wyr:'Be able to pause time|Be able to rewind time 1 hour|Have unlimited pizza|Have unlimited ice cream|Never need sleep|Never need to eat|Always say what you think|Never speak again|Live in the past|Live in the future|Have a pet dragon|Have a pet unicorn|Be a giant|Be a mouse-sized human|Have no phone for a year|Have no friends online for a year|Read minds|Be invisible|Always win at games|Always win arguments|Have an extra hour a day|Have an extra day a week|Be the best singer|Be the best dancer|Lose all your photos|Lose all your contacts|Live on the moon|Live under the sea|Be a superhero with no fame|Be a famous person with no powers|Only eat breakfast foods|Only eat dessert|Never get lost|Never lose anything|Have a rewind for mistakes|Have a fast-forward for boring things|Fight a bear|Fight a gorilla with a stick|Always be cold|Always be hot|Have a robot butler|Have a flying car|Only travel by bike|Only travel by boat|Know every language|Know every instrument|Be a movie star|Be a pro athlete|Never have homework|Never have a test|Have wifi everywhere|Have free food everywhere|Be unable to lie|Be unable to tell secrets|Be the youngest sibling|Be the oldest sibling|Win the lottery|Find true love|Have a teleport door|Have a time machine|Be trapped in a book|Be trapped in a video game|Eat a lemon|Eat a raw onion|Have a tail|Have wings|Swim like a fish|Run like a cheetah'.split('|').reduce((a,x,i,r)=>i%2?a:a.concat(x+'|'+r[i+1]),[]),
+ cha:'🎬 Movie|Finding Nemo,🎬 Movie|The Lion King,🎬 Movie|Harry Potter,🎬 Movie|Toy Story,🎬 Movie|Moana,🎬 Movie|Avengers,🎬 Action|Sneezing,🎬 Action|Playing guitar,🎬 Action|Climbing a ladder,🎬 Action|Swimming,🎬 Action|Taking a bath,🎬 Action|Flying a kite,🎬 Action|Washing dishes,🎬 Action|Sleepwalking,🐾 Animal|Giraffe,🐾 Animal|Kangaroo,🐾 Animal|Frog,🐾 Animal|Gorilla,🐾 Animal|Crab,🐾 Animal|Bee,🐾 Animal|Sloth,💼 Job|Firefighter,💼 Job|Dancer,💼 Job|Astronaut,💼 Job|Barber,💼 Job|Magician,💼 Job|Fisherman,💼 Job|Construction worker,🏫 School|Group reporting,🏫 School|Copying homework,🏫 School|Late for class,🏫 School|Recess,🏫 School|Sleeping in class,🇵🇭 Pinoy|Riding a jeepney,🇵🇭 Pinoy|Playing patintero,🇵🇭 Pinoy|Mano po,🇵🇭 Pinoy|Singing Christmas carols,🇵🇭 Pinoy|Playing tumbang preso,🇵🇭 Pinoy|Selling taho,🇵🇭 Pinoy|Cheering for Gilas'.split(','),
+ tri:'Capital of Japan?|Seoul|Tokyo|Beijing|Bangkok|1,Capital of France?|Rome|Madrid|Paris|Berlin|2,How many days in a leap year?|364|365|366|367|2,Largest country by area?|Canada|China|USA|Russia|3,What do bees make?|Milk|Honey|Silk|Wax only|1,Closest star to Earth?|Sirius|The Sun|Polaris|Mars|1,How many players on a basketball team on court?|4|5|6|7|1,Who discovered gravity with an apple legend?|Newton|Tesla|Curie|Darwin|0,Which planet is closest to the Sun?|Venus|Earth|Mercury|Mars|2,National hero of the Philippines?|Rizal|Aguinaldo|Luna|Mabini|0,What is H2O?|Salt|Water|Hydrogen only|Oxygen only|1,Number of days in a week?|5|6|7|8|2,Largest mammal?|Elephant|Blue whale|Giraffe|Hippo|1,Which metal is liquid at room temperature?|Iron|Mercury|Copper|Tin|1,How many strings on a standard guitar?|4|5|6|7|2,Who wrote Romeo and Juliet?|Dickens|Shakespeare|Austen|Twain|1,Currency of Japan?|Won|Yen|Yuan|Peso|1,Which ocean touches the Philippines on the east?|Atlantic|Pacific|Indian|Arctic|1,Binary digits are…|0 and 1|1 and 2|A and B|Yes and No only|0,Roman numeral for 10?|V|X|L|C|1,Taal Volcano is in which province?|Cebu|Batangas|Bohol|Albay|1,Which animal is the national animal of the Philippines?|Tarsier|Carabao|Eagle|Tamaraw|1,Fastest bird on land?|Ostrich|Eagle|Penguin|Emu|0,How many minutes in 2 hours?|100|120|140|160|1,Which vitamin comes from sunlight?|A|C|D|K|2,Sum of angles in a triangle?|90|180|270|360|1,Which is a mammal?|Shark|Dolphin|Trout|Squid|1,Smallest continent?|Europe|Australia|Antarctica|South America|1,Which gas do humans breathe in to live?|Carbon dioxide|Oxygen|Helium|Nitrogen only|1,Longest bone in the body?|Femur|Skull|Rib|Spine|0'.split(',').map(q=>{const p=q.split('|');return{q:p[0],o:p.slice(1,5),c:+p[5]};}),
+ cnw:'Cloud,Pencil,Bottle,Moon,Train,Beach,Garden,Hotel,Ice,Jelly,Kitchen,Lemon,Mountain,Nest,Onion,Parrot,Rain,Sand,Table,Uniform,Violin,Wolf,Xylophone,Yoyo,Zipper,Bell,Cactus,Drum,Elephant,Flag,Giant,Honey,Iron,Jewel,Key,Lamp,Mask,Nurse,Octopus,Pearl,Quilt,Rope,Spoon,Torch,Van,Wizard,Brush,Circle,Dust,Echo,Fence,Glass,Hat,Ink,Judge,Koala,Lock,Map,Nose,Owl,Pie,Ruler,Star,Tooth,Vest,Wheel,Banana,Camel,Doctor,Engine,Fork,Goat,Helmet,Pyramid,Radar,Sock,Tunnel'.split(','),
+ hot:'Morning people are secretly more annoying.|Phones should be allowed in every class.|Soup is a drink, not a meal.|Summer is the worst season.|Spoilers do not ruin a good movie.|Cereal is a soup.|Everyone should learn to cook before turning 15.|School should start at 10 AM.|Hot weather beats cold weather.|Dogs are too needy to be good pets.|Pop quizzes make students smarter.|Playing games counts as exercise.|Chocolate ice cream beats vanilla every time.|Leaving someone on read is rude.|The window seat is the only good seat.|Shoes should come off at every door.|Video calls are worse than phone calls.|Dessert should come before dinner.|It is okay to reply to texts a day later.|Rewatching a movie beats watching a new one.|Board games are better than video games.|Studying at night beats studying in the morning.|Ketchup belongs on fried rice.|Sharing a room is better than having your own.|Uniforms make school fairer.|Mango is the king of fruits.|Karaoke is fun even if you cannot sing.|A free period is better than a day off.|Being the oldest sibling is the hardest.|Small talk in elevators should stop.|Aircon should be set to freezing.|Being a morning shower person beats night showers.|Sequels are almost never better than the original.|Everyone should have to learn an instrument.|Tutoring friends is more fun than studying alone.'.split('|'),
+ nhie:'…gotten a song stuck in my head for days.|…worn my shirt inside out all day.|…laughed so hard I cried at school.|…blamed my sibling for something I did.|…called a teacher mom or dad.|…waited for a bus that never came.|…fallen off a bike.|…eaten dessert for breakfast.|…pretended to know a song I had never heard.|…forgotten a friend\'s name right after they told me.|…danced alone in my room.|…talked to myself out loud in public.|…walked into the wrong classroom.|…lost something while holding it.|…fallen asleep on public transport.|…gone a whole day without my phone.|…lied about reading a book.|…eaten an entire pizza by myself.|…hidden snacks from my family.|…watched the same show three times.|…tripped in front of the whole class.|…named a stuffed toy.|…sneezed at the worst possible moment.|…read a message and forgot to reply.|…broken something and hidden it.|…gotten lost in a mall.|…slept through an alarm.|…worn two different socks to school.|…waved at a stranger by mistake.|…made up a word and used it seriously.'.split('|'),
+ emo:'🦸🕷️|Spider-Man 2,🐼🥋|Kung Fu Panda 2,🚗⚡|Lightning McQueen,🏴‍☠️🦜|Treasure Island,🧞🪔|Aladdin 2,🐉🏯|Mulan,🌊👸|Moana 2,🧸🍯|Winnie the Pooh,🐘✈️|Dumbo,🧙⚡|Harry Potter,🦈🩸|Jaws 2,🛸👽|E.T.,🍫🏭|Willy Wonka,🐟🔍|Finding Dory,👻🏠|Casper,🦖🌴|Jurassic Park,🤖❤️|Big Hero 6,❄️⛄|Olaf,🌹🐻|Beauty and the Beast'.split(','),
+ tel:'A shark learning to dance,A grandmother skateboarding,A robot at a sari-sari store,A dinosaur in a jeepney,A king eating isaw,A snowman in Manila,A pilot lost in the canteen,A clown giving a speech,A tarsier astronaut,A mermaid taking an exam,A dentist afraid of teeth,Two ghosts playing basketball'.split(','),
+ dg:'Sandwich,Rocket,Umbrella,Giraffe,Skateboard,Kite,Snail,Lighthouse,Cactus,Octopus,Windmill,Snowman,Trophy,Spoon,Tent,Parachute,Tornado,Dentist,Cupcake,Tricycle,Crab,Bridge,Candle,Ladder,Butterfly,Campfire,Telescope,Saxophone,Sunflower,Scarecrow'.split(',')
+};
+function mergeUnique(target,extra){const seen=new Set(target.map(x=>typeof x==='string'?x.toLowerCase():x.q?x.q:JSON.stringify(x)));extra.forEach(x=>{const k=typeof x==='string'?x.toLowerCase():x.q?x.q:JSON.stringify(x);if(!seen.has(k)){seen.add(k);target.push(x);}});}
 const $a=()=>document.getElementById('app');
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function shuffle(a){const b=a.slice();for(let i=b.length-1;i>0;i--){const j=0|Math.random()*(i+1);[b[i],b[j]]=[b[j],b[i]];}return b;}
@@ -516,10 +644,11 @@ GAMES.push(
 GAMES.push(
  {id:'dg',cls:'gc-dg',icon:'🎨',title:'Draw & Guess',tag:'3–12 players · drawing',desc:'Sketch the secret word with your finger while the room shouts guesses. Live on every phone.',r:-1.4},
  {id:'hz',cls:'gc-hz',icon:'🔐',title:'Heist Planner',tag:'3–10 players · deduction',desc:'Five jobs, six specialties, one hidden Rat. Plan the heist — and figure out who is sabotaging it.',r:1.2});
-const SOON=['🧩 Pictionary Relay','⚖️ Court of Lies','🌍 Geo Quiz Blitz','🕵️ Murder Mystery Night','🃏 Bluff Poker Lite','🧮 Math Rush','🏝️ Survival Island','🎯 Reaction Duel'];
+const SOON=[];
 
+function setTheme(id){const b=document.body;b.className=id?'g-'+id:'';if(id&&typeof GA!=='undefined'&&GA[id]){b.style.setProperty('--ga',GA[id][0]);b.style.setProperty('--ga2',GA[id][1]);}}
 function renderHub(){
-  HELP.id=null;
+  HELP.id=null;setTheme(null);
   const name=S.get('idle_name','');
   const gcards=GAMES.map(g=>
     '<div class="gamecard '+g.cls+'" style="--r:'+g.r+'deg" onclick="G.launch(\''+g.id+'\')">'+
@@ -538,10 +667,10 @@ function renderHub(){
         '<label class="ws-field">Your name: <input value="'+esc(name)+'" placeholder="you" oninput="S.set(\'idle_name\',this.value)"/></label>'+
         '<label class="ws-field">Period: <span class="ws-blank">Free</span></label>'+
       '</div>'+
-      '<div class="netcard"><div class="netcard-t">📡 Play on different phones</div><div class="netcard-s">Each player uses their own phone. Choose <b>📶 same Wi-Fi / hotspot</b> (free, no data) or <b>🌐 Online</b> (friends anywhere). <a href="javascript:void(0)" style="color:var(--hl)" onclick="Help.show(\'lobby\')">How lobbies work</a></div><div class="brow"><button class="btn btn-accent" onclick="Net.host()">Host a lobby</button><button class="btn btn-ghost" style="background:var(--card)" onclick="Net.joinScreen()">Join a lobby</button></div></div>'+
+      '<div class="netcard"><div class="netcard-t">📡 Play on different phones</div><div class="netcard-s">Create a room, share the 4-letter code, and everyone joins in seconds. <a href="javascript:void(0)" style="color:var(--hl)" onclick="Help.show(\'lobby\')">How lobbies work</a></div><button class="btn btn-accent btn-block" id="hbCreate" onclick="Net.create()">Create lobby</button><div class="hubjoin"><input id="hbCode" maxlength="4" placeholder="CODE" inputmode="latin" autocomplete="off" autocapitalize="characters" spellcheck="false" oninput="this.value=this.value.toUpperCase().replace(/[^A-Z0-9]/g,\'\');Net.hideErr()" onkeydown="if(event.key===\'Enter\')Net.joinCode(this.value)"/><button class="btn btn-ghost" id="hbJoin" style="background:var(--card)" onclick="Net.joinCode(document.getElementById(\'hbCode\').value)">Join</button></div><div class="neterr" id="hbErr" role="alert"></div><p class="helptext" style="margin:10px 0 0;opacity:.75;font-size:.74rem">No internet? <a href="javascript:void(0)" style="color:var(--hl)" onclick="Net.host()">Pair manually</a> · <a href="javascript:void(0)" style="color:var(--hl)" onclick="Net.joinScreen()">Join manually</a></p></div>'+
       '<div class="slabel">Pass the phone — pick a game</div>'+
       '<div class="gamecard-grid">'+gcards+scards+'</div>'+
-      '<div class="footer-note">made for 9-Fullerene free periods · more games loading soon</div>'+
+      '<div class="footer-note">made for free periods · 16 games</div>'+
     '</div>';
 }
 
@@ -549,7 +678,7 @@ function renderHub(){
    GLOBAL G OBJECT
    ================================================================ */
 const G={
-  launch(id){SFX.unlock();SFX.click();HELP.id=id;({mafia:Mafia,spy:Spy,ttt:UTTT,dice:LiarsDice,wc:WordChain,tq:TwentyQ,dg:{start(){PP.start('dg')}},hz:{start(){PP.start('hz')}},cn:CN,tel:{start(){PP.start('tel')}},wyr:{start(){PP.start('wyr')}},cha:{start(){PP.start('cha')}},tri:{start(){PP.start('tri')}},hot:{start(){Party.start('hot')}},nhie:{start(){Party.start('nhie')}},emo:{start(){Party.start('emo')}}})[id].start();},
+  launch(id){SFX.unlock();SFX.click();HELP.id=id;setTheme(id);({mafia:Mafia,spy:Spy,ttt:UTTT,dice:LiarsDice,wc:WordChain,tq:TwentyQ,dg:{start(){PP.start('dg')}},hz:{start(){PP.start('hz')}},cn:CN,tel:{start(){PP.start('tel')}},wyr:{start(){PP.start('wyr')}},cha:{start(){PP.start('cha')}},tri:{start(){PP.start('tri')}},hot:{start(){Party.start('hot')}},nhie:{start(){Party.start('nhie')}},emo:{start(){Party.start('emo')}}})[id].start();},
   hub(){[Mafia,Spy,WordChain,WordSpy,PP].forEach(g=>g.stop&&g.stop());SFX.click();renderHub();},
   confirmLeave(){if(confirm('Leave this game? Progress will be lost.'))this.hub();},
   toggleMute(){const m=!SFX.isMuted();SFX.setMuted(m);document.getElementById('muteBtn').textContent=m?'🔇':'🔊';if(!m)SFX.tap();},
@@ -889,7 +1018,7 @@ TV Cooking Contest 👨‍🍳;Host,Judge,Contestant,Camera Operator,Sous Chef,S
 Esports Arena 🎮;Caster,Pro Player,Coach,Referee,Fan,Streamer,Tech Support,Team Manager
 Train Station 🚆;Conductor,Ticket Seller,Commuter,Pickpocket,Station Master,Backpacker,Cleaner,Delayed Traveler
 Observatory 🔭;Astronomer,Student,Telescope Tech,Night Guard,Comet Hunter,Tour Guide,Photographer,Dreamer`;
-  EXTRA.split('\n').forEach(l=>{const[n,r]=l.split(';');LOCS.push({n,r:r.split(',')});});
+  (EXTRA+'\n'+GAME_DATA.spyLocs).split('\n').forEach(l=>{const[n,r]=l.split(';');if(n&&r&&!LOCS.some(x=>x.n===n))LOCS.push({n:n.trim(),r:r.split(',')});});
   function nextLoc(){
     let b=S.get('spy_bag',[]).filter(n=>LOCS.some(l=>l.n===n));
     if(!b.length)b=shuffle(LOCS.map(l=>l.n));
@@ -1795,6 +1924,7 @@ const nsecs=ms=>Math.max(0,Math.round(ms/1000));
 const nname=(s,id)=>{const p=s.ps.find(x=>x.id===id);return p?nE(p.name):'?';};
 const nwait=(t)=>nbox('<div style="font-size:1.6rem">⏳</div><p class="helptext">'+t+'</p>');
 const nhostBtn=(pid,t,a)=>pid===0?nbtn(t,a):'<p class="helptext" style="text-align:center">Waiting for the lobby master…</p>';
+const GA={spy:['var(--c-spy)','var(--c-spy2)'],wspy:['var(--c-spy)','var(--c-spy2)'],ttt:['var(--c-ttt)','var(--c-ttt2)'],dice:['var(--c-dice)','var(--c-dice2)'],wc:['var(--c-wc)','var(--c-wc2)'],tq:['var(--c-tq)','var(--c-tq2)'],mafia:['var(--c-mafia)','var(--c-mafia2)'],hot:['#D9480F','#7C2D12'],nhie:['#C2255C','#6B0F32'],emo:['#E8A100','#8A5D00'],wyr:['#7048E8','#3B1F9C'],cha:['#0B7285','#04404B'],tri:['#1971C2','#0B3C73'],cn:['#C23B4B','#243558'],tel:['#2F9E44','#16531F'],dg:['#E8590C','#7A2E06'],hz:['#343A40','#111']};
 const DIE=['⚀','⚁','⚂','⚃','⚄','⚅'];
 
 /* ---------- Spy Hunt ---------- */
@@ -2376,14 +2506,14 @@ function hzTally(s){const c={};Object.values(s.votes).forEach(v=>c[v]=(c[v]||0)+
    HOW TO PLAY — full guides with step-by-step + worked examples
    ================================================================ */
 const HOW={
-lobby:{t:'📡 Lobbies',meta:['👥 any game','📱 each player uses their own phone','🌐 2 connection types'],
- goal:`Let every player use their **own phone**. One person is the **Lobby Master** (the host). The host's phone runs the game; everyone else's phone shows only what *they* are allowed to see (their secret role, their dice, their word…).`,
- need:`Everyone opens this same IDLE file/page on their own phone. Pick ONE connection type: **📶 Same Wi-Fi / hotspot** (free, no mobile data needed, everyone must be in the same room/network) or **🌐 Online** (friends can be anywhere, uses mobile data or internet Wi-Fi).`,
- steps:[`**Host:** on the home screen tap **Host a lobby**, then choose **📶 Same Wi-Fi / hotspot** or **🌐 Online**.`,`**Host:** tap **➕ Invite a phone**. A long code appears ("Send this code to the friend"). Tap **Copy code** and send it to ONE friend using any chat app (Messenger, Viber, Telegram, SMS…). For the hotspot type you can also read it from your screen if chats don't work.`,`**Friend:** open IDLE, tap **Join a lobby**, choose a connection type (it switches automatically to match the host's code), **paste** the code, then tap **Make my reply code**.`,`**Friend:** tap **Copy reply code** and send it back to the host.`,`**Host:** paste the reply code into the box under "Paste the reply code they send back" and tap **Connect**. The friend appears in the player list as **online** within a few seconds.`,`Repeat steps 2–5 for each friend. Every friend gets their **own** code (a code only works for one person).`,`**Host:** pick a game from the list (you can change it any time) and tap **Start**. The button turns on when you have enough players for that game.`,`When the game ends the host can tap **Play again**, or tap ← to return everyone to the lobby and choose another game.`],
- ex:[`> Example: Ana hosts a lobby for Mafia with Ben and Cara, who are at home in different towns.`,`**Ana:** taps Host a lobby → 🌐 Online → Invite a phone → Copy code → pastes it into Messenger to Ben.`,`**Ben:** opens IDLE → Join a lobby → pastes the code → Make my reply code → Copy reply code → sends it back to Ana.`,`**Ana:** pastes Ben's reply → Connect. "Ben — online" shows up. She does the same for Cara.`,`**Ana:** picks "Mafia" in the list. It needs 4+ players, so she invites Dan too. Then she taps Start.`,`> Now each phone shows a private screen: Ben sees "Your role: Detective", Cara sees "Civilian", and so on. Nobody passes a phone around.`],
- win:`There is no winner here — the lobby is just how you connect. Each game explains its own win condition (tap **?** inside a game).`,
- net:`**📶 Same Wi-Fi / hotspot:** best for a classroom. One person turns on their phone's hotspot (or everyone joins the same Wi-Fi) and everybody connects to it. It works even with **no mobile data**. **🌐 Online:** works across different networks but uses mobile data. Some strict mobile networks block direct phone-to-phone links; if a friend can't connect, try again once, or switch to the hotspot type.`,
- tips:[`The Lobby Master's phone **is the game** — keep the screen on and don't close the page, or everyone is disconnected.`,`If someone drops out mid-game, the host sees "⚠ Name disconnected" with a **Remove & continue** button.`,`Codes contain your network address. Only send them to people you trust.`,`Can't connect? Check both phones use the same connection type and that you copied the **whole** code (no missing end).`]},
+lobby:{t:'📡 Lobbies',meta:['👥 any game','📱 each player uses their own phone','⚡ 4-letter room code'],
+ goal:`Every player uses their **own phone**. One person is the **host**; their phone runs the game and everyone else sees only what *they* are allowed to see (secret roles, private dice, and so on).`,
+ need:`Everyone opens this same IDLE page on their own phone, with internet (Wi-Fi or mobile data).`,
+ steps:[`**Host:** tap **Create lobby**. A 4-letter room code appears instantly.`,`**Host:** tap **Share** (or read the code out loud).`,`**Players:** type the code on the home screen and tap **Join**. You land in the lobby straight away.`,`**Host:** pick a game. **Start** lights up when there are enough players.`,`If someone's connection drops, they rejoin their seat automatically when it comes back.`],
+ ex:[`> Example: Ana taps Create lobby and sees the code K7QM.`,`**Ben:** types K7QM and taps Join — he's in.`,`**Ana:** picks Spy Hunt and taps Start.`],
+ win:`The lobby is just how you connect. Each game explains its own win condition (tap **?** inside a game).`,
+ net:`No internet at all? Use **Pair manually** under the Join button: it works on the same Wi-Fi or a phone hotspot by swapping two codes.`,
+ tips:[`The host's phone **is the game** — keep it awake and the page open.`,`If the host refreshes the page, the same room code comes back and players reconnect on their own.`,`If someone drops mid-game, the host sees a **Remove & continue** button.`]},
 
 mafia:{t:'🎭 Mafia',meta:['👥 4–15 players (best 6–10)','⏱ 15–30 min','📱 1 shared phone or own phones'],
  goal:`A secret **Mafia** team is hiding among the **Town**. Town wins by voting out every Mafia member. Mafia wins when they **equal or outnumber** everyone else.`,
@@ -2565,6 +2695,121 @@ const Net=(()=>{
   function copyTa(id){const t=$e(id);if(!t)return;t.select();try{navigator.clipboard.writeText(t.value);}catch{}try{document.execCommand('copy');}catch{}SFX.success();}
   function netOk(){if(typeof RTCPeerConnection==='undefined'){alert('This browser does not support phone-to-phone play. Try Chrome or Safari.');return false;}return true;}
 
+
+  /* ===================== ROOM-CODE LOBBY (PeerJS broker, host-authoritative) =====================
+     States: idle → creating|joining → lobby(host|client) → playing → lobby … → leaving → idle
+     Identity: stable client id (cid) in localStorage; a refresh/reconnect restores the same seat.
+     Liveness: client pings every 4s; host drops silent peers after 14s (no arbitrary sync delays). */
+  const ALPHA='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',PRE='idleroom-';
+  const hh=c=>String(c).split('').reduce((a,ch)=>(a*31+ch.charCodeAt(0))>>>0,7).toString(36);
+  let mig=null,strict=false,via=null,code='',peer=null,busy=false,tok=0,hb=null,lastSeen={},reconn=0,reconT=null,leaving=false,hostConn0=null;
+  const myCid=(()=>{let c=S.get('idle_cid','');if(!c){c=Math.random().toString(36).slice(2)+Date.now().toString(36);S.set('idle_cid',c);}return c;})();
+  const myName=()=>String(S.get('idle_name','')||'').replace(/[<>]/g,'').trim().slice(0,18);
+  const mkCode=()=>Array.from({length:4},()=>ALPHA[0|Math.random()*ALPHA.length]).join('');
+  const parse=d=>{try{const m=typeof d==='string'?JSON.parse(d):d;return m&&typeof m==='object'?m:null;}catch{return null;}};
+  function flash(t){const b=$e('toasts');if(!b)return;const d=document.createElement('div');d.className='toast';d.textContent=t;b.appendChild(d);while(b.children.length>3)b.firstChild.remove();setTimeout(()=>d.remove(),2600);}
+  function hubBusy(w,t){const b=$e(w==='c'?'hbCreate':'hbJoin');if(b){b.dataset.t=b.dataset.t||b.textContent;b.textContent=t;b.classList.add('busy');}const o=$e(w==='c'?'hbJoin':'hbCreate');if(o)o.disabled=true;}
+  function hubReset(){[['hbCreate','Create lobby'],['hbJoin','Join']].forEach(([i,t])=>{const b=$e(i);if(b){b.textContent=t;b.classList.remove('busy');b.disabled=false;}});}
+  function showErr(m){const e=$e('hbErr');if(e){e.textContent=m;e.classList.add('show');}else flash(m);}
+  function hideErr(){const e=$e('hbErr');if(e)e.classList.remove('show');}
+  function noLib(){showErr('Online lobbies need an internet connection. Use "Pair manually" below to play on the same Wi-Fi without internet.');}
+  function wrapConn(conn){return{conn,dc:{get readyState(){return conn.open?'open':'closed';},send:s=>conn.send(s)},pc:{close(){try{conn.close();}catch{}}}};}
+  function startHb(){clearInterval(hb);hb=setInterval(()=>{
+    if(role==='client'&&via==='code'&&hc&&hc.dc.readyState==='open')send(hc,{t:'ping'});
+    if(role==='host'&&via==='code'){const now=Date.now();Object.keys(peers).forEach(id=>{if(now-(lastSeen[id]||now)>14000){try{peers[id].conn.close();}catch{}peerGone(peers[id]);}});}
+  },4000);}
+  function teardown(){leaving=true;clearInterval(hb);clearTimeout(reconT);tok++;busy=false;reconn=0;try{if(peer)peer.destroy();}catch{}peer=null;via=null;code='';lastSeen={};try{sessionStorage.removeItem('idle_room');sessionStorage.removeItem('idle_host');}catch{}hubReset();setTimeout(()=>{leaving=false;},0);}
+
+  function create(want){
+    if(busy||role)return;if(!mig)strict=false;if(typeof want!=='string'||!/^[A-Z2-9]{4}$/.test(want))want='';SFX.unlock();if(typeof Peer==='undefined')return noLib();
+    busy=true;hideErr();hubBusy('c','Creating…');const my=++tok;let tries=0;
+    const attempt=()=>{
+      if(my!==tok)return;const c=(tries<4&&want)||mkCode(),pr=new Peer(PRE+c,{debug:0});let open=false;
+      const timer=setTimeout(()=>{if(!open&&my===tok){tok++;busy=false;try{pr.destroy();}catch{}if(mig)return giveUp();hubReset();showErr('Could not reach the lobby service. Check your connection and retry.');}},9000);
+      pr.on('open',()=>{clearTimeout(timer);if(my!==tok){pr.destroy();return;}open=true;busy=false;peer=pr;code=c;via='code';role='host';HELP.id='lobby';
+        try{sessionStorage.setItem('idle_host',c);}catch{}roster=[{id:0,name:myName()||'Host',cid:myCid,h:hh(myCid)}];nid=1;pending=[];lg='spy';gst=null;game=null;peers={};lastSeen={};
+        if(mig){mig.forEach(r=>roster.push({id:nid++,name:r.name,h:r.h,off:true}));mig=null;strict=false;flash('You are now the host 👑');setTimeout(()=>{if(role==='host'&&!gst){roster=roster.filter(r=>!r.off);lobbyPush();render();}},20000);}
+        startHb();SFX.success();render();});
+      pr.on('connection',hostConn);
+      pr.on('disconnected',()=>{if(open&&peer===pr&&!pr.destroyed){try{pr.reconnect();}catch{}}});
+      pr.on('error',e=>{if(!open){clearTimeout(timer);try{pr.destroy();}catch{}if(e.type==='unavailable-id'&&(!strict||tries<4)&&tries++<8)return want&&tries<=4?void setTimeout(attempt,1500):attempt();if(my===tok){tok++;busy=false;if(mig)return giveUp();hubReset();showErr('Could not create a room. Check your internet and retry.');}}});
+    };attempt();
+  }
+  function hostConn(conn){
+    const p=Object.assign(wrapConn(conn),{pid:null});
+    conn.on('data',d=>{const m=parse(d);if(!m)return;if(p.pid!=null)lastSeen[p.pid]=Date.now();
+      if(m.t==='ping')send(p,{t:'pong'});else if(m.t==='hi')hostHi(p,m);else if(m.t==='act'&&gst&&p.pid!=null&&typeof m.a==='string')onAct(p.pid,m.a.slice(0,40),m.g);});
+    conn.on('close',()=>peerGone(p));conn.on('error',()=>peerGone(p));
+  }
+  function hostHi(p,m){
+    if(p.pid!=null||role!=='host')return;
+    const cid=String(m.cid||'').slice(0,40);let nm=String(m.name||'').replace(/[<>]/g,'').trim().slice(0,18)||'Player';
+    let r=cid?roster.find(x=>x.id!==0&&(x.cid===cid||x.h===hh(cid))):null;
+    if(r){r.cid=cid;if(peers[r.id]&&peers[r.id]!==p)try{peers[r.id].conn.close();}catch{}r.off=false;r.gone=false;flash(nm+' reconnected');}
+    else{if(on().length>=12){send(p,{t:'err',e:'full'});return;}
+      let k=2,b=nm;while(roster.some(x=>x.name===nm))nm=b+' '+k++;r={id:nid++,name:nm,cid,h:hh(cid)};roster.push(r);flash(nm+' joined');}
+    p.pid=r.id;peers[r.id]=p;lastSeen[r.id]=Date.now();SFX.success();
+    send(p,{t:'you',id:r.id,code});lobbyPush();if(gst)push();else render();
+  }
+  function peerGone(p){
+    if(p.pid==null||peers[p.pid]!==p)return;const r=roster.find(x=>x.id===p.pid);delete peers[p.pid];
+    if(r){flash(r.name+' disconnected');if(gst&&!r.gone)r.off=true;else roster=roster.filter(x=>x!==r);}
+    lobbyPush();if(gst)push();else if(role==='host')render();
+  }
+  function joinCode(raw){
+    if(busy||role)return;const c=String(raw||'').toUpperCase().replace(/[^A-Z0-9]/g,'');SFX.unlock();hideErr();
+    if(c.length!==4)return showErr('Enter the 4-character room code.');
+    if(typeof Peer==='undefined')return noLib();
+    busy=true;hubBusy('j','Joining…');connectTo(c,false);
+  }
+  function connectTo(c,silent){
+    const my=++tok;let done=false;const pr=new Peer({debug:0});
+    const fail=m=>{if(done||my!==tok)return;done=true;tok++;try{pr.destroy();}catch{}if(silent)return giveUp();busy=false;hubReset();showErr(m);};
+    const timer=setTimeout(()=>fail('Room not found, or no connection. Check the code and retry.'),10000);
+    pr.on('error',e=>{if(done)return;clearTimeout(timer);fail(e.type==='peer-unavailable'?'Room not found. Check the code.':'Connection problem. Please retry.');});
+    pr.on('open',()=>{if(my!==tok)return pr.destroy();
+      const conn=pr.connect(PRE+c,{reliable:true});
+      conn.on('open',()=>conn.send(JSON.stringify({t:'hi',name:myName()||'Player',cid:myCid})));
+      conn.on('data',d=>{const m=parse(d);if(!m||my!==tok&&!done)return;
+        if(m.t==='err'){return fail(m.e==='full'?'That room is full.':'Could not join that room.');}
+        if(m.t==='you'&&!done){done=true;clearTimeout(timer);busy=false;reconn=0;try{if(peer&&peer!==pr)peer.destroy();}catch{}peer=pr;code=c;via='code';role='client';hc=wrapConn(conn);hostConn0=conn;myId=m.id;HELP.id='lobby';leaving=false;
+          try{sessionStorage.setItem('idle_room',c);}catch{}startHb();SFX.success();}
+        if(done&&peer===pr)onHost(m);});
+      conn.on('close',()=>{if(!done)return fail('The room closed.');if(peer===pr&&role==='client'&&!leaving)hostLost();});
+    });
+  }
+  function successor(){const c=roster.filter(r=>r.id!==0&&!r.off&&!r.gone).map(r=>r.id);return c.length?Math.min(...c):-1;}
+  function takeOver(){
+    const c=code,list=roster.filter(r=>r.id!==0&&r.id!==myId&&!r.gone).map(r=>({name:r.name,h:r.h}));
+    clearTimeout(reconT);reconT=null;tok++;try{if(peer)peer.destroy();}catch{}peer=null;hc=null;role=null;via=null;gst=null;game=null;inGame=false;
+    mig=list;strict=true;busy=false;create(c);
+  }
+  function giveUp(){mig=null;strict=false;flash('The host left the room');leave();}
+  function hostLost(){
+    if(reconT)return;flash('Connection lost — reconnecting…');
+    const tryAgain=()=>{reconT=null;if(role!=='client'||leaving)return;if(++reconn>14)return giveUp();if(reconn>3&&successor()===myId&&role==='client')return takeOver();try{if(peer)peer.destroy();}catch{}peer=null;const c=code,saveRole=role;
+      // keep role/view; connectTo swaps in the new connection when the host answers
+      const my=++tok,pr=new Peer({debug:0});let ok=false;pr.on('error',()=>{if(!ok&&my===tok)reconT=setTimeout(()=>{reconT=null;hostLost();},1500);});
+      pr.on('open',()=>{const conn=pr.connect(PRE+c,{reliable:true});conn.on('open',()=>conn.send(JSON.stringify({t:'hi',name:myName()||'Player',cid:myCid})));
+        conn.on('data',d=>{const m=parse(d);if(!m)return;if(m.t==='you'&&!ok){ok=true;reconn=0;peer=pr;hc=wrapConn(conn);myId=m.id;flash('Reconnected ✓');}if(ok)onHost(m);});
+        conn.on('close',()=>{if(ok&&role==='client'&&!leaving)hostLost();else if(!ok&&my===tok&&!reconT)reconT=setTimeout(()=>{reconT=null;hostLost();},1500);});});};
+    reconT=setTimeout(tryAgain,600);
+  }
+  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&role==='client'&&via==='code'&&hc&&hc.dc.readyState!=='open'&&!reconT)hostLost();});
+  addEventListener('pagehide',()=>{if(role==='client'&&hc)send(hc,{t:'bye'});});
+  function share(){const t='Join my IDLE lobby! Room code: '+code;if(navigator.share)navigator.share({title:'IDLE',text:t}).catch(()=>{});else copyCode();}
+  function copyCode(){try{navigator.clipboard.writeText(code);}catch{}flash('Code '+code+' copied');}
+  function renderRoom(){
+    DrawPad.stop();setTheme(null);const host=role==='host',ps=roster.filter(r=>!r.gone&&(!r.off||gst)),act=on(),g=NG[lg]||NG.spy,ok=act.length>=g.min&&act.length<=g.max;
+    const who=r=>r.off?'<span class="pill off">reconnecting…</span>':r.id===0?'<span class="pill">👑 host</span>':r.id===myId&&!host?'<span class="pill live">you</span>':'<span class="pill live">ready</span>';
+    $a().innerHTML='<div class="screen">'+hdr('Lobby',host?'You are the host':'Waiting for the host',null,'Net.leaveAsk')+
+      '<div class="roomcode"><div class="rc-l">ROOM CODE</div><div class="rc-c">'+code.split('').map(ch=>'<span>'+nE(ch)+'</span>').join('')+'</div><div class="brow"><button class="btn btn-ghost btn-sm" style="background:var(--card)" onclick="Net.share()">📤 Share</button><button class="btn btn-ghost btn-sm" style="background:var(--card)" onclick="Net.copyCode()">📋 Copy</button></div></div>'+
+      '<div class="card"><div class="slabel">Players ('+act.length+')</div>'+nlist(ps,who)+'</div>'+
+      '<div class="card"><div class="slabel">'+(host?'Pick a game':'Next game')+'</div><div class="llist">'+chips()+'</div></div>'+
+      (host&&lg==='wspy'?'<div class="card"><div class="slabel">Word genre</div>'+wChips(wgenre,'Net.setGenre')+'</div>':'')+
+      (host?'<div class="lobstat'+(ok?' ready':'')+'"><i></i>'+(ok?'Ready — '+act.length+' players':nE(g.n)+' needs '+g.min+'–'+g.max+' players')+'</div><button class="btn btn-ink btn-block" '+(ok?'':'disabled')+' onclick="Net.start()">'+(ok?'Start '+nE(g.n)+' →':'Waiting for players…')+'</button>':nwait(run?'A game is running — you\'ll join the next one.':'Waiting for the host to start…'))+'</div>';
+  }
+
   /* ---------- HOST ---------- */
   function chooser(kind){SFX.unlock();HELP.id='lobby';role=null;
     const h=kind==='host';
@@ -2591,12 +2836,12 @@ const Net=(()=>{
       p.pid=nid++;roster.push({id:p.pid,name:nm});peers[p.pid]=p;pending=pending.filter(x=>x!==p);send(p,{t:'you',id:p.pid});SFX.success();lobbyPush();if(!gst)render();}
     else if(m.t==='act'&&gst&&p.pid!=null)onAct(p.pid,m.a,m.g);
   }
-  function lobbyPush(){const o={t:'lobby',roster,lg,run:!!gst};Object.values(peers).forEach(p=>send(p,o));}
+  function lobbyPush(){const o={t:'lobby',roster:roster.map(r=>({id:r.id,name:r.name,off:r.off,gone:r.gone,h:r.h})),lg,run:!!gst};Object.values(peers).forEach(p=>send(p,o));}
   function setGenre(k){if(role==='host'&&(k==='random'||WGEN[k])){wgenre=k;SFX.tap();render();}}
   function pick(id){if(role==='host'&&NG[id]){lg=id;SFX.tap();lobbyPush();render();}}
-  function start(){const g=NG[lg],ps=on();if(ps.length<g.min||ps.length>g.max)return;game=lg;HELP.id=lg;gst=g.init(ps.map(r=>({id:r.id,name:r.name})),lg==='wspy'?{genre:wgenre}:undefined);SFX.reveal();push();}
-  function wrap(pid,h){const off=pid===0?roster.filter(r=>r.off&&!r.gone):[];return '<div class="screen">'+hdr(NG[game].n,pid===0?'You are the lobby master':'Lobby game',null,'Net.leaveAsk')+off.map(r=>'<div class="card" style="background:var(--hl);display:flex;align-items:center;gap:10px;font-weight:700;font-size:.85rem;padding:12px 14px"><span style="flex:1">⚠ '+nE(r.name)+' disconnected</span><button class="btn btn-ink btn-sm" onclick="Net.kick('+r.id+')">Remove &amp; continue</button></div>').join('')+h+'</div>';}
-  function push(){if(!gst)return;on().forEach(r=>{let h;try{h=wrap(r.id,NG[game].view(gst,r.id));}catch(e){console.error(e);return;}if(r.id===0)showView(h);else send(peers[r.id],{t:'view',html:h,g:game});});}
+  function start(){if(gst||role!=='host')return;const g=NG[lg],ps=on();if(!g||ps.length<g.min||ps.length>g.max)return;game=lg;HELP.id=lg;gst=g.init(ps.map(r=>({id:r.id,name:r.name})),lg==='wspy'?{genre:wgenre}:undefined);SFX.reveal();push();}
+  function wrap(pid,h){const off=pid===0?roster.filter(r=>r.off&&!r.gone):[];const ga=GA[game]||GA.spy;return '<div class="screen gscreen" style="--ga:'+ga[0]+';--ga2:'+ga[1]+'">'+'<div class="gbar"><b>'+NG[game].i+'</b><span>'+nE(NG[game].n)+'</span></div>'+hdr(NG[game].n,pid===0?(via==='code'?'You are the host':'You are the lobby master'):'Lobby game',null,'Net.leaveAsk')+off.map(r=>'<div class="card" style="background:var(--hl);display:flex;align-items:center;gap:10px;font-weight:700;font-size:.85rem;padding:12px 14px"><span style="flex:1">⚠ '+nE(r.name)+' disconnected</span><button class="btn btn-ink btn-sm" onclick="Net.kick('+r.id+')">Remove &amp; continue</button></div>').join('')+h+'</div>';}
+  function push(){if(!gst)return;if(role==='host')setTheme(game);on().forEach(r=>{if(gst.ps&&!gst.ps.some(q=>q.id===r.id))return;let h;try{h=wrap(r.id,NG[game].view(gst,r.id));}catch(e){console.error(e);return;}if(r.id===0)showView(h);else send(peers[r.id],{t:'view',html:h,g:game});});}
   function setImg(d){const e=$e('live');if(e&&d)e.src=d;}
   function onAct(pid,a,g){if(!gst)return;let r;try{r=NG[game].act(gst,pid,a,g);}catch(e){console.error(e);}
     if(r==='img'){on().forEach(x=>{if(x.id===pid)return;if(x.id===0)setImg(gst.img);else send(peers[x.id],{t:'img',d:gst.img});});return;}push();}
@@ -2605,7 +2850,7 @@ const Net=(()=>{
   function act(a,g){if(role==='host')onAct(0,a,g);else send(hc,{t:'act',a,g});}
   function actIn(a,id){const e=$e(id);act(a,e?e.value:'');}
   function leaveAsk(){if(role==='host'&&gst){if(confirm('Back to the lobby? The game will end for everyone.'))toLobby();}else if(confirm('Leave the lobby?'))leave();}
-  function leave(){try{Object.values(peers).forEach(p=>p.pc.close());pending.forEach(p=>p.pc.close());if(hc&&hc.pc)hc.pc.close();}catch{}role=null;gst=null;game=null;hc=null;peers={};pending=[];inGame=false;joinReply='';renderHub();}
+  function leave(){teardown();try{Object.values(peers).forEach(p=>p.pc.close());pending.forEach(p=>p.pc.close());if(hc&&hc.pc)hc.pc.close();}catch{}role=null;gst=null;game=null;hc=null;peers={};pending=[];inGame=false;joinReply='';renderHub();}
 
   function showView(h){const keep={},fa=document.activeElement&&document.activeElement.id;document.querySelectorAll('#app input[id],#app textarea[id]').forEach(e=>keep[e.id]=e.value);$a().innerHTML=h;Object.keys(keep).forEach(k=>{const e=$e(k);if(e&&keep[k])e.value=keep[k];});if($e('dcv'))DrawPad.init(d=>act('img',d));else DrawPad.stop();tickDom();const f=$e(fa||'wcn');if(f&&f.tagName==='INPUT'){f.focus();try{f.setSelectionRange(f.value.length,f.value.length);}catch{}}}
   function tickDom(){document.querySelectorAll('[data-left]').forEach(e=>{if(!e.dataset.end)e.dataset.end=Date.now()+ +e.dataset.left*1000;});document.querySelectorAll('[data-end]').forEach(e=>{const s=nsecs(+e.dataset.end-Date.now());e.textContent=fmtTime(s);e.classList.toggle('urgent',s<=30&&s>0);});}
@@ -2613,7 +2858,8 @@ const Net=(()=>{
 
   function chips(){return Object.keys(NG).map(k=>{const g=NG[k];return '<div class="lrow'+(k===lg?' sel':'')+'" '+(role==='host'?'onclick="Net.pick(\''+k+'\')"':'style="cursor:default"')+'><div class="avatar" style="background:none;font-size:1.3rem">'+g.i+'</div><div class="rname">'+nE(g.n)+'</div><span class="pill">'+g.min+'–'+g.max+'</span><button class="chip" style="padding:3px 9px" onclick="event.stopPropagation();Help.show(\''+k+'\')">?</button></div>';}).join('');}
   function render(){
-    DrawPad.stop();
+    if(via==='code')return renderRoom();
+    DrawPad.stop();if(!gst)setTheme(null);
     if(role==='host'){
       pending.forEach((p,i)=>{const t=$e('ans'+i);if(t)p.ans=t.value;});
       if(gst)return;
@@ -2660,21 +2906,26 @@ const Net=(()=>{
     catch{alert('Could not use that code.');}
   }
   function onHost(m){
+    if(m.t==='pong')return;
     if(m.t==='you'){myId=m.id;}
-    else if(m.t==='lobby'){roster=m.roster;lg=m.lg;run=m.run;if(!inGame)render();}
-    else if(m.t==='view'){inGame=true;HELP.id=m.g||'lobby';showView(m.html);}
+    else if(m.t==='lobby'){if(!Array.isArray(m.roster))return;roster=m.roster;lg=NG[m.lg]?m.lg:'spy';run=!!m.run;if(!run)inGame=false;if(!inGame)render();}
+    else if(m.t==='view'){inGame=true;HELP.id=m.g||'lobby';setTheme(typeof m.g==='string'&&GA[m.g]?m.g:null);showView(m.html);}
     else if(m.t==='toLobby'){inGame=false;HELP.id='lobby';render();}
     else if(m.t==='img')setImg(m.d);
   }
-  return{host,hostGo,joinGo,invite,accept,drop,setGenre,pick,start,act,actIn,kick,toLobby,leave,leaveAsk,joinScreen,joinMake,copy:copyTa,render};
+  return{create,joinCode,share,copyCode,hideErr,host,hostGo,joinGo,invite,accept,drop,setGenre,pick,start,act,actIn,kick,toLobby,leave,leaveAsk,joinScreen,joinMake,copy:copyTa,render};
 })();
 
 /* ================================================================
    BOOT
    ================================================================ */
 (()=>{
+  Object.keys(GAME_DATA.words).forEach(k=>{if(WGEN[k]){const have=new Set(WGEN[k][1].split(',').map(x=>x.toLowerCase()));WGEN[k][1]+=','+GAME_DATA.words[k].split(',').filter(w=>!have.has(w.toLowerCase())).join(',');}});
+  mergeUnique(WYR,GAME_DATA.wyr);mergeUnique(CHA,GAME_DATA.cha);mergeUnique(TRI,GAME_DATA.tri);mergeUnique(CNW,GAME_DATA.cnw);mergeUnique(TELP,GAME_DATA.tel);mergeUnique(DGW,GAME_DATA.dg);
+  (()=>{const D=Party.DK;[['hot',GAME_DATA.hot],['nhie',GAME_DATA.nhie],['emo',GAME_DATA.emo]].forEach(([k,a])=>{if(D[k]&&a)mergeUnique(D[k].c,a);});})();
   document.getElementById('muteBtn').textContent=SFX.isMuted()?'🔇':'🔊';
   renderHub();
+  try{const hc0=sessionStorage.getItem('idle_host'),rc=sessionStorage.getItem('idle_room');if(hc0)Net.create(hc0);else if(rc){const i=document.getElementById('hbCode');if(i)i.value=rc;Net.joinCode(rc);}}catch{}
 })();
 </script>
 </body>
