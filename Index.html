@@ -624,7 +624,7 @@ const Mafia=(()=>{
     if(cfg.doctor)roles.push('DOCTOR');
     while(roles.length<names.length)roles.push('CIVILIAN');
     roles=shuffle(roles);
-    st={players:names.map((n,i)=>({id:i,name:n,role:roles[i],alive:true})),night:1,day:0,log:[]};
+    st={players:names.map((n,i)=>({id:i,name:n,role:roles[i],alive:true})),night:1,day:0,log:[],doctorSelfUsed:false};
     passSequence(
       st.players,
       p=>p.name,
@@ -700,7 +700,14 @@ const Mafia=(()=>{
       '</div></div>';
   }
   function nKill(id){nActions.kill=id;nextNQ();}
-  function nSave(id){nActions.save=id;nextNQ();}
+  function nSave(id){
+    const doc=st.players.find(p=>p.alive&&p.role==='DOCTOR');
+    if(doc&&id===doc.id){
+      if(st.doctorSelfUsed){alert('The Doctor can protect themselves only once per game.');return;}
+      st.doctorSelfUsed=true;
+    }
+    nActions.save=id;nextNQ();
+  }
   function nInvest(id){
     const t=st.players.find(p=>p.id===id);
     const isM=t.role==='MAFIA';
@@ -1792,7 +1799,7 @@ const nE=esc,nbox=h=>'<div class="card" style="text-align:center">'+h+'</div>';
 const nbtn=(t,a,g,c)=>'<button class="btn '+(c||'btn-ink')+' btn-block" style="margin-top:8px" onclick="Net.act(\''+a+'\',\''+(g==null?'':g)+'\')">'+t+'</button>';
 const nlist=(ps,f)=>'<div class="llist">'+ps.map(p=>'<div class="lrow" style="cursor:default"><div class="avatar">'+nE((p.name[0]||'?').toUpperCase())+'</div><div class="rname">'+nE(p.name)+'</div>'+(f?f(p):'')+'</div>').join('')+'</div>';
 const npick=(ps,a,extra)=>'<div class="llist">'+ps.map(p=>'<div class="lrow" onclick="Net.act(\''+a+'\',\''+p.id+'\')"><div class="avatar">'+nE((p.name[0]||'?').toUpperCase())+'</div><div class="rname">'+nE(p.name)+'</div></div>').join('')+'</div>'+(extra||'');
-const nsecs=ms=>Math.max(0,Math.round(ms/1000));
+const nsecs=ms=>Math.max(0,Math.ceil(Math.max(0,ms)/1000));
 const nname=(s,id)=>{const p=s.ps.find(x=>x.id===id);return p?nE(p.name):'?';};
 const nwait=(t)=>nbox('<div style="font-size:1.6rem">⏳</div><p class="helptext">'+t+'</p>');
 const nhostBtn=(pid,t,a)=>pid===0?nbtn(t,a):'<p class="helptext" style="text-align:center">Waiting for the lobby master…</p>';
@@ -1882,7 +1889,7 @@ const NG={
    const hd=nbox('<div class="slabel">Round '+s.round+' — your dice</div>'+mine);
    if(s.ph==='end'){const w=ldAlive(s)[0];return nbox('<div style="font-size:2.4rem">🎲</div><div class="pass-name">'+(w?nE(w.name)+' wins!':'Draw!')+'</div>')+nhostBtn(pid,'Play again','again');}
    if(s.ph==='reveal'){const r=s.rev,lo=s.ps.find(p=>p.id===r.loser);return nbox('<div class="slabel">Bid was '+r.bid.c+' × '+DIE[r.bid.f-1]+'</div><div style="font-size:2.6rem;font-weight:900;color:'+(r.ok?'var(--ok-deep)':'var(--bad)')+'">'+r.total+' '+DIE[r.bid.f-1]+'</div><p class="helptext"><b>'+(r.ok?'Bid was true':'Bid was a bluff')+'</b> — '+nE(lo.name)+' loses a die'+(lo.dice.length?'':' and is out')+'.</p>')+
-     nlist(r.all.map(x=>x),p=>'<span style="font-size:1.3rem;letter-spacing:2px">'+p.dice.map(d=>d===r.bid.f?'<b style="background:var(--hl);border-radius:5px">'+DIE[d-1]+'</b>':DIE[d-1]).join('')+'</span>')+nbtn('Next round →','next');}
+     nlist(r.all.map(x=>x),p=>'<span style="font-size:1.3rem;letter-spacing:2px">'+p.dice.map(d=>d===r.bid.f?'<b style="background:var(--hl);border-radius:5px">'+DIE[d-1]+'</b>':DIE[d-1]).join('')+'</span>')+nhostBtn(pid,'Next round →','next');}
    const cu=ldCur(s),bid=s.bid,ln=bid?'<div style="font-size:2rem;font-weight:900">'+bid.c+' × '+DIE[bid.f-1]+'</div><p class="helptext">by '+nname(s,s.bidder)+'</p>':'<p class="helptext">No bid yet</p>';
    const info=hd+nbox('<div class="slabel">Current bid</div>'+ln)+nlist(ldAlive(s),p=>'<span class="pill">'+p.dice.length+' 🎲'+(p.id===cu.id?' ◀':'')+'</span>');
    if(cu.id!==pid)return info+nwait(nE(cu.name)+' is thinking…');
@@ -2007,16 +2014,16 @@ NG.mafia.kick=(s,pid)=>{if(s.ph==='end'||s.dead[pid]||!s.ps.some(p=>p.id===pid))
  else if(s.ph==='day'&&Object.keys(s.ready).filter(k=>!s.dead[k]).length>mfAlive(s).length/2){s.ph='vote';s.votes={};}
  else if(s.ph==='vote'&&mfAlive(s).every(p=>p.id in s.votes))mfVoteEnd(s);};
 NG.dice.kick=(s,pid)=>{const p=s.ps.find(x=>x.id===pid);if(!p||!p.dice.length||s.ph==='end')return;p.dice=[];
- if(s.ph==='bid'&&ldAlive(s).length<=1)s.ph='end';};
-NG.hot.kick=(s,pid)=>{s.ps=s.ps.filter(p=>p.id!==pid);delete s.votes[pid];if(s.ph==='v'&&s.ps.length&&Object.keys(s.votes).length>=s.ps.length)s.ph='r';};
+ if(ldAlive(s).length<=1)s.ph='end';};
+NG.hot.kick=(s,pid)=>{if(s.ph==='end'||!s.ps.some(p=>p.id===pid))return;s.ps=s.ps.filter(p=>p.id!==pid);delete s.votes[pid];if(s.ps.length<2){s.ph='end';return;}if(s.ph==='v'&&Object.keys(s.votes).length>=s.ps.length)s.ph='r';};
 NG.nhie.kick=(s,pid)=>{const p=s.ps.find(x=>x.id===pid);if(!p||p.f<=0||s.ph==='end')return;p.f=0;delete s.ans[pid];const al=s.ps.filter(x=>x.f>0);
  if(al.length<=1){s.ph='end';return;}if(s.ph==='v'&&al.every(x=>x.id in s.ans)){al.forEach(x=>{if(s.ans[x.id])x.f--;});s.ph='r';}};
-NG.tq.kick=(s,pid)=>{if(s.ph==='end')return;if(pid===s.th||s.ps.length<=3){s.ans=s.ans||'(thinker left)';s.res='out';s.ph='end';return;}s.ps=s.ps.filter(p=>p.id!==pid);};
+NG.tq.kick=(s,pid)=>{if(s.ph==='end'||!s.ps.some(p=>p.id===pid))return;if(pid===s.th){s.ans=s.ans||'(thinker left)';s.res='out';s.ph='end';return;}s.ps=s.ps.filter(p=>p.id!==pid);if(s.ps.length<3){s.ans=s.ans||'(not enough players)';s.res='out';s.ph='end';}};
 NG.wc.kick=(s,pid)=>{const p=s.ps.find(x=>x.id===pid);if(!p||p.lives<=0||s.ph==='end')return;p.lives=0;s.note=nE(p.name)+' left the game';
  if(s.ps.filter(x=>x.lives>0).length<=1){s.ph='end';return;}s.end=Date.now()+s.secs*1000;};
 NG.ttt.kick=(s,pid)=>{if(s.ph==='end')return;if(pid===s.x||pid===s.o){s.win=pid===s.x?'O':'X';s.ph='end';}else s.ps=s.ps.filter(p=>p.id!==pid);};
 NG.emo.kick=(s,pid)=>{if(s.ph==='end'||!s.ps.some(p=>p.id===pid))return;const i=s.ps.findIndex(p=>p.id===pid);s.ps=s.ps.filter(p=>p.id!==pid);
- if(s.ps.length<2){s.ph='end';return;}if(pid===s.actor){s.actor=s.ps[i%s.ps.length].id;emoNext(s,true);}};
+ if(s.ps.length<3){s.ph='end';return;}if(pid===s.actor){s.actor=s.ps[i%s.ps.length].id;emoNext(s,true);}};
 
 /* ================================================================
    SPY HUNT — WORD HINT MODE (pass-the-phone + lobby)
@@ -2221,6 +2228,7 @@ NG.cn={n:'Codenames Lite',i:'🗝️',min:4,max:12,
    else if(a==='end'){s.turn=cnOther(T);s.ph='clue';s.clue=null;}}
   else if(s.ph==='end'&&a==='again'&&pid===0)Object.assign(s,NG.cn.init(s.ps));},
  kick(s,pid){if(s.ph==='end'||!s.ps.some(p=>p.id===pid))return;const T=s.t.R.includes(pid)?'R':'B';s.t[T]=s.t[T].filter(x=>x!==pid);s.ps=s.ps.filter(p=>p.id!==pid);
+  if(s.ps.length<4){s.win=cnOther(T);s.msg='Not enough players to continue.';s.ph='end';return;}
   if(s.t[T].length<2){s.win=cnOther(T);s.msg='A whole team left.';s.ph='end';return;}
   if(s.sp[T]===pid){s.sp[T]=s.t[T][0];if(s.turn===T&&s.ph==='guess'){s.ph='clue';s.clue=null;}}},
  view(s,pid){const T=s.t.R.includes(pid)?'R':'B',sp=s.sp[T]===pid,mine=s.turn===T,
@@ -2347,7 +2355,7 @@ NG.dg={n:'Draw & Guess',i:'🎨',min:3,max:12,
   else if(s.ph==='g'&&pid===s.actor){if(a==='got'){const w=s.ps.find(p=>p.id===+g&&p.id!==s.actor);if(!w)return;w.pts++;s.ps.find(p=>p.id===s.actor).pts++;s.res='🎉 '+nE(w.name)+' guessed it! +1 each.';s.ph='r';}else if(a==='out'){s.res='😅 Nobody got it.';s.ph='r';}}
   else if(s.ph==='r'&&pid===0){if(a==='next')dgNext(s);else if(a==='fin')s.ph='end';}
   else if(s.ph==='end'&&a==='again'&&pid===0)Object.assign(s,NG.dg.init(s.ps));},
- kick(s,pid){if(s.ph==='end'||!s.ps.some(p=>p.id===pid))return;const i=s.ps.findIndex(p=>p.id===pid);s.ps=s.ps.filter(p=>p.id!==pid);if(s.ps.length<2){s.ph='end';return;}if(pid===s.actor){s.actor=s.ps[i%s.ps.length].id;s.n--;dgNext(s,true);}},
+ kick(s,pid){if(s.ph==='end'||!s.ps.some(p=>p.id===pid))return;const i=s.ps.findIndex(p=>p.id===pid);s.ps=s.ps.filter(p=>p.id!==pid);if(s.ps.length<3){s.ph='end';return;}if(pid===s.actor){s.actor=s.ps[i%s.ps.length].id;s.n--;dgNext(s,true);}},
  view(s,pid){const sc=nlist(s.ps.slice().sort((a,b)=>b.pts-a.pts),p=>'<span class="pill">⭐ '+p.pts+'</span>'),me=pid===s.actor,tm='<div class="timer-disp" data-left="'+nsecs(s.end-Date.now())+'"></div>';
   if(s.ph==='end'){const m=Math.max(...s.ps.map(p=>p.pts)),w=s.ps.filter(p=>p.pts===m);return nbox('<div style="font-size:2.4rem">🏆</div><div class="pass-name">'+w.map(p=>nE(p.name)).join(' & ')+' win'+(w.length>1?'':'s')+'!</div>')+sc+nhostBtn(pid,'Play again','again');}
   if(s.ph==='d')return me?nbox('<div class="slabel">Draw this — no words!</div><div class="pass-name wsp-word">'+nE(s.word)+'</div>'+tm)+DrawPad.html()+'<button class="btn btn-ink btn-block" onclick="Net.act(\'done\',DrawPad.snap())">Done drawing</button>':nbox('<div class="slabel">'+nname(s,s.actor)+' is drawing…</div>'+dgImg(s)+tm+'<p class="helptext">Shout your guesses out loud!</p>')+sc;
@@ -2571,6 +2579,7 @@ const Net=(()=>{
 
   let wgenre='random',role=null,roster=[],pending=[],nid=1,lg='spy',game=null,gst=null,hc=null,myId=0,run=false,inGame=false,joinReply='',peers={};
   let peer=null,peerId='',joinState='code',netStatus='',peerLoad=null,clientRetryTimer=null,leaving=false;
+  let generation=0,peerOpenTimer=null;
   const PEERJS_URLS=[
     'https://unpkg.com/peerjs@1.5.5/dist/peerjs.min.js',
     'https://cdn.jsdelivr.net/npm/peerjs@1.5.5/dist/peerjs.min.js'
@@ -2611,7 +2620,15 @@ const Net=(()=>{
   function copyTa(id){
     const t=$e(id);if(!t)return;
     const v=t.value;
-    navigator.clipboard?.writeText(v).then(()=>SFX.success()).catch(()=>{try{t.focus();t.select();document.execCommand('copy');SFX.success();}catch{}});
+    const fallback=()=>{try{t.focus();t.select();document.execCommand('copy');SFX.success();return true;}catch{return false;}};
+    try{
+      const write=navigator.clipboard&&navigator.clipboard.writeText;
+      if(typeof write==='function'){
+        Promise.resolve(write.call(navigator.clipboard,v)).then(()=>SFX.success()).catch(fallback);
+        return;
+      }
+    }catch{}
+    fallback();
   }
   function netOk(){
     if(typeof RTCPeerConnection==='undefined'){
@@ -2662,10 +2679,11 @@ const Net=(()=>{
     try{p?.dc?.close?.();}catch{}
     try{p?.pc?.close?.();}catch{}
     if(p?.failTimer)clearTimeout(p.failTimer);
+    if(p?.handshakeTimer)clearTimeout(p.handshakeTimer);
   }
 
   function markHostPeerOffline(p,reason){
-    if(!p)return;if(leaving){p.closed=true;return;}
+    if(!p||p.gen!==generation)return;if(leaving){p.closed=true;return;}
     if(p.pid!=null){
       const r=roster.find(x=>x.id===p.pid);if(r){r.off=true;r.reason=reason||'connection lost';}
       delete peers[p.pid];
@@ -2674,13 +2692,14 @@ const Net=(()=>{
       if(gst)push();else render();
     }else{
       p.closed=true;
-      const i=pending.indexOf(p);if(i>=0){pending.splice(i,1);render();}
+      const i=pending.indexOf(p);if(i>=0)pending.splice(i,1);
       peers.__pending=(peers.__pending||[]).filter(x=>x!==p);
+      if(role==='host'&&!gst)render();
     }
   }
 
-  function clientLost(reason){
-    if(leaving||role!=='client')return;
+  function clientLost(reason,g= generation){
+    if(leaving||role!=='client'||g!==generation)return;
     inGame=false;run=false;setStatus(reason||'Connection lost.');joinState='error';
     if(clientRetryTimer)clearTimeout(clientRetryTimer);
     renderJoin();
@@ -2689,6 +2708,7 @@ const Net=(()=>{
   function watchLocalPC(p,isHost){
     const pc=p.pc;
     pc.addEventListener('connectionstatechange',()=>{
+      if(p.gen!==generation||leaving)return;
       const state=pc.connectionState;
       if(state==='connected'||state==='completed'){
         if(p.failTimer)clearTimeout(p.failTimer);p.failTimer=null;p.connected=true;
@@ -2704,28 +2724,30 @@ const Net=(()=>{
       }
     });
     pc.addEventListener('iceconnectionstatechange',()=>{
-      if(pc.iceConnectionState==='failed')isHost?markHostPeerOffline(p,'ICE failed'):clientLost('The network path between the phones failed.');
+      if(p.gen!==generation||leaving)return;
+      if(pc.iceConnectionState==='failed')isHost?markHostPeerOffline(p,'ICE failed'):clientLost('The network path between the phones failed.',p.gen);
     });
   }
 
   function bindPeerJsHostConn(conn){
-    const p={kind:'peerjs',conn,pid:null,connected:false,closed:false};
+    const p={kind:'peerjs',conn,pid:null,connected:false,closed:false,gen:generation};
     peers.__pending=(peers.__pending||[]).concat(p);
     const clean=()=>{if(p.closed)return;if(p.pid!=null)markHostPeerOffline(p,'connection closed');else{p.closed=true;peers.__pending=(peers.__pending||[]).filter(x=>x!==p);}};
-    conn.on('open',()=>{p.connected=true;send(p,{t:'ready'});});
-    conn.on('data',m=>{const msg=safeParse(m);if(msg)onPeer(p,msg);});
+    conn.on('open',()=>{if(p.gen!==generation||leaving)return;p.connected=true;send(p,{t:'ready'});});
+    conn.on('data',m=>{if(p.gen!==generation||leaving)return;const msg=safeParse(m);if(msg)onPeer(p,msg);});
     conn.on('close',clean);
-    conn.on('error',err=>{console.warn('PeerJS host connection error',err);if(p.pid!=null)markHostPeerOffline(p,peerErrorMessage(err));});
+    conn.on('error',err=>{if(p.gen!==generation||leaving)return;console.warn('PeerJS host connection error',err);if(p.pid!=null)markHostPeerOffline(p,peerErrorMessage(err));});
     return p;
   }
 
   function bindPeerJsClientConn(conn){
-    const p={kind:'peerjs',conn,pid:0,connected:false,closed:false};
+    const p={kind:'peerjs',conn,pid:0,connected:false,closed:false,gen:generation,handshake:false};
     hc=p;
-    conn.on('open',()=>{p.connected=true;joinState='connecting';setStatus('Connected to the lobby. Waiting for the host…');send(p,{t:'hi',name:getClientName()});});
-    conn.on('data',m=>{const msg=safeParse(m);if(msg)onHost(msg);});
-    conn.on('close',()=>{p.closed=true;clientLost('The lobby connection closed.');});
-    conn.on('error',err=>{console.warn('PeerJS client connection error',err);clientLost(peerErrorMessage(err));});
+    p.handshakeTimer=setTimeout(()=>{if(p.gen===generation&&!p.handshake&&!p.closed)clientLost('The host did not send a lobby handshake. Re-check the lobby code and try again.',p.gen);},12000);
+    conn.on('open',()=>{if(p.gen!==generation||leaving)return;p.connected=true;joinState='connecting';setStatus('Connected to the lobby. Waiting for the host…');send(p,{t:'hi',name:getClientName()});});
+    conn.on('data',m=>{if(p.gen!==generation||leaving)return;const msg=safeParse(m);if(msg)onHost(msg,p.gen);});
+    conn.on('close',()=>{if(p.gen!==generation)return;p.closed=true;if(p.handshakeTimer)clearTimeout(p.handshakeTimer);clientLost('The lobby connection closed.',p.gen);});
+    conn.on('error',err=>{if(p.gen!==generation)return;console.warn('PeerJS client connection error',err);clientLost(peerErrorMessage(err),p.gen);});
     return p;
   }
 
@@ -2743,16 +2765,20 @@ const Net=(()=>{
   function hostGo(m){mode=m==='online'?'online':'local';hostStart();}
   async function hostStart(){
     if(!netOk())return;
+    generation++;if(peerOpenTimer)clearTimeout(peerOpenTimer);peerOpenTimer=null;
     SFX.unlock();HELP.id='lobby';role='host';roster=[{id:0,name:(S.get('idle_name','')||'').trim().slice(0,18)||'Host'}];nid=1;pending=[];lg='spy';gst=null;game=null;peers={};peer=null;peerId='';setStatus('');
     if(mode==='online'){
       try{
+        const gen=generation;
         setStatus('Starting online lobby…');render();await loadPeerJS();
+        if(gen!==generation||role!=='host')return;
         peer=makePeer({config:rtcCfg()});
-        peer.on('open',id=>{peerId=String(id);setStatus('Online lobby ready — share the code below.');render();});
-        peer.on('connection',bindPeerJsHostConn);
-        peer.on('disconnected',()=>{setStatus('Online signaling briefly disconnected — reconnecting…');try{peer.reconnect();}catch{}});
-        peer.on('error',err=>{console.warn('PeerJS host error',err);setStatus(peerErrorMessage(err));render();});
-        peer.on('close',()=>{if(role==='host')setStatus('Online lobby service closed. Start a new lobby.');});
+        peerOpenTimer=setTimeout(()=>{if(gen===generation&&role==='host'&&!peerId){setStatus('Online lobby service did not respond. Try starting the lobby again.');render();}},15000);
+        peer.on('open',id=>{if(gen!==generation||role!=='host')return;if(peerOpenTimer)clearTimeout(peerOpenTimer);peerOpenTimer=null;peerId=String(id);setStatus('Online lobby ready — share the code below.');render();});
+        peer.on('connection',conn=>{if(gen!==generation||role!=='host')return;bindPeerJsHostConn(conn);});
+        peer.on('disconnected',()=>{if(gen!==generation||role!=='host')return;setStatus('Online signaling briefly disconnected — reconnecting…');try{peer.reconnect();}catch{}});
+        peer.on('error',err=>{if(gen!==generation||role!=='host')return;console.warn('PeerJS host error',err);setStatus(peerErrorMessage(err));render();});
+        peer.on('close',()=>{if(gen===generation&&role==='host')setStatus('Online lobby service closed. Start a new lobby.');});
       }catch(e){setStatus('Could not start the online lobby. '+(e.message||''));}
     }
     render();
@@ -2762,17 +2788,17 @@ const Net=(()=>{
     if(mode==='online'){if(peerId)$e('ocode')&&copyTa('ocode');else setStatus('Online lobby is still starting…');render();return;}
     try{
       const pc=new RTCPeerConnection(rtcCfg()),dc=pc.createDataChannel('g');
-      const p={pc,dc,code:'',ans:'',pid:null,kind:'local',connected:false,closed:false};pending.push(p);bindHostLocal(p);render();
+      const p={pc,dc,code:'',ans:'',pid:null,kind:'local',connected:false,closed:false,gen:generation};pending.push(p);bindHostLocal(p);render();
       await pc.setLocalDescription(await pc.createOffer());await gathered(pc);p.code=enc(pc.localDescription);setStatus('Send the invite code to one friend.');render();
     }catch(e){setStatus('Could not create the invite code. '+(e.message||''));render();}
   }
 
   function bindHostLocal(p){
     const dc=p.dc,pc=p.pc;
-    dc.onmessage=m=>{const msg=safeParse(m.data);if(msg)onPeer(p,msg);};
-    dc.onopen=()=>{p.connected=true;setStatus('A phone connected.');};
+    dc.onmessage=m=>{if(p.gen!==generation||leaving)return;const msg=safeParse(m.data);if(msg)onPeer(p,msg);};
+    dc.onopen=()=>{if(p.gen!==generation||leaving)return;p.connected=true;setStatus('A phone connected.');};
     dc.onclose=()=>markHostPeerOffline(p,'connection closed');
-    dc.onerror=e=>console.warn('Local data channel error',e);
+    dc.onerror=e=>{if(p.gen===generation)console.warn('Local data channel error',e);};
     watchLocalPC(p,true);
   }
 
@@ -2790,6 +2816,7 @@ const Net=(()=>{
 
   function onPeer(p,m){
     try{
+      if(role!=='host'||leaving||!p||p.gen!==generation)return;
       if(m.t==='hi'&&p.pid==null){
         let nm=String(m.name||'Player').trim().slice(0,18)||'Player',k=2,b=nm;
         while(roster.some(r=>r.name.toLowerCase()===nm.toLowerCase()&&!r.off&&!r.gone))nm=b+' '+k++;
@@ -2808,6 +2835,11 @@ const Net=(()=>{
         // render to make the host controls appear.
         if(role==='host'&&!gst)render();
         lobbyPush();
+        // A player is allowed to join while a game is already running.
+        // Send that new peer its authoritative current view immediately.
+        if(gst&&game&&p.pid!=null){
+          try{send(p,{t:'view',html:wrap(p.pid,NG[game].view(gst,p.pid)),g:game});}catch(e){console.error('IDLE late-join view error',e);}
+        }
       }else if(m.t==='act'&&gst&&p.pid!=null)onAct(p.pid,m.a,m.g);
     }catch(e){console.error('IDLE peer message error',e);setStatus('A lobby message could not be processed.');if(role==='host'&&!gst)render();}
   }
@@ -2878,7 +2910,13 @@ const Net=(()=>{
   function setImg(d){const e=$e('live');if(e&&d&&dgOk(d))e.src=d;}
 
   function onAct(pid,a,g){
-    if(!gst)return;let r;
+    if(!gst||!NG[game])return;
+    // Close the small race where a timed action arrives just after its deadline
+    // but before the once-per-second UI tick notices the timeout.
+    if(NG[game].tick){
+      try{if(NG[game].tick(gst)){push();return;}}catch(e){console.error('IDLE pre-action timer error',e);}
+    }
+    let r;
     try{r=NG[game].act(gst,pid,a,g);}catch(e){console.error('IDLE game action error',e);setStatus('A game action failed.');return;}
     if(r==='img'){
       on().forEach(x=>{if(x.id===pid)return;if(x.id===0)setImg(gst.img);else send(peers[x.id],{t:'img',d:gst.img});});
@@ -2910,7 +2948,8 @@ const Net=(()=>{
   }
 
   function leave(){
-    leaving=true;
+    leaving=true;generation++;
+    if(peerOpenTimer)clearTimeout(peerOpenTimer);peerOpenTimer=null;
     if(clientRetryTimer)clearTimeout(clientRetryTimer);clientRetryTimer=null;
     const activePeers=Object.keys(peers).filter(k=>k!=='__pending').map(k=>peers[k]);
     const pendingPeers=(peers.__pending||[]).slice();
@@ -2998,8 +3037,8 @@ const Net=(()=>{
 
   /* ---------- JOIN ---------- */
   function joinScreen(){if(!netOk())return;chooser('join');}
-  function joinGo(m){mode=m==='online'?'online':'local';SFX.unlock();HELP.id='lobby';role='client';joinReply='';joinState='code';setStatus('');renderJoin();}
-  function retryJoin(){try{if(peer)peer.destroy();}catch{}hc=null;peer=null;joinReply='';joinState='code';setStatus('');renderJoin();}
+  function joinGo(m){generation++;if(peerOpenTimer)clearTimeout(peerOpenTimer);peerOpenTimer=null;mode=m==='online'?'online':'local';SFX.unlock();HELP.id='lobby';role='client';joinReply='';joinState='code';setStatus('');renderJoin();}
+  function retryJoin(){generation++;if(peerOpenTimer)clearTimeout(peerOpenTimer);peerOpenTimer=null;try{if(hc)closePeerConnection(hc);}catch{}try{if(peer)peer.destroy();}catch{}hc=null;peer=null;joinReply='';joinState='code';setStatus('');renderJoin();}
 
   function parseOnlineCode(raw){
     const t=String(raw||'').trim().replace(/\s+/g,'');
@@ -3032,18 +3071,23 @@ const Net=(()=>{
       const hostId=parseOnlineCode(compactCode);
       if(!hostId||!/^[A-Za-z0-9_-]+$/.test(hostId)){setStatus('That online lobby code is not valid. Copy the whole code from the host.');joinState='error';renderJoin();return;}
       try{
+        const gen=generation;
         joinState='connecting';setStatus('Starting online connection…');renderJoin();await loadPeerJS();
+        if(gen!==generation||role!=='client')return;
         if(peer)try{peer.destroy();}catch{}
         peer=makePeer({config:rtcCfg()});
+        peerOpenTimer=setTimeout(()=>{if(gen===generation&&role==='client'&&!peer?.open){clientLost('The online lobby service did not respond. Try again.',gen);}},12000);
         peer.on('open',()=>{
+          if(gen!==generation||role!=='client')return;
+          if(peerOpenTimer)clearTimeout(peerOpenTimer);peerOpenTimer=null;
           try{
             const conn=peer.connect(hostId,{reliable:true,metadata:{name:nm}});
             bindPeerJsClientConn(conn);
-            clientRetryTimer=setTimeout(()=>{if(!hc||!hc.connected)clientLost('The host did not accept the connection. Re-check the lobby code and try again.');},15000);
-          }catch(e){clientLost(peerErrorMessage(e));}
+            clientRetryTimer=setTimeout(()=>{if(gen===generation&&(!hc||!hc.handshake))clientLost('The host did not accept the connection. Re-check the lobby code and try again.',gen);},15000);
+          }catch(e){clientLost(peerErrorMessage(e),gen);}
         });
-        peer.on('error',err=>{console.warn('PeerJS client peer error',err);clientLost(peerErrorMessage(err));});
-        peer.on('disconnected',()=>{if(!inGame){setStatus('Online signaling disconnected.');try{peer.reconnect();}catch{}}});
+        peer.on('error',err=>{if(gen!==generation||role!=='client')return;console.warn('PeerJS client peer error',err);clientLost(peerErrorMessage(err),gen);});
+        peer.on('disconnected',()=>{if(gen!==generation||role!=='client'||inGame)return;setStatus('Online signaling disconnected.');try{peer.reconnect();}catch{}});
       }catch(e){setStatus('Could not start the online lobby. '+(e.message||''));joinState='error';renderJoin();}
       return;
     }
@@ -3054,8 +3098,8 @@ const Net=(()=>{
     if(off.m&&off.m!=='l'){setStatus('This invite is not a same-network lobby code. Choose Online and use the host IDLE-O code.');joinState='error';renderJoin();return;}
     try{
       const pc=new RTCPeerConnection(rtcCfg());
-      const p={pc,dc:null,kind:'local',pid:0,connected:false,closed:false};hc=p;
-      pc.ondatachannel=e=>{const dc=e.channel;p.dc=dc;bindClientLocal(p);};
+      const p={pc,dc:null,kind:'local',pid:0,connected:false,closed:false,gen:generation,handshake:false};hc=p;
+      pc.ondatachannel=e=>{if(p.gen!==generation||leaving)return;const dc=e.channel;p.dc=dc;bindClientLocal(p);};
       watchLocalPC(p,false);
       await pc.setRemoteDescription(off);await pc.setLocalDescription(await pc.createAnswer());await gathered(pc);joinReply=enc(pc.localDescription);joinState='reply';setStatus('Reply code ready — send it to the host.');renderJoin();
     }catch(e){setStatus('Could not make the reply code. '+(e.message||''));joinState='error';renderJoin();}
@@ -3063,16 +3107,18 @@ const Net=(()=>{
 
   function bindClientLocal(p){
     const dc=p.dc;
-    dc.onopen=()=>{p.connected=true;inGame=false;setStatus('Connected to the lobby. Waiting for the host…');dc.send(JSON.stringify({t:'hi',name:getClientName()}));};
-    dc.onmessage=m=>{const msg=safeParse(m.data);if(msg)onHost(msg);};
-    dc.onclose=()=>clientLost('The lobby connection closed.');
-    dc.onerror=e=>console.warn('Local client data channel error',e);
+    p.handshakeTimer=setTimeout(()=>{if(p.gen===generation&&!p.handshake&&!p.closed)clientLost('The host did not send a lobby handshake. Re-check the invite and try again.',p.gen);},12000);
+    dc.onopen=()=>{if(p.gen!==generation||leaving)return;p.connected=true;inGame=false;setStatus('Connected to the lobby. Waiting for the host…');dc.send(JSON.stringify({t:'hi',name:getClientName()}));};
+    dc.onmessage=m=>{if(p.gen!==generation||leaving)return;const msg=safeParse(m.data);if(msg)onHost(msg,p.gen);};
+    dc.onclose=()=>{if(p.handshakeTimer)clearTimeout(p.handshakeTimer);clientLost('The lobby connection closed.',p.gen);};
+    dc.onerror=e=>{if(p.gen===generation)console.warn('Local client data channel error',e);};
   }
 
-  function onHost(m){
+  function onHost(m,g=generation){
+    if(g!==generation||role!=='client'||leaving)return;
     try{
-      if(m.t==='you'){myId=m.id;setStatus('Connected.');}
-      else if(m.t==='lobby'){roster=Array.isArray(m.roster)?m.roster.map(r=>({...r})):[];lg=m.lg;run=!!m.run;if(!inGame){joinState='connected';setStatus('Lobby connected.');render();}}
+      if(m.t==='you'){myId=m.id;if(hc)hc.handshake=true;if(hc?.handshakeTimer)clearTimeout(hc.handshakeTimer);setStatus('Connected.');}
+      else if(m.t==='lobby'){roster=Array.isArray(m.roster)?m.roster.map(r=>({...r})):[];if(NG[m.lg])lg=m.lg;run=!!m.run;if(!inGame){joinState='connected';setStatus('Lobby connected.');render();}}
       else if(m.t==='ready')setStatus('Connected to host.');
       else if(m.t==='view'){inGame=true;joinState='connected';HELP.id=m.g||'lobby';setStatus('Game live.');if(clientRetryTimer)clearTimeout(clientRetryTimer);showView(m.html);}
       else if(m.t==='toLobby'){inGame=false;HELP.id='lobby';setStatus('Back in lobby.');render();}
