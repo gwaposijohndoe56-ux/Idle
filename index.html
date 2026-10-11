@@ -1,0 +1,671 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#080d12">
+  <meta name="description" content="Recovered record 07 from the Sangay ng Pag-aaral sa Dilim. The moon is missing. The sea remembers why.">
+  <meta property="og:title" content="BAKUNAWA — The Eighth Tide">
+  <meta property="og:description" content="A recovered archive following the dead signal. The moon has vanished once before.">
+  <meta property="og:type" content="website">
+  <title>BAKUNAWA — The Eighth Tide / Archive 07</title>
+  <style>
+    :root {
+      --ink: #080d12;
+      --ink-2: #0d151b;
+      --ink-3: #132129;
+      --paper: #e7e2d3;
+      --paper-dim: #aaa99c;
+      --sea: #8ab9b0;
+      --sea-dim: #3e7777;
+      --ember: #d6654c;
+      --gold: #d3bb80;
+      --line: rgba(212, 218, 203, .16);
+      --line-bright: rgba(212, 218, 203, .3);
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: "Arial Narrow", "Aptos Narrow", "Helvetica Neue", Arial, sans-serif;
+      --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      --page: min(1180px, calc(100% - 48px));
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; background: var(--ink); }
+    body {
+      margin: 0; color: var(--paper); background: var(--ink); font-family: var(--sans);
+      font-size: 16px; line-height: 1.6; letter-spacing: .015em; overflow-x: hidden;
+    }
+    body::before {
+      content: ""; position: fixed; inset: 0; z-index: 20; pointer-events: none; opacity: .14;
+      background-image: repeating-linear-gradient(0deg, transparent 0 3px, rgba(255,255,255,.035) 4px, transparent 5px);
+      mix-blend-mode: soft-light;
+    }
+    body::after {
+      content: ""; position: fixed; inset: -50%; z-index: 19; pointer-events: none; opacity: .12;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+      animation: grain .3s steps(2) infinite;
+    }
+    @keyframes grain { 0% { transform: translate(0,0) } 25% { transform: translate(1%,-1%) } 50% { transform: translate(-1%,1%) } 75% { transform: translate(1%,1%) } 100% { transform: translate(0,0) } }
+    a { color: inherit; text-decoration: none; }
+    button, input { font: inherit; }
+    button, a, input { -webkit-tap-highlight-color: transparent; }
+    button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+    ::selection { background: var(--gold); color: var(--ink); }
+    .wrap { width: var(--page); margin-inline: auto; }
+    .eyebrow { color: var(--sea); font: 11px/1.5 var(--mono); text-transform: uppercase; letter-spacing: .18em; }
+    .micro { font: 10px/1.6 var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+    .muted { color: var(--paper-dim); }
+    .accent { color: var(--gold); }
+    .red { color: var(--ember); }
+    .section { position: relative; padding: 108px 0; border-top: 1px solid var(--line); }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 30px; margin-bottom: 42px; }
+    .section-head h2 { margin: 8px 0 0; font: clamp(34px, 5vw, 58px)/.98 var(--serif); letter-spacing: -.035em; font-weight: 400; }
+    .section-head p { max-width: 340px; margin: 0; color: var(--paper-dim); font-size: 14px; }
+    .rule { width: 100%; height: 1px; background: var(--line); }
+    .topbar { position: sticky; top: 0; z-index: 30; background: rgba(8,13,18,.88); backdrop-filter: blur(18px); border-bottom: 1px solid var(--line); }
+    .nav { width: var(--page); min-height: 70px; margin: auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .brand-mark { display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid var(--gold); color: var(--gold); border-radius: 50%; font: 19px var(--serif); position: relative; flex: 0 0 auto; }
+    .brand-mark::after { content: ""; position: absolute; width: 8px; height: 8px; border: 1px solid var(--ember); border-radius: 50%; right: -3px; top: 0; background: var(--ink); }
+    .brand-copy { display: grid; line-height: 1.25; }
+    .brand-copy strong { font: 12px var(--mono); letter-spacing: .14em; }
+    .brand-copy span { margin-top: 4px; font: 9px var(--mono); color: var(--paper-dim); letter-spacing: .12em; }
+    .nav-links { display: flex; align-items: center; gap: clamp(14px, 2.6vw, 34px); }
+    .nav-links a { color: #c0c5bb; font: 10px var(--mono); letter-spacing: .1em; text-transform: uppercase; transition: color .2s ease; }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-state { display: flex; align-items: center; gap: 8px; color: var(--ember); white-space: nowrap; font: 9px var(--mono); letter-spacing: .12em; }
+    .pulse { width: 6px; height: 6px; border-radius: 50%; background: var(--ember); box-shadow: 0 0 12px var(--ember); animation: pulse 2s infinite; }
+    @keyframes pulse { 50% { opacity: .25; box-shadow: 0 0 2px var(--ember); } }
+    .menu-toggle { display: none; border: 1px solid var(--line-bright); background: transparent; color: var(--paper); padding: 9px 12px; min-height: 44px; }
+
+    .hero { min-height: 760px; position: relative; display: grid; align-items: center; isolation: isolate; overflow: hidden; }
+    .hero::before { content: ""; position: absolute; z-index: -2; inset: 0; background: radial-gradient(ellipse at 74% 44%, rgba(36,79,82,.26), transparent 42%), linear-gradient(180deg, #0a1118, #080d12 86%); }
+    .hero::after { content: ""; position: absolute; z-index: -1; inset: auto 0 0; height: 150px; background: linear-gradient(transparent, var(--ink)); }
+    .hero-inner { width: var(--page); margin: 0 auto; display: grid; grid-template-columns: minmax(330px,.88fr) minmax(380px,1.12fr); align-items: center; gap: 18px; padding: 58px 0 90px; }
+    .hero-copy { position: relative; z-index: 3; padding: 8px 0; }
+    .kicker { display: inline-flex; align-items: center; gap: 11px; color: var(--sea); font: 10px var(--mono); letter-spacing: .15em; text-transform: uppercase; }
+    .kicker::before { content: ""; display: block; width: 26px; height: 1px; background: var(--ember); }
+    h1 { margin: 24px 0 8px; font: clamp(64px, 9vw, 122px)/.78 var(--serif); font-weight: 400; letter-spacing: -.075em; }
+    h1 span { display: block; margin: 0 0 0 5px; color: var(--gold); font: italic clamp(19px, 2.6vw, 29px)/1.6 var(--serif); letter-spacing: .04em; }
+    .hero-quote { max-width: 440px; margin: 28px 0 0; padding-left: 18px; border-left: 1px solid var(--ember); font: clamp(17px, 2vw, 22px)/1.48 var(--serif); color: #d8d8cd; }
+    .hero-quote em { color: var(--gold); }
+    .hero-copy .summary { max-width: 410px; margin: 19px 0 0; color: var(--paper-dim); font-size: 14px; line-height: 1.8; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 29px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 11px; min-height: 48px; padding: 0 18px; cursor: pointer; text-transform: uppercase; font: 10px var(--mono); letter-spacing: .1em; border: 1px solid var(--gold); background: var(--gold); color: var(--ink); transition: transform .2s ease, background .2s ease, color .2s ease, border-color .2s ease; }
+    .btn:hover { transform: translateY(-2px); background: #e4d2a6; }
+    .btn.ghost { background: transparent; color: var(--paper); border-color: var(--line-bright); }
+    .btn.ghost:hover { border-color: var(--sea); color: var(--sea); background: rgba(138,185,176,.05); }
+    .btn .arrow { font-size: 16px; line-height: 1; }
+    .hero-stamp { display: flex; gap: 20px; margin-top: 42px; padding-top: 20px; border-top: 1px solid var(--line); max-width: 420px; }
+    .hero-stamp div { display: grid; gap: 3px; }
+    .hero-stamp strong { font: 12px var(--mono); color: var(--paper); font-weight: 400; }
+    .hero-stamp span { font: 9px var(--mono); text-transform: uppercase; letter-spacing: .1em; color: var(--paper-dim); }
+    .hero-art { position: relative; min-width: 0; margin-right: -4vw; transform: translateX(2%); }
+    .hero-art svg { display: block; width: 100%; overflow: visible; filter: drop-shadow(0 30px 50px rgba(0,0,0,.28)); }
+    .art-caption { position: absolute; right: 11%; bottom: 6%; font: 9px var(--mono); letter-spacing: .16em; color: rgba(230,226,211,.64); text-transform: uppercase; writing-mode: vertical-rl; }
+    .orbit { transform-origin: 53% 35%; animation: orbit 60s linear infinite; }
+    @keyframes orbit { to { transform: rotate(360deg); } }
+    .lava-glow { animation: lava 5s ease-in-out infinite alternate; }
+    @keyframes lava { to { opacity: .5; filter: blur(2px); } }
+    .embers { animation: drift 12s linear infinite; }
+    @keyframes drift { from { transform: translateY(12px); opacity: .1; } 50% { opacity: .7; } to { transform: translateY(-28px); opacity: .1; } }
+    .hero-bottomline { position: absolute; width: var(--page); bottom: 28px; left: 50%; transform: translateX(-50%); display: flex; justify-content: space-between; gap: 15px; color: rgba(216,220,208,.48); font: 9px var(--mono); letter-spacing: .13em; text-transform: uppercase; }
+    .hero-bottomline span:last-child { color: var(--ember); }
+    .signalbar { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: #0b1319; overflow: hidden; }
+    .signalbar-inner { width: var(--page); margin: auto; min-height: 48px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .signal-label { color: var(--ember); font: 9px var(--mono); letter-spacing: .12em; white-space: nowrap; }
+    .signal-track { flex: 1; height: 22px; display: flex; align-items: center; gap: 3px; opacity: .6; overflow: hidden; }
+    .signal-track i { display: block; flex: 0 0 2px; height: var(--h, 7px); background: var(--sea); opacity: var(--o, .7); }
+    .signal-tail { font: 9px var(--mono); color: var(--paper-dim); white-space: nowrap; }
+
+    .intro-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(32px, 8vw, 115px); align-items: start; }
+    .intro-aside { padding-top: 6px; }
+    .issue-number { font: clamp(54px, 8vw, 98px)/1 var(--serif); color: var(--gold); letter-spacing: -.07em; }
+    .issue-caption { margin-top: 12px; max-width: 180px; font: 10px/1.8 var(--mono); text-transform: uppercase; color: var(--paper-dim); letter-spacing: .12em; }
+    .intro-copy h2 { margin: 0; max-width: 680px; font: clamp(34px, 5.5vw, 67px)/1.02 var(--serif); font-weight: 400; letter-spacing: -.04em; }
+    .intro-copy h2 em { color: var(--sea); }
+    .intro-copy p { max-width: 640px; margin: 24px 0 0; color: #bdc2b8; font-size: 15px; line-height: 1.9; }
+    .margin-note { display: inline-block; max-width: 440px; margin-top: 25px; padding: 14px 17px; border-left: 2px solid var(--gold); background: rgba(211,187,128,.055); font: italic 14px/1.7 var(--serif); color: var(--gold); }
+
+    .thesis { padding: 0 0 108px; }
+    .thesis-panel { position: relative; overflow: hidden; display: grid; grid-template-columns: .92fr 1.08fr; border: 1px solid var(--line-bright); background: linear-gradient(125deg, rgba(25,45,50,.58), rgba(11,17,22,.4)); }
+    .thesis-visual { min-height: 340px; position: relative; overflow: hidden; display: grid; place-items: center; border-right: 1px solid var(--line); background: radial-gradient(ellipse at 50% 55%, rgba(72,134,130,.18), transparent 63%); }
+    .thesis-visual svg { width: min(78%, 360px); }
+    .thesis-visual .crosshair { position: absolute; inset: 17px; border: 1px solid rgba(138,185,176,.14); }
+    .thesis-visual .crosshair::before, .thesis-visual .crosshair::after { content: ""; position: absolute; background: rgba(138,185,176,.18); }
+    .thesis-visual .crosshair::before { width: 1px; height: 100%; left: 50%; top: 0; }
+    .thesis-visual .crosshair::after { height: 1px; width: 100%; top: 50%; left: 0; }
+    .thesis-copy { padding: clamp(28px, 5vw, 65px); align-self: center; }
+    .thesis-copy h3 { margin: 10px 0 18px; font: clamp(30px, 4vw, 49px)/1.03 var(--serif); font-weight: 400; letter-spacing: -.035em; }
+    .thesis-copy p { color: #bbc2b8; font-size: 14px; line-height: 1.9; }
+    .fact-list { margin-top: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .fact { border-top: 1px solid var(--line-bright); padding-top: 11px; }
+    .fact strong { display: block; margin-bottom: 4px; color: var(--gold); font: 11px var(--mono); letter-spacing: .08em; }
+    .fact span { font-size: 12px; color: var(--paper-dim); }
+
+    .evidence-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .evidence { min-height: 300px; display: flex; flex-direction: column; border: 1px solid var(--line); background: rgba(15,24,30,.72); transition: border-color .2s ease, transform .2s ease, background .2s ease; }
+    .evidence:hover { border-color: rgba(138,185,176,.5); transform: translateY(-4px); background: #101d23; }
+    .evidence-top { display: flex; align-items: center; justify-content: space-between; padding: 17px 18px; border-bottom: 1px solid var(--line); }
+    .evidence-code { color: var(--sea); font: 10px var(--mono); letter-spacing: .12em; }
+    .evidence-flag { color: var(--ember); font: 9px var(--mono); letter-spacing: .1em; }
+    .evidence-body { flex: 1; padding: 24px 20px 17px; }
+    .evidence-icon { width: 42px; height: 42px; display: grid; place-items: center; margin-bottom: 20px; border: 1px solid var(--line-bright); border-radius: 50%; color: var(--gold); font: 19px var(--serif); }
+    .evidence h3 { margin: 0 0 11px; font: 24px/1.05 var(--serif); font-weight: 400; }
+    .evidence p { margin: 0; color: var(--paper-dim); font-size: 13px; line-height: 1.8; }
+    .evidence details { margin-top: auto; border-top: 1px solid var(--line); }
+    .evidence summary { min-height: 49px; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; cursor: pointer; color: var(--sea); font: 10px var(--mono); letter-spacing: .09em; text-transform: uppercase; list-style: none; }
+    .evidence summary::-webkit-details-marker { display: none; }
+    .evidence summary::after { content: "+"; color: var(--gold); font: 18px var(--serif); }
+    .evidence details[open] summary::after { content: "−"; }
+    .evidence .transcript { padding: 2px 20px 20px; color: #d4d3c5; font: italic 14px/1.8 var(--serif); }
+
+    .ledger { background: linear-gradient(180deg, rgba(13,21,27,.6), rgba(8,13,18,0)); }
+    .ledger-intro { display: grid; grid-template-columns: 1fr .65fr; gap: 30px; align-items: end; margin-bottom: 35px; }
+    .ledger-intro h2 { margin: 8px 0 0; font: clamp(36px, 5vw, 61px)/.98 var(--serif); font-weight: 400; letter-spacing: -.04em; }
+    .ledger-intro p { margin: 0; color: var(--paper-dim); font-size: 13px; line-height: 1.9; }
+    .ledger-hint { margin: 0 0 22px; padding: 12px 16px; display: flex; align-items: center; gap: 14px; border: 1px dashed rgba(211,187,128,.35); color: #bdb8a4; font: 11px/1.7 var(--mono); letter-spacing: .035em; }
+    .ledger-hint strong { color: var(--gold); font-weight: 400; }
+    .record-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line-bright); border-left: 1px solid var(--line-bright); }
+    .record { min-height: 184px; position: relative; display: flex; flex-direction: column; align-items: flex-start; text-align: left; padding: 20px 20px 17px; border: 0; border-right: 1px solid var(--line-bright); border-bottom: 1px solid var(--line-bright); cursor: pointer; color: var(--paper); background: rgba(13,21,27,.45); transition: background .2s ease, box-shadow .2s ease; }
+    .record:hover, .record[aria-pressed="true"] { background: rgba(44,75,75,.22); box-shadow: inset 0 0 0 1px rgba(138,185,176,.14); }
+    .record-number { align-self: stretch; display: flex; align-items: center; justify-content: space-between; color: var(--paper-dim); font: 9px var(--mono); letter-spacing: .1em; }
+    .record-number .seal { font: 16px var(--serif); color: var(--sea); }
+    .record-initial { display: block; margin: 16px 0 7px; font: 39px/.9 var(--serif); color: var(--gold); letter-spacing: -.07em; }
+    .record h3 { margin: 0; font: 17px/1.25 var(--serif); font-weight: 400; }
+    .record small { margin-top: auto; padding-top: 13px; color: var(--paper-dim); font: 9px var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+    .ledger-output { display: grid; grid-template-columns: 1fr minmax(260px,.8fr); gap: 25px; margin-top: 25px; }
+    .record-note { min-height: 118px; border-left: 1px solid var(--sea-dim); padding: 10px 0 10px 20px; }
+    .record-note .note-label { display: block; color: var(--sea); font: 9px var(--mono); letter-spacing: .14em; text-transform: uppercase; }
+    .record-note p { margin: 11px 0 0; color: #c5c8be; font: 15px/1.8 var(--serif); }
+    .record-note .note-lock { color: var(--paper-dim); font-style: italic; }
+    .terminal { border: 1px solid var(--line-bright); background: #05090d; box-shadow: 0 20px 55px rgba(0,0,0,.16); }
+    .terminal-head { display: flex; justify-content: space-between; gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--line); color: var(--sea); font: 9px var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+    .terminal-body { padding: 19px 18px 18px; }
+    .terminal-prompt { color: #c3c5b5; font: 11px/1.8 var(--mono); }
+    .terminal-prompt span { color: var(--ember); }
+    .terminal-form { display: flex; gap: 8px; margin-top: 15px; }
+    .terminal-form input { flex: 1; width: 0; min-width: 0; background: #0b1216; border: 1px solid var(--line-bright); border-radius: 0; padding: 11px 12px; min-height: 46px; color: var(--gold); text-transform: uppercase; font: 12px var(--mono); letter-spacing: .1em; }
+    .terminal-form input::placeholder { color: #6e7978; }
+    .terminal-form .btn { min-height: 46px; padding-inline: 14px; font-size: 9px; }
+    .terminal-response { display: none; margin-top: 16px; padding: 15px; border-left: 2px solid var(--sea); background: rgba(138,185,176,.06); }
+    .terminal-response.show { display: block; animation: reveal .4s ease both; }
+    .terminal-response.error { border-color: var(--ember); background: rgba(214,101,76,.06); }
+    .terminal-response .response-kicker { font: 9px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--sea); }
+    .terminal-response.error .response-kicker { color: var(--ember); }
+    .terminal-response h3 { margin: 8px 0; font: 26px/1.1 var(--serif); font-weight: 400; color: var(--gold); }
+    .terminal-response p { margin: 0; font-size: 12px; line-height: 1.8; color: #bdc4b9; }
+    @keyframes reveal { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+    .transmission { padding: 90px 0; background: #d9d4c4; color: #171d1c; position: relative; overflow: hidden; }
+    .transmission::before { content: ""; position: absolute; inset: 0; opacity: .11; pointer-events: none; background: repeating-linear-gradient(90deg, transparent 0 52px, #3e5c59 53px, transparent 54px), repeating-linear-gradient(0deg, transparent 0 52px, #3e5c59 53px, transparent 54px); }
+    .transmission-inner { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .transmission .eyebrow { color: #3d6965; }
+    .transmission h2 { margin: 12px 0 20px; font: clamp(34px, 5.3vw, 64px)/.98 var(--serif); letter-spacing: -.04em; font-weight: 400; }
+    .transmission p { max-width: 520px; margin: 0; color: #44504c; font-size: 14px; line-height: 1.9; }
+    .transmission blockquote { margin: 0; padding: 4px 0 4px 25px; border-left: 2px solid #b65b45; font: italic clamp(21px, 3vw, 30px)/1.5 var(--serif); }
+    .transmission blockquote cite { display: block; margin-top: 18px; color: #536762; font: 9px var(--mono); letter-spacing: .13em; text-transform: uppercase; font-style: normal; }
+    .redacted { background: #202c2b; color: transparent; border-radius: 1px; user-select: none; }
+
+    footer { padding: 38px 0 28px; }
+    .footer-top { display: flex; justify-content: space-between; align-items: start; gap: 30px; padding-bottom: 29px; border-bottom: 1px solid var(--line); }
+    .footer-title { font: 22px var(--serif); color: var(--gold); }
+    .footer-note { max-width: 440px; color: var(--paper-dim); font-size: 11px; line-height: 1.8; }
+    .footer-bottom { display: flex; justify-content: space-between; gap: 18px; padding-top: 18px; color: #707e7b; font: 9px var(--mono); text-transform: uppercase; letter-spacing: .1em; }
+    .backtop { color: var(--sea); }
+    .modal-backdrop { display: none; position: fixed; inset: 0; z-index: 100; padding: 24px; align-items: center; justify-content: center; background: rgba(0,0,0,.78); backdrop-filter: blur(12px); }
+    .modal-backdrop.open { display: flex; }
+    .modal { position: relative; width: min(620px, 100%); padding: clamp(25px, 5vw, 48px); border: 1px solid var(--line-bright); background: linear-gradient(145deg, #121f25, #080d12 75%); box-shadow: 0 30px 100px rgba(0,0,0,.6); }
+    .modal-close { position: absolute; right: 15px; top: 15px; display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid var(--line-bright); background: transparent; color: var(--paper); cursor: pointer; font-size: 22px; }
+    .modal h2 { margin: 13px 0; padding-right: 25px; font: clamp(28px, 5vw, 44px)/1.05 var(--serif); font-weight: 400; }
+    .modal p { color: #c1c7bc; font-size: 14px; line-height: 1.9; }
+    .modal .quote-box { padding: 18px; border-left: 2px solid var(--ember); background: rgba(214,101,76,.05); color: var(--paper); font: italic 18px/1.65 var(--serif); }
+    .toast { position: fixed; bottom: 20px; left: 50%; z-index: 70; transform: translate(-50%, 12px); opacity: 0; pointer-events: none; border: 1px solid var(--line-bright); background: #101a20; padding: 10px 15px; font: 10px var(--mono); color: var(--gold); transition: opacity .2s, transform .2s; }
+    .toast.visible { opacity: 1; transform: translate(-50%, 0); }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+    @media (max-width: 920px) {
+      :root { --page: min(100% - 36px, 760px); }
+      .nav-state { display: none; }
+      .hero { min-height: 0; }
+      .hero-inner { grid-template-columns: 1fr; padding: 55px 0 70px; gap: 0; }
+      .hero-copy { max-width: 600px; }
+      .hero-art { width: min(100%, 680px); margin: -15px auto -10px; transform: none; }
+      .hero-art svg { max-height: 520px; }
+      .hero-bottomline { bottom: 17px; }
+      .intro-grid { gap: 40px; grid-template-columns: .6fr 1.4fr; }
+      .thesis-panel { grid-template-columns: .8fr 1.2fr; }
+      .evidence-grid { grid-template-columns: 1fr 1fr; }
+      .evidence:last-child { grid-column: 1 / -1; min-height: 240px; }
+      .record-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    @media (max-width: 640px) {
+      :root { --page: calc(100% - 32px); }
+      .nav { min-height: 64px; gap: 10px; }
+      .brand-copy strong { font-size: 10px; }
+      .brand-copy span { font-size: 8px; }
+      .menu-toggle { display: inline-flex; align-items: center; justify-content: center; }
+      .nav-links { display: none; position: absolute; top: 63px; right: 0; left: 0; padding: 13px 16px 18px; background: rgba(8,13,18,.98); border-bottom: 1px solid var(--line-bright); flex-direction: column; align-items: stretch; gap: 0; }
+      .nav-links.open { display: flex; }
+      .nav-links a { min-height: 44px; display: flex; align-items: center; border-bottom: 1px solid var(--line); }
+      .nav-links a:last-child { border-bottom: 0; }
+      .hero-inner { padding-top: 50px; padding-bottom: 56px; }
+      h1 { font-size: clamp(59px, 17vw, 86px); }
+      h1 span { font-size: 20px; }
+      .hero-quote { font-size: 18px; }
+      .hero-art { margin: -1px auto 4px; width: calc(100% + 24px); transform: translateX(-12px); }
+      .art-caption { right: 4%; bottom: 4%; font-size: 8px; }
+      .hero-stamp { gap: 12px; margin-top: 32px; }
+      .hero-stamp strong { font-size: 10px; }
+      .hero-stamp span { font-size: 8px; }
+      .hero-bottomline { font-size: 7px; }
+      .hero-bottomline span:nth-child(2) { display: none; }
+      .signalbar-inner { min-height: 42px; gap: 12px; }
+      .signal-label { font-size: 8px; }
+      .signal-tail { font-size: 8px; }
+      .section { padding: 72px 0; }
+      .section-head { align-items: start; flex-direction: column; gap: 14px; margin-bottom: 30px; }
+      .section-head p { max-width: 450px; }
+      .intro-grid { grid-template-columns: 1fr; gap: 30px; }
+      .intro-aside { display: flex; gap: 18px; align-items: center; }
+      .issue-number { font-size: 59px; }
+      .issue-caption { margin: 0; }
+      .intro-copy h2 { font-size: 42px; }
+      .intro-copy p { font-size: 14px; }
+      .thesis { padding-bottom: 72px; }
+      .thesis-panel { grid-template-columns: 1fr; }
+      .thesis-visual { min-height: 245px; border-right: 0; border-bottom: 1px solid var(--line); }
+      .thesis-visual svg { width: 235px; }
+      .thesis-copy { padding: 27px 22px; }
+      .thesis-copy h3 { font-size: 34px; }
+      .fact-list { gap: 13px; }
+      .evidence-grid { grid-template-columns: 1fr; gap: 12px; }
+      .evidence, .evidence:last-child { grid-column: auto; min-height: 270px; }
+      .ledger-intro { grid-template-columns: 1fr; gap: 16px; }
+      .ledger-intro h2 { font-size: 43px; }
+      .record-grid { grid-template-columns: repeat(2, 1fr); }
+      .record { min-height: 173px; padding: 16px 15px 14px; }
+      .record-initial { font-size: 35px; }
+      .record h3 { font-size: 16px; }
+      .ledger-output { grid-template-columns: 1fr; gap: 20px; }
+      .record-note { min-height: auto; }
+      .terminal-form { flex-direction: column; }
+      .terminal-form input { width: 100%; }
+      .terminal-form .btn { width: 100%; }
+      .transmission { padding: 66px 0; }
+      .transmission-inner { grid-template-columns: 1fr; gap: 32px; }
+      .transmission h2 { font-size: 43px; }
+      .transmission blockquote { font-size: 23px; }
+      .footer-top, .footer-bottom { flex-direction: column; gap: 17px; }
+      .footer-bottom { align-items: start; }
+      .modal-backdrop { padding: 14px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav" aria-label="Main navigation">
+      <a class="brand" href="#top" aria-label="Bakunawa archive home">
+        <span class="brand-mark" aria-hidden="true">◔</span>
+        <span class="brand-copy"><strong>S.P.D. / ARCHIVE</strong><span>SANGAY NG PAG-AARAL SA DILIM</span></span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navLinks">MENU +</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#record">The Record</a>
+        <a href="#evidence">Evidence</a>
+        <a href="#ledger">Seven Testimonies</a>
+        <a href="#signal">Signal Terminal</a>
+      </div>
+      <div class="nav-state"><span class="pulse"></span> LUNAR BODY: NOT FOUND</div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <div class="kicker">Recovered transmission / 001</div>
+          <h1 id="hero-title">BAKUNAWA<span>THE EIGHTH TIDE</span></h1>
+          <blockquote class="hero-quote">“The moon has vanished once before.<br><em>Now it will never return.</em>”</blockquote>
+          <p class="summary">The Morse signal led here. The record says an island rose from the ocean, a man stepped out of its burning heart, and every instrument pointed at an empty sky.</p>
+          <div class="hero-actions">
+            <a class="btn" href="#record">Open the archive <span class="arrow" aria-hidden="true">↘</span></a>
+            <button class="btn ghost" id="openTransmission">Read the last transmission <span class="arrow" aria-hidden="true">↗</span></button>
+          </div>
+          <div class="hero-stamp" aria-label="Archive details">
+            <div><strong>FILE 07—Ø</strong><span>Classification / Unresolved</span></div>
+            <div><strong>00:08:08</strong><span>Signal length / disputed</span></div>
+            <div><strong>NO REFLECTION</strong><span>Last observation</span></div>
+          </div>
+        </div>
+
+        <div class="hero-art" aria-label="Illustration of an eclipsed moon above a volcanic island and a figure rising from the sea" role="img">
+          <svg viewBox="0 0 760 680" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <radialGradient id="skyGlow"><stop offset="0" stop-color="#31565b" stop-opacity=".56"/><stop offset=".55" stop-color="#17303a" stop-opacity=".22"/><stop offset="1" stop-color="#0a1118" stop-opacity="0"/></radialGradient>
+              <radialGradient id="moonGrad"><stop offset="0" stop-color="#e6dec4"/><stop offset=".8" stop-color="#c9c6b1"/><stop offset="1" stop-color="#827f76"/></radialGradient>
+              <linearGradient id="seaGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#244b50"/><stop offset=".3" stop-color="#102b34"/><stop offset="1" stop-color="#080d12"/></linearGradient>
+              <linearGradient id="mountainGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#34464a"/><stop offset=".48" stop-color="#17282e"/><stop offset="1" stop-color="#080d12"/></linearGradient>
+              <linearGradient id="lavaGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1bb79"/><stop offset=".4" stop-color="#d6654c"/><stop offset="1" stop-color="#7b2c2a" stop-opacity="0"/></linearGradient>
+              <linearGradient id="figureGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#788d83"/><stop offset=".45" stop-color="#293d40"/><stop offset="1" stop-color="#0b161d"/></linearGradient>
+              <filter id="blurGlow"><feGaussianBlur stdDeviation="16"/></filter>
+              <clipPath id="seaClip"><path d="M0 386 C100 369 168 395 262 384 S435 383 520 390 S666 372 760 389 L760 680 L0 680Z"/></clipPath>
+            </defs>
+            <ellipse cx="410" cy="270" rx="345" ry="300" fill="url(#skyGlow)"/>
+            <g fill="#c7c8b8" opacity=".65">
+              <circle cx="144" cy="128" r="1.7"/><circle cx="198" cy="74" r="1"/><circle cx="287" cy="146" r="1.2"/><circle cx="521" cy="65" r="1.7"/><circle cx="603" cy="148" r="1"/><circle cx="674" cy="104" r="1.3"/><circle cx="120" cy="241" r="1"/><circle cx="265" cy="224" r="1.4"/><circle cx="613" cy="260" r="1.2"/><circle cx="714" cy="202" r="1"/><circle cx="397" cy="70" r="1"/><circle cx="474" cy="124" r=".9"/><circle cx="87" cy="174" r="1.2"/>
+            </g>
+            <g class="orbit" fill="none" stroke="#8ab9b0" stroke-opacity=".28">
+              <ellipse cx="407" cy="244" rx="245" ry="192" transform="rotate(-23 407 244)" stroke-dasharray="2 8"/>
+              <ellipse cx="407" cy="244" rx="285" ry="218" transform="rotate(48 407 244)" stroke-opacity=".13"/>
+              <path d="M124 248 A283 224 0 0 1 690 248" stroke-opacity=".18"/>
+            </g>
+            <circle cx="470" cy="180" r="102" fill="#9bc2b5" opacity=".1" filter="url(#blurGlow)"/>
+            <circle cx="470" cy="180" r="82" fill="url(#moonGrad)"/>
+            <circle cx="442" cy="162" r="13" fill="#888e84" opacity=".21"/><circle cx="495" cy="206" r="19" fill="#747c75" opacity=".18"/><circle cx="489" cy="142" r="8" fill="#717c74" opacity=".2"/><circle cx="438" cy="211" r="6" fill="#727e78" opacity=".18"/>
+            <circle cx="505" cy="164" r="83" fill="#0a141b"/>
+            <path d="M420 103 A82 82 0 0 0 426 255" stroke="#d3bb80" stroke-opacity=".65" stroke-width="1.4" fill="none"/>
+            <circle cx="470" cy="180" r="100" stroke="#d3bb80" stroke-opacity=".19" fill="none"/>
+            <path d="M470 66 V46 M470 294 V313 M356 180 H337 M584 180 H604" stroke="#d3bb80" stroke-opacity=".5"/>
+            <text x="470" y="32" font-family="monospace" font-size="9" text-anchor="middle" fill="#d3bb80" letter-spacing="2">LUNAR BODY / 00.00</text>
+            <path d="M0 377 C94 362 151 386 247 376 C330 366 365 385 433 376 C532 364 635 387 760 371 L760 680 L0 680Z" fill="url(#seaGrad)"/>
+            <path d="M0 384 C94 369 151 393 247 383 C330 373 365 392 433 383 C532 371 635 394 760 378" stroke="#78aaa3" stroke-opacity=".55" fill="none"/>
+            <g opacity=".32" stroke="#64958f" fill="none">
+              <path d="M11 420 Q84 409 142 422 T273 420 T398 422 T523 419 T752 422"/>
+              <path d="M54 454 Q99 444 164 455 T282 453 T417 455 T561 451 T731 456"/>
+              <path d="M-2 500 Q64 487 130 499 T270 499 T401 501 T546 497 T767 501"/>
+              <path d="M45 550 Q100 538 163 550 T288 548 T424 550 T566 547 T752 551"/>
+              <path d="M-7 610 Q68 597 146 610 T290 607 T438 611 T582 607 T763 610"/>
+            </g>
+            <g clip-path="url(#seaClip)" opacity=".17" stroke="#d3bb80" fill="none">
+              <path d="M435 390 Q404 452 460 480 T425 566 T445 685" stroke-width="2"/>
+              <path d="M453 388 Q430 445 483 480 T458 574 T469 682"/>
+              <path d="M472 390 Q458 448 503 485 T487 574 T495 683"/>
+            </g>
+            <path d="M80 391 L134 363 L169 374 L212 321 L249 338 L294 268 L327 291 L361 248 L395 295 L424 323 L454 342 L497 324 L541 354 L586 348 L628 379 L699 367 L725 386Z" fill="url(#mountainGrad)"/>
+            <path d="M267 305 L294 268 L327 291 L361 248 L395 295 L378 289 L361 263 L347 299 L324 307 L309 289 L295 282 L283 309Z" fill="#6b6253" opacity=".72"/>
+            <path d="M349 266 L359 251 L369 269 L362 280 L356 274Z" fill="#edb16e"/>
+            <path class="lava-glow" d="M359 266 Q366 302 351 321 T355 356 L373 369 L379 337 Q367 319 378 294Z" fill="url(#lavaGrad)" opacity=".8"/>
+            <path d="M345 277 Q326 290 319 313 M372 274 Q392 294 401 308 M339 285 L311 300 M380 286 L404 293" stroke="#d6654c" stroke-opacity=".7" stroke-width="2" fill="none"/>
+            <ellipse cx="367" cy="375" rx="135" ry="20" fill="#d6654c" opacity=".12" filter="url(#blurGlow)"/>
+            <!-- The shore-born figure: intentionally mythic, not a realistic human portrait. -->
+            <g transform="translate(376 310)">
+              <ellipse cx="0" cy="32" rx="45" ry="75" fill="#8ab9b0" opacity=".12" filter="url(#blurGlow)"/>
+              <path d="M-17 19 Q-40 45 -56 84 L-92 137 Q-47 127 -12 103 L0 80 L18 112 Q47 130 91 134 L57 78 Q44 49 17 19Z" fill="url(#figureGrad)" stroke="#607c78" stroke-opacity=".56"/>
+              <path d="M-16 18 L-26 53 L-11 91 L0 76 L10 92 L26 52 L16 18Z" fill="#182a31"/>
+              <path d="M-13 -6 Q-10 -29 5 -30 Q20 -27 20 -5 L14 16 L-4 20 L-15 8Z" fill="#354a49" stroke="#83988a" stroke-opacity=".65"/>
+              <path d="M-13 -9 Q-5 -19 8 -13 L18 -6 L12 2 L-5 -1Z" fill="#d3bb80" opacity=".88"/>
+              <path d="M-9 -16 Q-16 -3 -10 11 M13 -12 Q22 -4 15 9" stroke="#b4b7a3" stroke-width="1" opacity=".6" fill="none"/>
+              <path d="M-17 22 L-36 65 L-20 76 L0 40 L18 76 L39 63 L17 22" fill="#24383d"/>
+              <path d="M-48 93 L-80 132 L-45 123 L-20 101 M42 92 L79 130 L46 123 L20 101" fill="none" stroke="#8ab9b0" stroke-opacity=".44" stroke-width="1.2"/>
+              <path d="M-5 29 L-1 60 L4 34" stroke="#d6654c" stroke-width="2" opacity=".8" fill="none"/>
+            </g>
+            <g class="embers" fill="#d6654c">
+              <circle cx="317" cy="345" r="2"/><circle cx="411" cy="326" r="1.5"/><circle cx="335" cy="296" r="1.4"/><circle cx="420" cy="355" r="1.7"/><circle cx="300" cy="376" r="1.3"/><circle cx="392" cy="281" r="1"/><circle cx="447" cy="322" r="1.2"/><circle cx="329" cy="331" r="1.1"/>
+            </g>
+            <g font-family="monospace" font-size="9" letter-spacing="1.5" fill="#8ab9b0" opacity=".65">
+              <text x="30" y="324">SITE UNKNOWN</text><path d="M30 333 H108 L145 366" stroke="#8ab9b0" stroke-opacity=".45" fill="none"/>
+              <text x="532" y="330">THERMAL ANOMALY</text><path d="M532 339 H498 L419 359" stroke="#8ab9b0" stroke-opacity=".45" fill="none"/>
+              <text x="545" y="418">NO TIDAL REFLECTION</text><path d="M545 426 H517 L464 447" stroke="#8ab9b0" stroke-opacity=".45" fill="none"/>
+            </g>
+            <path d="M20 18 H50 M20 18 V48 M740 18 H710 M740 18 V48 M20 660 H50 M20 660 V630 M740 660 H710 M740 660 V630" stroke="#8ab9b0" stroke-opacity=".4" fill="none"/>
+          </svg>
+          <div class="art-caption">Plate 07 / the shore-born witness / reconstruction uncertain</div>
+        </div>
+      </div>
+      <div class="hero-bottomline"><span>Fig. 07 — The island that was not on any chart</span><span>Philippine Sea / coordinates removed</span><span>Do not trust the reflection</span></div>
+    </section>
+
+    <div class="signalbar" aria-label="Recovered signal readout">
+      <div class="signalbar-inner"><span class="signal-label"><span class="pulse" style="display:inline-block;vertical-align:middle;margin-right:7px"></span> SIGNAL FOUND</span>
+        <div class="signal-track" aria-hidden="true">
+          <i style="--h:4px"></i><i style="--h:13px"></i><i style="--h:7px"></i><i style="--h:19px"></i><i style="--h:5px"></i><i style="--h:9px"></i><i style="--h:17px"></i><i style="--h:6px"></i><i style="--h:11px"></i><i style="--h:4px"></i><i style="--h:19px"></i><i style="--h:9px"></i><i style="--h:15px"></i><i style="--h:5px"></i><i style="--h:10px"></i><i style="--h:18px"></i><i style="--h:5px"></i><i style="--h:8px"></i><i style="--h:15px"></i><i style="--h:4px"></i><i style="--h:18px"></i><i style="--h:9px"></i><i style="--h:5px"></i><i style="--h:14px"></i><i style="--h:8px"></i><i style="--h:19px"></i><i style="--h:4px"></i><i style="--h:11px"></i><i style="--h:15px"></i><i style="--h:7px"></i><i style="--h:18px"></i><i style="--h:5px"></i><i style="--h:13px"></i><i style="--h:4px"></i><i style="--h:10px"></i><i style="--h:18px"></i><i style="--h:7px"></i><i style="--h:14px"></i><i style="--h:5px"></i><i style="--h:19px"></i><i style="--h:9px"></i><i style="--h:4px"></i><i style="--h:16px"></i><i style="--h:8px"></i><i style="--h:13px"></i><i style="--h:5px"></i><i style="--h:18px"></i><i style="--h:10px"></i><i style="--h:6px"></i><i style="--h:17px"></i><i style="--h:8px"></i><i style="--h:12px"></i><i style="--h:4px"></i><i style="--h:19px"></i><i style="--h:7px"></i><i style="--h:14px"></i><i style="--h:5px"></i><i style="--h:10px"></i><i style="--h:18px"></i><i style="--h:6px"></i></div>
+        <span class="signal-tail">CARRIER: SALT / NO VOICEPRINT</span>
+      </div>
+    </div>
+
+    <section class="section" id="record">
+      <div class="wrap intro-grid">
+        <aside class="intro-aside"><div class="issue-number">07<span class="accent">/Ø</span></div><div class="issue-caption">The seventh surviving record. The eighth has been removed from the index.</div></aside>
+        <div class="intro-copy">
+          <div class="eyebrow">Record begins / translated from a damaged field journal</div>
+          <h2>The first account is <em>wrong.</em></h2>
+          <p>Every child is told the same story: Bakunawa rises from the deep and swallows the moon. The people make a terrible noise, the serpent retreats, and the moon returns to its place in the sky.</p>
+          <p>But on the night documented here, no one heard a roar. No one saw a serpent. A mountain came up through the sea where no mountain had been. Its crown burned without smoke. At its shore stood a man whose shadow fell toward the moon—although the moon was gone.</p>
+          <div class="margin-note">“The old story describes what people could bear to remember. It does not describe what actually happened.” <span class="micro">— Field note, author removed</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="thesis wrap" aria-labelledby="thesis-title">
+      <div class="thesis-panel">
+        <div class="thesis-visual">
+          <div class="crosshair" aria-hidden="true"></div>
+          <svg viewBox="0 0 330 310" role="img" aria-label="A moon reflected in water, with the reflection broken">
+            <defs><linearGradient id="mirrorWater" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4b8882" stop-opacity=".7"/><stop offset="1" stop-color="#0d171e" stop-opacity="0"/></linearGradient><radialGradient id="mirrorMoon"><stop offset="0" stop-color="#dfd5b9"/><stop offset="1" stop-color="#8d978c"/></radialGradient></defs>
+            <circle cx="166" cy="100" r="62" fill="#8ab9b0" opacity=".08"/><circle cx="166" cy="100" r="47" fill="url(#mirrorMoon)"/><path d="M177 56 A47 47 0 0 1 177 144 A40 40 0 0 0 177 56Z" fill="#0d171e"/>
+            <circle cx="148" cy="88" r="7" fill="#6d8178" opacity=".2"/><circle cx="184" cy="115" r="11" fill="#6d8178" opacity=".2"/>
+            <path d="M18 166 Q52 157 83 166 T149 166 T215 166 T282 166 T330 166 L330 280 L0 280Z" fill="url(#mirrorWater)"/>
+            <g stroke="#8ab9b0" stroke-opacity=".7" fill="none"><path d="M92 174 H240"/><path d="M115 185 H215"/><path d="M128 196 H202"/><path d="M140 208 H190"/><path d="M149 221 H181"/></g>
+            <path d="M166 155 L157 178 L174 190 L158 202 L174 218 L160 236 L169 256" fill="none" stroke="#d6654c" stroke-width="2"/>
+            <path d="M68 271 H258" stroke="#d3bb80" stroke-opacity=".5" stroke-dasharray="2 6"/>
+            <text x="166" y="296" font-family="monospace" font-size="9" letter-spacing="2" text-anchor="middle" fill="#8ab9b0">REFLECTION / ERROR 08</text>
+          </svg>
+        </div>
+        <div class="thesis-copy">
+          <div class="eyebrow">Primary contradiction / do not circulate</div>
+          <h3 id="thesis-title">It was not the moon.<br><span class="accent">It was the mirror.</span></h3>
+          <p>The damaged notes suggest that Bakunawa did not consume a celestial body. He swallowed the thing that made the body visible to us. The moon we remember may be a reflection held in place by seven tides—and something underneath the ocean has learned to imitate it.</p>
+          <div class="fact-list">
+            <div class="fact"><strong>OBSERVATION 01</strong><span>Moonlight without a source</span></div>
+            <div class="fact"><strong>OBSERVATION 02</strong><span>Eight tides; seven recorded</span></div>
+            <div class="fact"><strong>OBSERVATION 03</strong><span>A voice beneath the signal</span></div>
+            <div class="fact"><strong>OBSERVATION 04</strong><span>One witness who never blinks</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="evidence">
+      <div class="wrap">
+        <div class="section-head"><div><div class="eyebrow">Collected objects / chain of custody uncertain</div><h2>Evidence from the<br>wrong side of the water.</h2></div><p>Three fragments survived the archive failure. Open each record. The missing sentences are not identical between copies.</p></div>
+        <div class="evidence-grid">
+          <article class="evidence">
+            <div class="evidence-top"><span class="evidence-code">OBJECT 01 / GLASS</span><span class="evidence-flag">CORRUPTED</span></div>
+            <div class="evidence-body"><div class="evidence-icon" aria-hidden="true">◉</div><h3>Black volcanic glass</h3><p>Recovered from a shoreline that appears on no navigational chart. Its surface reflects a sky with one extra star.</p></div>
+            <details><summary>Read examiner's note</summary><div class="transcript">“The reflection lagged behind the movement of the lamp by approximately one breath. When I covered the glass, the extra star remained visible in the room.”</div></details>
+          </article>
+          <article class="evidence">
+            <div class="evidence-top"><span class="evidence-code">OBJECT 02 / AUDIO</span><span class="evidence-flag">NO SPEAKER</span></div>
+            <div class="evidence-body"><div class="evidence-icon" aria-hidden="true">⌁</div><h3>The dry signal</h3><p>A marine radio captured eight seconds of a tide moving backward. Beneath the static: a voice, recorded before the microphone was built.</p></div>
+            <details><summary>Read transcription</summary><div class="transcript">“Do not count the waves that arrive. Count the one that never reaches shore. That is where the name was left.”</div></details>
+          </article>
+          <article class="evidence">
+            <div class="evidence-top"><span class="evidence-code">OBJECT 03 / TESTIMONY</span><span class="evidence-flag">UNSIGNED</span></div>
+            <div class="evidence-body"><div class="evidence-icon" aria-hidden="true">⌖</div><h3>The shore-born man</h3><p>A witness described a human silhouette forming inside the volcano's ash plume. He gave no name. He spoke as if continuing a conversation.</p></div>
+            <details><summary>Read witness fragment</summary><div class="transcript">“He looked at the empty sky, not at us. His first words were not a threat. They sounded like an apology he had practised for centuries.”</div></details>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section ledger" id="ledger">
+      <div class="wrap">
+        <div class="ledger-intro"><div><div class="eyebrow">Index of surviving testimonies / 7 of 8</div><h2>The drowned<br>ledger.</h2></div><p>These records were recovered in the order the current delivered them. Select a testimony to inspect its surviving fragment. One letter from each title was not damaged by the flood.</p></div>
+        <div class="ledger-hint"><span class="accent" aria-hidden="true">✳</span><span><strong>Archivist's marginalia:</strong> “When the sentences drown, the first mark survives. Read the records in the order they arrived.”</span></div>
+        <div class="record-grid" id="recordGrid" aria-label="Seven recovered testimonies">
+          <button class="record" type="button" data-record="0" aria-pressed="false"><span class="record-number"><span>TESTIMONY / 01</span><span class="seal">◌</span></span><span class="record-initial">S</span><h3>Sa ilalim ng alon</h3><small>Recovered / coast</small></button>
+          <button class="record" type="button" data-record="1" aria-pressed="false"><span class="record-number"><span>TESTIMONY / 02</span><span class="seal">⌁</span></span><span class="record-initial">A</span><h3>Ang abo ay hindi natutulog</h3><small>Recovered / ash</small></button>
+          <button class="record" type="button" data-record="2" aria-pressed="false"><span class="record-number"><span>TESTIMONY / 03</span><span class="seal">⌖</span></span><span class="record-initial">L</span><h3>Liham na hindi dumating</h3><small>Recovered / post</small></button>
+          <button class="record" type="button" data-record="3" aria-pressed="false"><span class="record-number"><span>TESTIMONY / 04</span><span class="seal">◒</span></span><span class="record-initial">A</span><h3>Awit ng walang tinig</h3><small>Recovered / audio</small></button>
+          <button class="record" type="button" data-record="4" aria-pressed="false"><span class="record-number"><span>TESTIMONY / 05</span><span class="seal">◉</span></span><span class="record-initial">M</span><h3>Mga mata sa kailaliman</h3><small>Recovered / deep</small></button>
+          <button class="record" type="button" data-record="5" aria-pressed="false"><span class="record-number"><span>TESTIMONY / 06</span><span class="seal">☽</span></span><span class="record-initial">I</span><h3>Isang buwan, dalawang anino</h3><small>Recovered / sky</small></button>
+          <button class="record" type="button" data-record="6" aria-pressed="false"><span class="record-number"><span>TESTIMONY / 07</span><span class="seal">✳</span></span><span class="record-initial">N</span><h3>Nawalang pangalan</h3><small>Recovered / identity</small></button>
+          <button class="record" type="button" data-record="7" aria-pressed="false" aria-label="Unlisted testimony, sealed"><span class="record-number"><span>TESTIMONY / 08</span><span class="seal red">×</span></span><span class="record-initial red">Ø</span><h3>Record removed</h3><small>Not in the index</small></button>
+        </div>
+        <div class="ledger-output">
+          <div class="record-note" aria-live="polite" aria-atomic="true"><span class="note-label" id="noteLabel">Awaiting selection / testimony 00</span><p id="noteText" class="note-lock">The sea returned seven records. The eighth is not blank. It has been deliberately removed.</p></div>
+          <div class="terminal" id="signal">
+            <div class="terminal-head"><span>Signal terminal / 07-A</span><span>INPUT REQUIRED</span></div>
+            <div class="terminal-body">
+              <div class="terminal-prompt"><span>›</span> Seven titles survived. Their first marks are intact.<br><span>›</span> What word do they form?</div>
+              <form class="terminal-form" id="answerForm" autocomplete="off">
+                <label class="sr-only" for="answerInput">Recovered word</label>
+                <input id="answerInput" name="answer" type="text" placeholder="ENTER RECOVERED WORD" maxlength="32" spellcheck="false" autocapitalize="characters" aria-describedby="answerHelp">
+                <button class="btn" type="submit">Submit <span aria-hidden="true">↗</span></button>
+              </form>
+              <p id="answerHelp" class="micro muted" style="margin:11px 0 0">No punctuation. No spaces. Case does not matter.</p>
+              <div class="terminal-response" id="terminalResponse" role="status" aria-live="polite">
+                <div class="response-kicker" id="responseKicker">Archive accepted</div>
+                <h3 id="responseTitle">ARCHIVE 08</h3>
+                <p id="responseText"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="transmission" aria-labelledby="warning-title">
+      <div class="wrap transmission-inner">
+        <div><div class="eyebrow">Recovered voice / translated with uncertainty</div><h2 id="warning-title">A warning is not<br>the same as a promise.</h2><p>Nothing in the record proves that Bakunawa caused the disappearance. Nothing proves he can reverse it, either. The archive makes one thing clear: the figure from the volcano knows what is waiting below the water—and he is afraid of what will happen if the moon returns.</p></div>
+        <blockquote>“You call me the thing that eats the moon. You never ask why the sea is afraid of the light.”<cite>— Unsigned transmission / channel 08</cite></blockquote>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-top"><div><div class="footer-title">S.P.D. / Archive 07</div><div class="micro muted" style="margin-top:8px">The Sangay ng Pag-aaral sa Dilim — fictional archive</div></div><p class="footer-note">This is an original alternate-reality story inspired by Philippine mythology, not a claim about a canonical traditional account. All archive records and events are fictional. The mystery is designed to be solved through the published materials—never by trespassing, approaching hazardous places, or contacting real strangers.</p></div>
+      <div class="footer-bottom"><span>File integrity: 71.08% / loss is increasing</span><a class="backtop" href="#top">Return to the surface ↑</a><span>Do not trust the reflection.</span></div>
+    </div>
+  </footer>
+
+  <div class="modal-backdrop" id="transmissionModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal">
+      <button class="modal-close" id="closeTransmission" aria-label="Close transmission">×</button>
+      <div class="eyebrow">Transcript reconstructed / 00:08:08</div>
+      <h2 id="modalTitle">The last transmission</h2>
+      <div class="quote-box">“The moon has vanished once before. Now it will never return.”</div>
+      <p>At the end of the recording, the speaker stops. The sea continues to move, but the audio waveform becomes perfectly flat for eight seconds. The camera does not cut. The stars do not move. Something in the water continues to reflect a moon the sky no longer contains.</p>
+      <p class="micro muted">TRANSCRIPT NOTE: Do not mistake the silence for missing data.</p>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    (() => {
+      const menuToggle = document.getElementById('menuToggle');
+      const navLinks = document.getElementById('navLinks');
+      menuToggle.addEventListener('click', () => {
+        const isOpen = navLinks.classList.toggle('open');
+        menuToggle.setAttribute('aria-expanded', String(isOpen));
+        menuToggle.textContent = isOpen ? 'MENU −' : 'MENU +';
+      });
+      navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.textContent = 'MENU +';
+      }));
+
+      const noteLabel = document.getElementById('noteLabel');
+      const noteText = document.getElementById('noteText');
+      const records = [
+        ['Testimony 01 / coast', '“At low tide, the rocks were warm. I heard something under them breathing in time with the waves.”'],
+        ['Testimony 02 / ash', '“The ash fell upward. Every ember carried the same shape: a circle with one bite taken from it.”'],
+        ['Testimony 03 / post', '“The letter was addressed to a person who had not been born. The postmark was tomorrow’s date.”'],
+        ['Testimony 04 / audio', '“The song had seven notes. The eighth was silence, but everyone in the room heard their own name.”'],
+        ['Testimony 05 / deep', '“There were lights beneath the trench. When the moon went dark, the lights looked up.”'],
+        ['Testimony 06 / sky', '“We saw one moon in the sky and another in the water. The one in the water blinked first.”'],
+        ['Testimony 07 / identity', '“The man from the volcano asked us what we called him. No one answered. We had forgotten the word before he arrived.”'],
+        ['Testimony 08 / removed', '“This record has been sealed by the archive. The symbol is not a letter. It is the shape of a name that must not be spoken yet.”']
+      ];
+      const recordButtons = [...document.querySelectorAll('[data-record]')];
+      recordButtons.forEach(button => button.addEventListener('click', () => {
+        const index = Number(button.dataset.record);
+        recordButtons.forEach(other => other.setAttribute('aria-pressed', String(other === button)));
+        noteLabel.textContent = records[index][0];
+        noteText.textContent = records[index][1];
+        noteText.classList.remove('note-lock');
+        if (index === 7) {
+          noteText.textContent = 'The record is present as an absence. The answer is not inside it. Read the seven surviving titles first.';
+        }
+      }));
+
+      const answerForm = document.getElementById('answerForm');
+      const answerInput = document.getElementById('answerInput');
+      const response = document.getElementById('terminalResponse');
+      const responseKicker = document.getElementById('responseKicker');
+      const responseTitle = document.getElementById('responseTitle');
+      const responseText = document.getElementById('responseText');
+      answerForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const answer = answerInput.value.normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toUpperCase().replace(/[^A-Z]/g, '');
+        response.classList.add('show');
+        if (answer === 'SALAMIN') {
+          response.classList.remove('error');
+          responseKicker.textContent = 'Access accepted / record restored';
+          responseTitle.textContent = 'ARCHIVE 08: THE MIRROR BELOW';
+          responseText.textContent = 'The phrase was never an instruction to look into a mirror. It was a warning: the mirror is looking back. NEXT CLUE — Find the oldest moving image in which the sea is visible but the moon is absent. At the eight-second mark, the waves stop moving. Count the silence, not the frames.';
+          answerInput.value = '';
+          response.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'nearest' });
+        } else {
+          response.classList.add('error');
+          responseKicker.textContent = 'No match / signal unstable';
+          responseTitle.textContent = 'THE SEA DID NOT SAY THAT';
+          responseText.textContent = 'Seven titles survived. The archivist left a note about the first mark of each testimony. Return to the ledger and read in the order the current delivered them.';
+          answerInput.select();
+        }
+      });
+
+      const modal = document.getElementById('transmissionModal');
+      const openModal = document.getElementById('openTransmission');
+      const closeModal = document.getElementById('closeTransmission');
+      let lastFocus = null;
+      function showModal() {
+        lastFocus = document.activeElement;
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        closeModal.focus();
+      }
+      function hideModal() {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+      }
+      openModal.addEventListener('click', showModal);
+      closeModal.addEventListener('click', hideModal);
+      modal.addEventListener('click', event => { if (event.target === modal) hideModal(); });
+      document.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && modal.classList.contains('open')) hideModal();
+      });
+
+      // Optional archival Easter egg: clicking the lunar status seven times reveals a note.
+      const status = document.querySelector('.nav-state');
+      const toast = document.getElementById('toast');
+      let taps = 0;
+      let toastTimer;
+      status.style.cursor = 'pointer';
+      status.setAttribute('role', 'button');
+      status.setAttribute('tabindex', '0');
+      status.setAttribute('aria-label', 'Lunar body status. Repeated activation may reveal a note.');
+      function tickStatus() {
+        taps++;
+        if (taps >= 7) {
+          toast.textContent = 'MARGINAL NOTE: The eighth tide was never counted because it arrived before the first.';
+          toast.classList.add('visible');
+          window.clearTimeout(toastTimer);
+          toastTimer = window.setTimeout(() => toast.classList.remove('visible'), 6000);
+          taps = 0;
+        }
+      }
+      status.addEventListener('click', tickStatus);
+      status.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); tickStatus(); } });
+    })();
+  </script>
+  <!-- SOURCE FRAGMENT / READ ONLY AFTER THE SIGNAL: the eighth record was removed before the first record was catalogued. The word that restores it means MIRROR in Filipino. -->
+</body>
+</html>
